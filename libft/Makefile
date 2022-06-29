@@ -6,7 +6,7 @@
 #    By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 11:16:18 by sesim             #+#    #+#              #
-#    Updated: 2022/05/25 15:50:29 by sesim            ###   ########.fr        #
+#    Updated: 2022/06/29 12:32:16 by sesim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar rc
 RM = rm -f
 SRCS = ft_atoi.c \
+	   ft_atoui_base.c \
 	   ft_bzero.c \
 	   ft_calloc.c \
 	   ft_isalnum.c \
@@ -22,6 +23,7 @@ SRCS = ft_atoi.c \
 	   ft_isascii.c \
 	   ft_isdigit.c \
 	   ft_isprint.c \
+	   ft_isspace.c \
 	   ft_itoa.c \
 	   ft_memcpy.c \
 	   ft_memchr.c \

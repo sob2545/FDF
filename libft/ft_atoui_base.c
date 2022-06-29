@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
+/*   ft_atoui_base.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 11:29:10 by sesim             #+#    #+#             */
-/*   Updated: 2022/06/29 12:24:02 by sesim            ###   ########.fr       */
+/*   Updated: 2022/06/29 12:31:10 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
 
 size_t	ft_strlen(const char *s);
 int		ft_isspace(int c);
@@ -63,7 +63,7 @@ int	ft_atoui_base(char *str, char *base)
 	dec_num = 0;
 	if (invalid_case(base) == 1)
 	{
-		while (ft_isspace(*str))
+		while (ft_isspace(str[k]))
 			k++;
 		base_num = base_cmp(str[k], base);
 		while (base_num != -1)
