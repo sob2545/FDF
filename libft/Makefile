@@ -6,13 +6,13 @@
 #    By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 11:16:18 by sesim             #+#    #+#              #
-#    Updated: 2022/06/29 12:32:16 by sesim            ###   ########.fr        #
+#    Updated: 2022/06/29 22:41:36 by sesim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
-AR = ar rc
+AR = ar rcs
 RM = rm -f
 SRCS = ft_atoi.c \
 	   ft_atoui_base.c \
@@ -49,7 +49,9 @@ SRCS = ft_atoi.c \
 	   ft_putchar_fd.c \
 	   ft_putstr_fd.c \
 	   ft_putendl_fd.c \
-	   ft_putnbr_fd.c
+	   ft_putnbr_fd.c \
+	   get_next_line.c \
+	   get_next_line_utils.c
 
 SRCS_BONUS = ft_lstnew.c \
 			 ft_lstadd_front.c \
@@ -59,7 +61,9 @@ SRCS_BONUS = ft_lstnew.c \
 			 ft_lstdelone.c \
 			 ft_lstclear.c \
 			 ft_lstiter.c \
-			 ft_lstmap.c
+			 ft_lstmap.c \
+			 get_next_line_bonus.c \
+			 get_next_line_utils_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
@@ -70,7 +74,6 @@ else
 	OBJ = $(OBJS)
 endif
 
-INCLUDE = libft.h
 NAME = libft.a
 
 all : $(NAME)

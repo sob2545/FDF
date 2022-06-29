@@ -6,13 +6,13 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 13:43:59 by sesim             #+#    #+#             */
-/*   Updated: 2022/06/02 12:51:44 by sesim            ###   ########.fr       */
+/*   Updated: 2022/06/29 22:35:35 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen_g(char *s)
 {
 	size_t	i;
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strchr(char *s, int c)
+char	*ft_strchr_g(char *s, int c)
 {
 	if (s == 0)
 		return (0);
@@ -39,13 +39,13 @@ char	*ft_strchr(char *s, int c)
 	return (0);
 }
 
-size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
+size_t	ft_strlcpy_g(char *dst, char *src, size_t dstsize)
 {
 	size_t	i;
 	size_t	src_len;
 
 	i = 0;
-	src_len = ft_strlen(src);
+	src_len = ft_strlen_g(src);
 	if (dstsize == 0)
 		return (src_len);
 	while (i < src_len && i + 1 < dstsize)
@@ -57,16 +57,16 @@ size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 	return (src_len);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_g(char *s1, char *s2)
 {
 	char	*res;
 	int		len;
 
-	len = ft_strlen(s1);
-	res = (char *)malloc(sizeof(char) * (len + ft_strlen(s2) + 1));
+	len = ft_strlen_g(s1);
+	res = (char *)malloc(sizeof(char) * (len + ft_strlen_g(s2) + 1));
 	if (res == 0)
 		return (0);
-	ft_strlcpy(res, s1, (len + 1));
+	ft_strlcpy_g(res, s1, (len + 1));
 	while (*s2)
 	{
 		res[len++] = *s2;
@@ -84,18 +84,18 @@ char	*new_line(char *bac)
 	int		m_len;
 	int		c_len;
 
-	if (!ft_strchr(bac, '\n'))
+	if (!ft_strchr_g(bac, '\n'))
 	{
 		free (bac);
 		bac = 0;
 		return (0);
 	}
-	m_len = ft_strlen(bac) - (ft_strchr(bac, '\n') - bac) + 1;
-	c_len = ft_strchr(bac, '\n') - bac + 1;
+	m_len = ft_strlen_g(bac) - (ft_strchr_g(bac, '\n') - bac) + 1;
+	c_len = ft_strchr_g(bac, '\n') - bac + 1;
 	new = malloc(sizeof(char) * m_len);
 	if (new == 0)
 		return (0);
-	ft_strlcpy(new, (bac + c_len), m_len);
+	ft_strlcpy_g(new, (bac + c_len), m_len);
 	free(bac);
 	bac = 0;
 	return (new);

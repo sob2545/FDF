@@ -6,13 +6,13 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 11:53:34 by sesim             #+#    #+#             */
-/*   Updated: 2022/06/01 22:55:39 by sesim            ###   ########.fr       */
+/*   Updated: 2022/06/29 22:36:15 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*reader(int fd, char *bac)
+static char	*reader(int fd, char *bac)
 {
 	char	*buf;
 	ssize_t	r_cnt;
@@ -21,13 +21,13 @@ char	*reader(int fd, char *bac)
 	if (buf == 0)
 		return (0);
 	r_cnt = 1;
-	while (!ft_strchr(bac, '\n') && r_cnt != 0)
+	while (!ft_strchr_g(bac, '\n') && r_cnt != 0)
 	{
 		r_cnt = read(fd, buf, BUFFER_SIZE);
 		if (r_cnt == -1)
 			break ;
 		buf[r_cnt] = '\0';
-		bac = ft_strjoin(bac, buf);
+		bac = ft_strjoin_g(bac, buf);
 	}
 	free(buf);
 	buf = 0;
@@ -41,14 +41,14 @@ char	*get_line(char *bac)
 
 	if (bac[0] == 0)
 		return (0);
-	if (ft_strchr(bac, '\n'))
-		len = ft_strchr(bac, '\n') - bac + 2;
+	if (ft_strchr_g(bac, '\n'))
+		len = ft_strchr_g(bac, '\n') - bac + 2;
 	else
-		len = ft_strlen(bac) + 1;
+		len = ft_strlen_g(bac) + 1;
 	line = malloc(sizeof(char) * len);
 	if (line == 0)
 		return (0);
-	ft_strlcpy(line, bac, len);
+	ft_strlcpy_g(line, bac, len);
 	return (line);
 }
 
