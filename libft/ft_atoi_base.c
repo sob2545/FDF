@@ -6,16 +6,16 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 11:29:10 by sesim             #+#    #+#             */
-/*   Updated: 2022/06/29 12:02:30 by sesim            ###   ########.fr       */
+/*   Updated: 2022/06/29 12:24:02 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 size_t	ft_strlen(const char *s);
-size_t	ft_isspace(char str, int ptr);
+int		ft_isspace(int c);
 
-int	ft_base_cmp(char c, char *str)
+static int	base_cmp(char c, char *str)
 {
 	int	i;
 
@@ -53,10 +53,9 @@ int	invalid_case(char *str)
 	return (1);
 }
 
-int	ft_atoi_base(char *str, char *base)
+int	ft_atoui_base(char *str, char *base)
 {
 	int	k;
-	int	pn;
 	int	base_num;
 	int	dec_num;
 
@@ -64,15 +63,16 @@ int	ft_atoi_base(char *str, char *base)
 	dec_num = 0;
 	if (invalid_case(base) == 1)
 	{
-		pn = ft_isspace(str, &k);
-		base_num = ft_strchr(base, str[k]) - str;
+		while (ft_isspace(*str))
+			k++;
+		base_num = base_cmp(str[k], base);
 		while (base_num != -1)
 		{
 			dec_num = (dec_num * ft_strlen(base)) + base_num;
 			k++;
-			base_num = ft_base_cmp(str[k], base);
+			base_num = base_cmp(str[k], base);
 		}
-		return (pn * dec_num);
+		return (dec_num);
 	}
 	return (0);
 }

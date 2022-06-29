@@ -6,13 +6,14 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 13:18:55 by sesim             #+#    #+#             */
-/*   Updated: 2022/04/03 14:21:39 by seongmins        ###   ########.fr       */
+/*   Updated: 2022/06/29 12:21:22 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
 int	ft_isdigit(int c);
+int	ft_isspace(int c);
 
 int	check_val(size_t nb, int pn)
 {
@@ -32,7 +33,7 @@ int	ft_atoi(const char *str)
 	i = 0;
 	res = 0;
 	pn = 1;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+	while (ft_isspace(*str))
 		i++;
 	if (str[i] == 43 || str[i] == 45)
 	{
