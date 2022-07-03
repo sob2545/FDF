@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/29 13:43:59 by sesim             #+#    #+#             */
-/*   Updated: 2022/06/29 22:35:35 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/03 13:44:52 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,27 +76,4 @@ char	*ft_strjoin_g(char *s1, char *s2)
 	free(s1);
 	s1 = 0;
 	return (res);
-}
-
-char	*new_line(char *bac)
-{
-	char	*new;
-	int		m_len;
-	int		c_len;
-
-	if (!ft_strchr_g(bac, '\n'))
-	{
-		free (bac);
-		bac = 0;
-		return (0);
-	}
-	m_len = ft_strlen_g(bac) - (ft_strchr_g(bac, '\n') - bac) + 1;
-	c_len = ft_strchr_g(bac, '\n') - bac + 1;
-	new = malloc(sizeof(char) * m_len);
-	if (new == 0)
-		return (0);
-	ft_strlcpy_g(new, (bac + c_len), m_len);
-	free(bac);
-	bac = 0;
-	return (new);
 }
