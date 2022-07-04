@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/03 17:21:44 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/04 09:50:57 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,18 @@ typedef struct	s_ptr
 	int		y2;
 	double	gradient;
 }	t_ptr;
+
+void	ft_swap(int *x, int *y);
+int		dtoi(double val);
+int		ft_round(double val);
+double	dec_point(double val);
+double	rev_dec_point(double val);
+void	first_pixel_1(t_mlx mlx, t_ptr line, t_ptr *pxl_point);
+void	first_pixel_2(t_mlx mlx, t_ptr line, t_ptr *pxl_point);
+void	last_pixel_1(t_mlx mlx, t_ptr line, t_ptr *pxl_point);
+void	last_pixel_2(t_mlx mlx, t_ptr line, t_ptr *pxl_point);
+void	middle_pixel(t_mlx mlx, t_ptr line, t_ptr pxl_point, int flag);
+int		get_pixel(t_mlx mlx, double grad, double gap);
+void	anti_alias(t_mlx mlx, t_ptr line);
 
 #endif
