@@ -1,5 +1,6 @@
 #include "fdf.h"
 #include "../libft/libft.h"
+#include "../libft/get_next_line.h"
 #include <stdlib.h>
 #include <fcntl.h>
 

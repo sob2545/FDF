@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/04 09:50:57 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/04 10:13:35 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	first_pixel_2(t_mlx mlx, t_ptr line, t_ptr *pxl_point);
 void	last_pixel_1(t_mlx mlx, t_ptr line, t_ptr *pxl_point);
 void	last_pixel_2(t_mlx mlx, t_ptr line, t_ptr *pxl_point);
 void	middle_pixel(t_mlx mlx, t_ptr line, t_ptr pxl_point, int flag);
-int		get_pixel(t_mlx mlx, double grad, double gap);
+int		get_color(t_mlx mlx, double grad, double gap);
 void	anti_alias(t_mlx mlx, t_ptr line);
 
 #endif

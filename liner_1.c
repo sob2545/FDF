@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:10:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/04 09:50:04 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/04 11:52:42 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,16 @@ void	anti_alias(t_mlx mlx, t_ptr line)
 {
 	t_ptr	pxl_point;
 
-	if (fabs((double)line.x2) < fabs((double)line.x1))
+	if (fabs((double)line.x2 - (double)line.x1) > \
+			fabs((double)line.y2 - (double)line.y1))
 	{
 		if (line.x2 < line.x1)
 		{
 			ft_swap(&line.x2, &line.x1);
 			ft_swap(&line.y2, &line.y1);
 		}
-		line.gradient = ((double)line.x2 - (double)line.x1 / \
-				(double)line.y2 - (double)line.y1);
+		line.gradient = (((double)line.x2 - (double)line.x1) / \
+				((double)line.y2 - (double)line.y1));
 		liner(mlx, line, &pxl_point, 1);
 	}
 	else
@@ -72,8 +73,8 @@ void	anti_alias(t_mlx mlx, t_ptr line)
 			ft_swap(&line.x2, &line.x1);
 			ft_swap(&line.y2, &line.y1);
 		}
-		line.gradient = ((double)line.y2 - (double)line.y1 / \
-				(double)line.x2 - (double)line.x1);
+		line.gradient = (((double)line.y2 - (double)line.y1) / \
+				((double)line.x2 - (double)line.x1));
 		liner(mlx, line, &pxl_point, 2);
 	}
 }

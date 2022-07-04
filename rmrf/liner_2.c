@@ -6,12 +6,12 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:09:54 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/04 10:14:48 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/04 10:38:56 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "../minilibx_macos/mlx.h"
+#include "../mlx_2/mlx.h"
 
 void	first_pixel_1(t_mlx mlx, t_ptr line, t_ptr *pxl_point)
 {

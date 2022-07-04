@@ -1,4 +1,4 @@
-#include "../minilibx_macos/mlx.h"
+#include "../mlx_2/mlx.h"
 #include "../libft/libft.h"
 #include <fcntl.h>
 #include <math.h>
@@ -203,27 +203,30 @@ int	main_loop(t_all all)
 		for (int j = 1; j < map->width; ++j)
 		{
 			//rotate_x(i, j, &point, mlx.handler.angle);
+			/*
 			line.x1 = mlx.handler.scale * point[i][j - 1].iso_x;
 			line.y1 = mlx.handler.scale * point[i][j - 1].iso_y;
 			line.x2 = mlx.handler.scale * point[i][j].iso_x;
 			line.y2 = mlx.handler.scale * point[i][j].iso_y;
-			anti_alias(mlx, line);
 			mlx.handler.color = 0x00FF00;
-			//bresenham(mlx.handler.scale * point[i][j - 1].iso_x, mlx.handler.scale * point[i][j - 1].iso_y, mlx.handler.scale * point[i][j].iso_x, mlx.handler.scale * point[i][j].iso_y, mlx);
+			anti_alias(mlx, line);
+			*/
+			bresenham(mlx.handler.scale * point[i][j - 1].iso_x, mlx.handler.scale * point[i][j - 1].iso_y, mlx.handler.scale * point[i][j].iso_x, mlx.handler.scale * point[i][j].iso_y, mlx);
 		}
 	}
 	for (int i = 1; i < map->height; ++i)
 	{
 		for (int j = 0; j < map->width; ++j)
 		{
+			/*
 			line.x1 = mlx.handler.scale * point[i][j - 1].iso_x;
 			line.y1 = mlx.handler.scale * point[i][j - 1].iso_y;
 			line.x2 = mlx.handler.scale * point[i][j].iso_x;
 			line.y2 = mlx.handler.scale * point[i][j].iso_y;
-			anti_alias(mlx, line);
 			mlx.handler.color = 0x00FF00;
-
-			//bresenham(mlx.handler.scale * point[i - 1][j].iso_x, mlx.handler.scale * point[i - 1][j].iso_y, mlx.handler.scale * point[i][j].iso_x, mlx.handler.scale * point[i][j].iso_y, mlx);
+			anti_alias(mlx, line);
+			*/
+			bresenham(mlx.handler.scale * point[i - 1][j].iso_x, mlx.handler.scale * point[i - 1][j].iso_y, mlx.handler.scale * point[i][j].iso_x, mlx.handler.scale * point[i][j].iso_y, mlx);
 		}
 	}
 	return (0);
