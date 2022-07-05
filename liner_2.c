@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:09:54 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/04 09:43:21 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/04 22:05:44 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	last_pixel_2(t_mlx mlx, t_ptr line, t_ptr *pxl_point)
 			pxl_point->y2 + mlx.ucs.h, color2);
 }
 
-void	middle_pixel(t_mlx mlx, t_ptr line, t_ptr pxl_point, int flag)
+void	middle_pixel_1(t_mlx mlx, t_ptr line, t_ptr pxl_point)
 {
 	int	color1;
 	int	color2;
@@ -107,20 +107,37 @@ void	middle_pixel(t_mlx mlx, t_ptr line, t_ptr pxl_point, int flag)
 	int	x;
 	int	y;
 
-	i = 0;
+	i = pxl_point.x1 + 1;
 	color1 = get_color(mlx, rev_dec_point(pxl_point.gradient), 1);
 	color2 = get_color(mlx, dec_point(pxl_point.gradient), 1);
-	while (i < pxl_point.y1)
+	while (i < pxl_point.x2)
 	{
 		x = i + mlx.ucs.h;
 		y = dtoi(pxl_point.gradient) + mlx.ucs.w;
-		if (flag == 2)
-			ft_swap(&x, &y);
 		mlx_pixel_put(mlx.mlx, mlx.win, x, y, color1);
-		if (flag == 1)
-			mlx_pixel_put(mlx.mlx, mlx.win, x, y + 1, color2);
-		else
-			mlx_pixel_put(mlx.mlx, mlx.win, x + 1, y, color2);
+		mlx_pixel_put(mlx.mlx, mlx.win, x, y + 1, color2);
+		pxl_point.gradient += line.gradient;
+		i++;
+	}
+}
+
+void	middle_pixel_2(t_mlx mlx, t_ptr line, t_ptr pxl_point)
+{
+	int	color1;
+	int	color2;
+	int	i;
+	int	x;
+	int	y;
+
+	i = pxl_point.y1 + 1;
+	color1 = get_color(mlx, rev_dec_point(pxl_point.gradient), 1);
+	color2 = get_color(mlx, dec_point(pxl_point.gradient), 1);
+	while (i < pxl_point.y2)
+	{
+		x = dtoi(pxl_point.gradient) + mlx.ucs.w;
+		y = i + mlx.ucs.h;
+		mlx_pixel_put(mlx.mlx, mlx.win, x, y, color1);
+		mlx_pixel_put(mlx.mlx, mlx.win, x + 1, y, color2);
 		pxl_point.gradient += line.gradient;
 		i++;
 	}

@@ -1,10 +1,9 @@
 #include "fdf.h"
 #include "../libft/libft.h"
-#include "../libft/get_next_line.h"
 #include <stdlib.h>
 #include <fcntl.h>
 
-void	get_one_line(t_point *point, int y, char *a_line, int width, t_mlx *mlx)
+void	get_one_line(t_point *point, int y, char *a_line, int width)
 {
 	char	**split;
 	int		i;
@@ -18,7 +17,6 @@ void	get_one_line(t_point *point, int y, char *a_line, int width, t_mlx *mlx)
 		point[i].iso_x = i;
 		point[i].iso_y = y;
 		point[i].z = ft_atoi(split[i]);
-		ft_isometric(&point[i].iso_x, &point[i].iso_y, point[i].z);
 		i++;
 	}
 	tmp = split;
@@ -45,7 +43,7 @@ t_point	**create_points(t_map *map)
 	return (point);
 }
 
-t_point	**make_points(t_map *map, char *file_name, t_mlx *mlx)
+t_point	**make_points(t_map *map, char *file_name)
 {
 	t_point	**point;
 	int		i;
@@ -58,7 +56,7 @@ t_point	**make_points(t_map *map, char *file_name, t_mlx *mlx)
 	while(i < map->height)
 	{
 		line = get_next_line(fd);
-		get_one_line(point[i], i, line, map->width, mlx);
+		get_one_line(point[i], i, line, map->width);
 		free(line);
 		i++;
 	}

@@ -6,26 +6,26 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:10:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/04 10:38:49 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/05 23:09:51 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "../mlx_2/mlx.h"
+#include "../minilibx_macos/mlx.h"
 #include "math.h"
 
-int	get_color(t_mlx mlx, double grad, double gap)
+unsigned int	get_color(t_mlx mlx, double grad, double gap)
 {
-	int	t;
-	int	r;
-	int	g;
-	int	b;
-	int	rgb;
+	unsigned int	t;
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+	unsigned int	rgb;
 
 	t = (mlx.handler.color >> 24) & 0xFF;
-	r = ((mlx.handler.color >> 16) & 0xFF) * grad * gap;
-	g = ((mlx.handler.color >> 8) & 0xFF) * grad * gap;
-	b = (mlx.handler.color & 0xFF) * grad * gap;
+	r = ((mlx.handler.color >> 16) & 0xFF) * fabs(grad * gap);
+	g = ((mlx.handler.color >> 8) & 0xFF) * fabs(grad * gap);
+	b = (mlx.handler.color & 0xFF) * fabs(grad * gap);
 	rgb = 0;
 	rgb |= t << 24;
 	rgb |= r << 16;
@@ -34,36 +34,39 @@ int	get_color(t_mlx mlx, double grad, double gap)
 	return (rgb);
 }
 
-void	liner(t_mlx mlx, t_ptr line, t_ptr *pxl_point, int flag)
+void	liner(t_mlx mlx, t_ptr line, int flag)
 {
+	t_ptr	pxl_point;
+
 	if (flag == 1)
 	{
-		first_pixel_1(mlx, line, pxl_point);
-		last_pixel_1(mlx, line, pxl_point);
-		middle_pixel(mlx, line, *pxl_point, 1);
+		first_pixel_1(mlx, line, &pxl_point);
+		last_pixel_1(mlx, line, &pxl_point);
+		middle_pixel_1(mlx, line, pxl_point);
 	}
 	else
 	{
-		first_pixel_2(mlx, line, pxl_point);
-		last_pixel_2(mlx, line, pxl_point);
-		middle_pixel(mlx, line, *pxl_point, 2);
+		first_pixel_2(mlx, line, &pxl_point);
+		last_pixel_2(mlx, line, &pxl_point);
+		middle_pixel_2(mlx, line, pxl_point);
 	}
 }
 
 void	anti_alias(t_mlx mlx, t_ptr line)
 {
-	t_ptr	pxl_point;
+	t_delta_val	delta_val;
 
-	if (fabs((double)line.x2) < fabs((double)line.x1))
+	delta_val.w = line.x2 - line.x1;
+	delta_val.h = line.y2 - line.y1;
+	if (fabs(delta_val.w) > fabs(delta_val.h))
 	{
 		if (line.x2 < line.x1)
 		{
 			ft_swap(&line.x2, &line.x1);
 			ft_swap(&line.y2, &line.y1);
 		}
-		line.gradient = ((double)line.x2 - (double)line.x1 / \
-				(double)line.y2 - (double)line.y1);
-		liner(mlx, line, &pxl_point, 1);
+		line.gradient = delta_val.h / delta_val.w;
+		liner(mlx, line, 1);
 	}
 	else
 	{
@@ -72,8 +75,7 @@ void	anti_alias(t_mlx mlx, t_ptr line)
 			ft_swap(&line.x2, &line.x1);
 			ft_swap(&line.y2, &line.y1);
 		}
-		line.gradient = ((double)line.y2 - (double)line.y1 / \
-				(double)line.x2 - (double)line.x1);
-		liner(mlx, line, &pxl_point, 2);
+		line.gradient = delta_val.w / delta_val.h;
+		liner(mlx, line, 2);
 	}
 }

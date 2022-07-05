@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:10:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/04 11:52:42 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/04 22:01:34 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,37 +34,39 @@ int	get_color(t_mlx mlx, double grad, double gap)
 	return (rgb);
 }
 
-void	liner(t_mlx mlx, t_ptr line, t_ptr *pxl_point, int flag)
+void	liner(t_mlx mlx, t_ptr line, int flag)
 {
+	t_ptr	pxl_point;
+
 	if (flag == 1)
 	{
-		first_pixel_1(mlx, line, pxl_point);
-		last_pixel_1(mlx, line, pxl_point);
-		middle_pixel(mlx, line, *pxl_point, 1);
+		first_pixel_1(mlx, line, &pxl_point);
+		last_pixel_1(mlx, line, &pxl_point);
+		middle_pixel_1(mlx, line, pxl_point);
 	}
 	else
 	{
-		first_pixel_2(mlx, line, pxl_point);
-		last_pixel_2(mlx, line, pxl_point);
-		middle_pixel(mlx, line, *pxl_point, 2);
+		first_pixel_2(mlx, line, &pxl_point);
+		last_pixel_2(mlx, line, &pxl_point);
+		middle_pixel_2(mlx, line, pxl_point);
 	}
 }
 
 void	anti_alias(t_mlx mlx, t_ptr line)
 {
-	t_ptr	pxl_point;
+	t_delta_val	delta_val;
 
-	if (fabs((double)line.x2 - (double)line.x1) > \
-			fabs((double)line.y2 - (double)line.y1))
+	delta_val.dx = line.x2 - line.x1;
+	delta_val.dy = line.y2 - line.y1;
+	if (fabs(delta_val.dx) < fabs((delta_val.dy)))
 	{
 		if (line.x2 < line.x1)
 		{
 			ft_swap(&line.x2, &line.x1);
 			ft_swap(&line.y2, &line.y1);
 		}
-		line.gradient = (((double)line.x2 - (double)line.x1) / \
-				((double)line.y2 - (double)line.y1));
-		liner(mlx, line, &pxl_point, 1);
+		line.gradient = (delta_val.dy / delta_val.dx);
+		liner(mlx, line, 1);
 	}
 	else
 	{
@@ -73,8 +75,7 @@ void	anti_alias(t_mlx mlx, t_ptr line)
 			ft_swap(&line.x2, &line.x1);
 			ft_swap(&line.y2, &line.y1);
 		}
-		line.gradient = (((double)line.y2 - (double)line.y1) / \
-				((double)line.x2 - (double)line.x1));
-		liner(mlx, line, &pxl_point, 2);
+		line.gradient = (delta_val.dx / delta_val.dy);
+		liner(mlx, line, 2);
 	}
 }

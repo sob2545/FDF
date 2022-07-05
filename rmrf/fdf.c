@@ -1,50 +1,18 @@
-#include "../mlx_2/mlx.h"
+#include "../minilibx_macos/mlx.h"
 #include "../libft/libft.h"
 #include <fcntl.h>
 #include <math.h>
 #include <stdio.h>
 #include "fdf.h"
-/*
-void	rotate_x(int y, int x, t_point ***point, double angle)
+
+void	bresenham_x(double start_x, double start_y, double finish_x, double finish_y, t_mlx mlx)
 {
-	double	prev_y;
-	double	prev_z;
-
-	prev_y = y;
-	prev_z = point[y][x]->z;
-	point[y][x]->iso_y = prev_y * cos(angle * M_PI / 180) + prev_z * sin(angle * M_PI / 180);
-	point[y][x]->z = -prev_y * sin(angle * M_PI / 180) + prev_z * cos(angle * M_PI / 180);
-	ft_isometric(&(point[y][x]->iso_x), &(point[y][x]->iso_y), point[y][x]->z);
-}
-
-void	rotate_y(double *x, double *z, double angle)
-{
-	double	prev_x;
-
-	prev_x = *x;
-	*x = prev_x * cos(angle * M_PI / 180) + (*z) * sin(angle);
-	*z = -prev_x * sin(angle) + (*z) * cos(angle);
-}
-
-void	rotate_z(double *x, double *y, double angle)
-{
-	double	prev_x;
-	double	prev_y;
-
-	prev_x = *x;
-	prev_y = *y;
-	*x = prev_x * cos(angle) - prev_y * sin(angle);
-	*y = prev_x * sin(angle) + prev_y * cos(angle);
-}
-*/
-void	bresenham_x(int start_x, int start_y, int finish_x, int finish_y, t_mlx mlx)
-{
-	int width;
-	int height;
-	int	x;
-	int	y;
-	int	formula;
-	int Yfactor;
+	double width;
+	double height;
+	double	x;
+	double	y;
+	double	formula;
+	double Yfactor;
 
 	width = finish_x - start_x;
 	height = finish_y - start_y;
@@ -71,14 +39,14 @@ void	bresenham_x(int start_x, int start_y, int finish_x, int finish_y, t_mlx mlx
 	}
 }
 
-void	bresenham_y(int start_x, int start_y, int finish_x, int finish_y, t_mlx mlx)
+void	bresenham_y(double start_x, double start_y, double finish_x, double finish_y, t_mlx mlx)
 {
-	int width;
-	int height;
-	int	x;
-	int	y;
-	int	formula;
-	int Xfactor;
+	double width;
+	double height;
+	double	x;
+	double	y;
+	double	formula;
+	double Xfactor;
 	width = finish_x - start_x;
 	height = finish_y - start_y;
 	Xfactor = 1;
@@ -91,7 +59,8 @@ void	bresenham_y(int start_x, int start_y, int finish_x, int finish_y, t_mlx mlx
 	x = start_x;
 	y = start_y;
 	formula = 2 * width - height;
-	while (y != finish_y)
+	//while (y != finish_y)
+	while (y < finish_y)
 	{
 		if (formula < 0)
 			formula += (2 * width);
@@ -106,10 +75,10 @@ void	bresenham_y(int start_x, int start_y, int finish_x, int finish_y, t_mlx mlx
 }
 
 
-void	bresenham(int start_x, int start_y, int finish_x, int finish_y, t_mlx mlx)
+void	bresenham(double start_x, double start_y, double finish_x, double finish_y, t_mlx mlx)
 {
-	int width;
-	int height;
+	double width;
+	double height;
 
 	width = (finish_x - start_x);
 	if (width < 0)
@@ -146,12 +115,22 @@ int	key_press(int keycode, t_mlx *mlx)
 		--(mlx->handler.delta_x);
 	else if (keycode == KEY_RIGHT)
 		++(mlx->handler.delta_x);
+	else if (keycode == KEY_1)
+		++(mlx->handler.angle_x);
+	else if (keycode == KEY_2)
+		--(mlx->handler.angle_x);
+	else if (keycode == KEY_3)
+		++(mlx->handler.angle_y);
+	else if (keycode == KEY_4)
+		--(mlx->handler.angle_y);
+	else if (keycode == KEY_5)
+		++(mlx->handler.angle_z);
+	else if (keycode == KEY_6)
+		--(mlx->handler.angle_z);
 	else if (keycode == KEY_Q)
 		++(mlx->handler.scale);
 	else if (keycode == KEY_E)
 		--(mlx->handler.scale);
-	else if (keycode == KEY_A)
-		++(mlx->handler.angle);
 
 	return (0);
 }
@@ -160,29 +139,30 @@ void	set_mlx(t_mlx *mlx, t_map *map)
 {
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, 1600, 900, "FdF");
+	ft_bzero(&mlx->handler, sizeof(t_handler));
 	if (map->width < 20)
 	{
 		mlx->handler.scale = 25;
-		mlx->handler.delta_x = 650;
-		mlx->handler.delta_y = 400;
+		mlx->handler.delta_x = 650 + (map->width / 2);
+		mlx->handler.delta_y = 400 + (map->height / 2);
 	}
 	else if (map->width < 50)
 	{
 		mlx->handler.scale = 20;
-		mlx->handler.delta_x = 800;
-		mlx->handler.delta_y = 200;
+		mlx->handler.delta_x = 800 + (map->width / 2);
+		mlx->handler.delta_y = 200 + (map->height / 2);
 	}
 	else if (map->width < 210)
 	{
 		mlx->handler.scale = 4;
-		mlx->handler.delta_x = 600;
-		mlx->handler.delta_y = 100;
+		mlx->handler.delta_x = 600 + (map->width / 2);
+		mlx->handler.delta_y = 100 + (map->height / 2);
 	}
 	else
 	{
 		mlx->handler.scale = 1;
-		mlx->handler.delta_x = 300;
-		mlx->handler.delta_y = 100;
+		mlx->handler.delta_x = 300 + (map->width / 2);
+		mlx->handler.delta_y = 100 + (map->height / 2);
 	}
 }
 
@@ -191,42 +171,58 @@ int	main_loop(t_all all)
 	t_point **point;
 	t_mlx mlx;
 	t_map *map;
-	t_ptr line;
-	
+	t_ptr	line;
+
 	point = *(all.point);
 	mlx = *(all.mlx);
 	map = all.map;
-
 	mlx_clear_window(mlx.mlx, mlx.win);
+
+	for (int i = 0; i < map->height; ++i)
+	{
+		// for (int j = 0; j < map->width; ++j)
+		// {
+		// 	rotate_z(j, i, &point[i][j], mlx.handler.angle_z);
+		// 	rotate_y(j, point[i][j].z, &point[i][j], mlx.handler.angle_y);
+		// 	rotate_x(i, point[i][j].z, &point[i][j], mlx.handler.angle_x);
+		// 	ft_isometric(&point[i][j].iso_x, &point[i][j].iso_y, point[i][j].rotated_z);
+		// }
+		for (int j = 0; j < map->width; ++j)
+		{
+			rotate_z(j, i, &point[i][j], mlx.handler.angle_z);
+			rotate_y(point[i][j].iso_x, point[i][j].z, &point[i][j], mlx.handler.angle_y);
+			rotate_x(point[i][j].iso_y, point[i][j].rotated_z, &point[i][j], mlx.handler.angle_x);
+			ft_isometric(&point[i][j].iso_x, &point[i][j].iso_y, point[i][j].rotated_z);
+		}
+	}	
 	for (int i = 0; i < map->height; ++i)
 	{
 		for (int j = 1; j < map->width; ++j)
 		{
-			//rotate_x(i, j, &point, mlx.handler.angle);
-			/*
 			line.x1 = mlx.handler.scale * point[i][j - 1].iso_x;
 			line.y1 = mlx.handler.scale * point[i][j - 1].iso_y;
 			line.x2 = mlx.handler.scale * point[i][j].iso_x;
 			line.y2 = mlx.handler.scale * point[i][j].iso_y;
 			mlx.handler.color = 0x00FF00;
 			anti_alias(mlx, line);
-			*/
+			/*
 			bresenham(mlx.handler.scale * point[i][j - 1].iso_x, mlx.handler.scale * point[i][j - 1].iso_y, mlx.handler.scale * point[i][j].iso_x, mlx.handler.scale * point[i][j].iso_y, mlx);
+			*/
 		}
 	}
 	for (int i = 1; i < map->height; ++i)
 	{
 		for (int j = 0; j < map->width; ++j)
 		{
-			/*
-			line.x1 = mlx.handler.scale * point[i][j - 1].iso_x;
-			line.y1 = mlx.handler.scale * point[i][j - 1].iso_y;
+			line.x1 = mlx.handler.scale * point[i - 1][j].iso_x;
+			line.y1 = mlx.handler.scale * point[i - 1][j].iso_y;
 			line.x2 = mlx.handler.scale * point[i][j].iso_x;
 			line.y2 = mlx.handler.scale * point[i][j].iso_y;
 			mlx.handler.color = 0x00FF00;
 			anti_alias(mlx, line);
-			*/
+			/*
 			bresenham(mlx.handler.scale * point[i - 1][j].iso_x, mlx.handler.scale * point[i - 1][j].iso_y, mlx.handler.scale * point[i][j].iso_x, mlx.handler.scale * point[i][j].iso_y, mlx);
+			*/
 		}
 	}
 	return (0);
@@ -243,11 +239,10 @@ int	main(int argc, char **argv)
 	map = malloc(sizeof(t_map));
 	*map = rec_checker(argv[1]);
 	set_mlx(&mlx, map);
-	point = make_points(map, argv[1], &mlx);
+	point = make_points(map, argv[1]);
 	all.map = map;
 	all.mlx = &mlx;
 	all.point = &point;
-	all.mlx->handler.angle = 0;
 
 	mlx_hook(mlx.win, X_EVENT_KEY_PRESS, 0, key_press, &mlx);
 	mlx_loop_hook(mlx.mlx, main_loop, &all);
