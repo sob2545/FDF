@@ -53,11 +53,12 @@ typedef struct	s_all
 
 typedef struct	s_ptr
 {
-	int		x1;
-	int		y1;
-	int		x2;
-	int		y2;
+	int	x1;
+	int	y1;
+	int	x2;
+	int	y2;
 	double	gradient;
+	double	c_grad;
 }	t_ptr;
 
 #define X_EVENT_KEY_PRESS 2
@@ -76,6 +77,9 @@ typedef struct	s_ptr
 # define KEY_1 18
 # define KEY_2 19
 # define KEY_3 20
+# define KEY_4 21
+# define KEY_5 23
+# define KEY_6 22
 
 void	rotate_x(double y, double z, t_point *point, double angle);
 void	rotate_y(double x, double z, t_point *point, double angle);
@@ -93,7 +97,7 @@ int		is_set(char c, char const *set);
 t_point	**make_points(t_map *map, char *file_name);
 void	ft_isometric(double *x, double *y, double z);
 
-int		get_color(t_mlx mlx, double grad, double gap);
+unsigned int		get_color(t_mlx mlx, double grad, double gap);
 void	ft_swap(int *x, int *y);
 int		dtoi(double val);
 int		ft_round(double val);
