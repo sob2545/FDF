@@ -6,12 +6,12 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:10:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/04 22:01:34 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/07 14:09:30 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "./mlx/mlx.h"
+#include "../mlx/mlx.h"
 #include "math.h"
 
 int	get_color(t_mlx mlx, double grad, double gap)

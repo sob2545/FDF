@@ -6,7 +6,7 @@
 #    By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 11:16:18 by sesim             #+#    #+#              #
-#    Updated: 2022/06/29 22:41:36 by sesim            ###   ########.fr        #
+#    Updated: 2022/07/07 22:06:47 by sesim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = rm -f
 SRCS = ft_atoi.c \
+	   ft_adtoi.c \
 	   ft_atoui_base.c \
 	   ft_bzero.c \
 	   ft_calloc.c \
@@ -51,7 +52,8 @@ SRCS = ft_atoi.c \
 	   ft_putendl_fd.c \
 	   ft_putnbr_fd.c \
 	   get_next_line.c \
-	   get_next_line_utils.c
+	   get_next_line_utils.c \
+	   get_file.c
 
 SRCS_BONUS = ft_lstnew.c \
 			 ft_lstadd_front.c \

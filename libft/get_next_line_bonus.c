@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 11:53:34 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/06 22:39:47 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/06 22:43:10 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*reader(int fd, char *bac)
 {
@@ -52,17 +52,67 @@ char	*get_line(char *bac)
 	return (line);
 }
 
+t_list	*get_node(t_list *head, int fd)
+{
+	t_list	*node;
+
+	node = head->next;
+	while (node)
+	{
+		if (node->idx == fd)
+			return (node);
+		else
+			node = node->next;
+	}
+	node = malloc(sizeof(t_list));
+	if (node == 0)
+		return (0);
+	node->prev = head;
+	node->next = head->next;
+	node->idx = fd;
+	node->line = 0;
+	if (node->next)
+		head->next->prev = node;
+	head->next = node;
+	return (node);
+}
+
+void	del_node(t_list **node)
+{
+	free((*node)->line);
+	(*node)->line = 0;
+	if ((*node)->next)
+		(*node)->next->prev = (*node)->prev;
+	(*node)->prev->next = (*node)->next;
+	free (*node);
+	*node = 0;
+}
+
 char	*get_next_line(int fd)
 {
-	static char	*bac;
-	char		*res;
+	static t_list	head;
+	t_list			*bac;
+	char			*res;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	bac = reader(fd, bac);
+	bac = get_node(&head, fd);
 	if (bac == 0)
 		return (0);
-	res = get_line(bac);
-	bac = new_line(bac);
+	bac->line = reader(fd, bac->line);
+	if (bac->line == 0)
+	{
+		del_node(&bac);
+		return (0);
+	}
+	res = get_line(bac->line);
+	if (res == 0)
+	{
+		del_node(&bac);
+		return (0);
+	}
+	bac->line = new_line(bac->line);
+	if (bac->line == 0)
+		del_node(&bac);
 	return (res);
 }

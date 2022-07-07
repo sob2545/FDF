@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 11:29:10 by sesim             #+#    #+#             */
-/*   Updated: 2022/06/29 12:31:10 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/06 22:28:05 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	invalid_case(char *str)
 	return (1);
 }
 
-int	ft_atoui_base(char *str, char *base)
+unsigned int	ft_atoui_base(char *str, char *base)
 {
 	int	k;
 	int	base_num;
