@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 11:29:10 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/06 22:28:05 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/08 08:10:24 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,18 @@ int	invalid_case(char *str)
 
 	i = 0;
 	if (str[0] == '\0' || ft_strlen(str) == 1)
-		return (0);
+		return (-1);
 	while (str[i] != '\0')
 	{
 		j = i + 1;
 		while (str[j] != '\0')
 		{
 			if (str[i] == str[j])
-				return (0);
+				return (-1);
 			j++;
 		}
 		if (str[i] == 43 || str[i] == 45)
-			return (0);
+			return (-1);
 		i++;
 	}
 	return (1);
