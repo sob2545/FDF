@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 13:45:02 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/08 11:00:38 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/08 19:01:40 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ int	map_checker_1(char *map, t_ucs *ucs)
 	w_cnt = 0;
 	while (map[i] != '\0')
 	{
-		if (is_set(" \t\n", map[i]) == 1)
+		if (is_set(" \t", map[i]) == 1)
+			i++;
+		else if (map[i] == '\n')
 		{
-			if (map[i] == '\n')
-			{
-				w_cnt = 0;
-				ucs->h += 1;
-			}
-			printf("a");
+			if ((ucs->w != w_cnt) || ucs->w == 0)
+				return (0);
+			w_cnt = 0;
+			ucs->h += 1;
 			i++;
 		}
 		else
@@ -54,20 +54,8 @@ int	map_checker_1(char *map, t_ucs *ucs)
 				ucs->w += 1;
 			w_cnt++;
 			while (map[i] && (is_set(" \t\n", map[i]) == -1))
-			{
-				if (ft_isalpha(map[i]))
-					ft_tolower(map[i]);
 				i++;
-				printf("c");
-			}
-			printf("b");
 		}
-		printf("%d %d %d\n", ucs->w, ucs->h, w_cnt);
-		/*if (ucs->w != w_cnt)
-		{
-			printf("%d %d %d\n", ucs->w, ucs->h, w_cnt);
-			return (0);
-		}*/
 	}
 	return (1);
 }
@@ -77,11 +65,11 @@ int	point_init(char *map, t_point **point, int w, int h)
 	int	i;
 
 	i = 0;
-	if (ft_isdigit(*map))
+	if (ft_isdigit(*map) || *map == '-')
 	{
 		point[h][w].x = w;
 		point[h][w].y = h;
-		point[h][w].z = ft_adtoi(map);
+		point[h][w].z = ft_atoi(map);
 		while (ft_isdigit(map[i]))
 			i++;
 		if (map[i] == ',')
@@ -92,11 +80,12 @@ int	point_init(char *map, t_point **point, int w, int h)
 			if (map[i] != '\0' || !(ft_isspace(map[i])))
 				return (-1);
 		}
-		else if (map[i] == ' ' || map[i] == '\t' || map[i] == '\0')
+		else if (ft_isspace(map[i]) || map[i] == '\0')
 			point[h][w].color = 0xFFFFFF;
 		else
 			return (-1);
 	}
+	printf("%d %d %d %d\n", point[h][w].x, point[h][w].y, point[h][w].z, point[h][w].color);
 	return (i);
 }
 
@@ -116,11 +105,13 @@ int	map_checker_2(char *map, t_point **point, t_ucs *ucs)
 			if (is_set(" \t", *map) != -1)
 				map++;
 			else
+			{
 				i = point_init(map, point, width, height);
-			if (i < 0)
-				return (0);
-			width++;
-			map += i;
+				if (i < 0)
+					return (0);
+				width++;
+				map += i;
+			}
 		}
 		map++;
 		height++;
@@ -159,6 +150,7 @@ t_point	**get_map(int ac, char **file, t_ucs *ucs)
 		printf("f");
 		free_file(map, 1);
 	}
+	printf("%d, %d\n", ucs->w, ucs->h);
 	point = ft_calloc(ucs->h, sizeof(t_point *));
 	if (point == 0)
 		ft_error("Allocating Fail");
