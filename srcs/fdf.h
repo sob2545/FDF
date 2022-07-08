@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/07 22:53:46 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/08 10:39:17 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 typedef struct s_ucs
 {
+	int		w;
+	int		h;
 	double	scale;
-	double	w;
-	double	h;
 	double	angle;
 	int		color;
 }	t_ucs;
@@ -69,7 +69,7 @@ typedef struct s_vertex
 t_point	**get_map(int ac, char **map, t_ucs *ucs);
 void	ft_error(char *error_no);
 void	free_file(char *file, int flag);
-t_point	**free_file_point(char *file, t_point **point);
+t_point	**free_file_point(char *file, t_point **point, t_ucs *ucs);
 void	check_file_name(char *file);
 
 

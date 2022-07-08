@@ -6,10 +6,11 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 21:03:47 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/07 22:59:26 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/08 10:06:46 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "fdf.h"
 #include "../libft/libft.h"
 
@@ -19,14 +20,14 @@ void	ft_error(char *error_no)
 	exit(1);
 }
 
-t_point	**free_file_point(char *file, t_point **point)
+t_point	**free_file_point(char *file, t_point **point, t_ucs *ucs)
 {
 	int	i;
 
 	i = 0;
 	free (file);
 	file = 0;
-	while (point[i])
+	while (i < ucs->h)
 	{
 		free (point[i]);
 		i++;

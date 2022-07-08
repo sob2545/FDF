@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:10 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/07 22:57:30 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/08 10:55:25 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ int	main(int ac, char **av)
 	{
 		for (int j = 0; j < mlx.ucs.w; ++j)
 		{
-			printf("%d ", point[j][i].x);
-			printf("%d ", point[j][i].y);
-			printf("%d ", point[j][i].z);
-			printf("%d ", point[j][i].color);
+			printf("%d %d %d %d\n", point[j][i].x, point[j][i].y, point[j][i].z, point[j][i].color);
 		}
 	}
 }

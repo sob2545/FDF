@@ -6,7 +6,7 @@
 #    By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 11:16:18 by sesim             #+#    #+#              #
-#    Updated: 2022/07/07 22:06:47 by sesim            ###   ########.fr        #
+#    Updated: 2022/07/08 10:37:48 by sesim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ AR = ar rcs
 RM = rm -f
 SRCS = ft_atoi.c \
 	   ft_adtoi.c \
-	   ft_atoui_base.c \
+	   ft_atoi_hex.c \
 	   ft_bzero.c \
 	   ft_calloc.c \
 	   ft_isalnum.c \

@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 13:45:02 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/08 09:06:40 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/08 11:00:38 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@
 #include "../libft/libft.h"
 #include "../libft/get_next_line.h"
 
-int	is_set(char *set, int c)
+static int	is_set(char *set, int c)
 {
 	while (*set)
 	{
 		if (*set == c)
 			return (1);
+		set++;
 	}
-	return (0);
+	return (-1);
 }
 
 int	map_checker_1(char *map, t_ucs *ucs)
@@ -32,30 +33,41 @@ int	map_checker_1(char *map, t_ucs *ucs)
 	int	i;
 
 	i = 0;
-	while (map[i])
+	ucs->w = 0;
+	ucs->h = 0;
+	w_cnt = 0;
+	while (map[i] != '\0')
 	{
-		w_cnt = 0;
-		if (is_set(" \t\n", map[i]))
+		if (is_set(" \t\n", map[i]) == 1)
 		{
-			i++;
 			if (map[i] == '\n')
+			{
+				w_cnt = 0;
 				ucs->h += 1;
+			}
+			printf("a");
+			i++;
 		}
 		else
 		{
 			if (ucs->h == 0)
 				ucs->w += 1;
 			w_cnt++;
-			while (map[i] && !(is_set(" \t\n", map[i])))
+			while (map[i] && (is_set(" \t\n", map[i]) == -1))
 			{
 				if (ft_isalpha(map[i]))
 					ft_tolower(map[i]);
 				i++;
+				printf("c");
 			}
+			printf("b");
 		}
-		printf("%f %f\n", ucs->w, ucs->h);
-		if (ucs->w != w_cnt)
+		printf("%d %d %d\n", ucs->w, ucs->h, w_cnt);
+		/*if (ucs->w != w_cnt)
+		{
+			printf("%d %d %d\n", ucs->w, ucs->h, w_cnt);
 			return (0);
+		}*/
 	}
 	return (1);
 }
@@ -75,11 +87,12 @@ int	point_init(char *map, t_point **point, int w, int h)
 		if (map[i] == ',')
 		{
 			++i;
-			point[h][w].color = ft_atoui_base(map + i, HEX);
-			while (ft_strchr(HEX, map[i]) != 0)
-				i++;
+			point[h][w].color = ft_atoi_hex(map + i);
+			i += 9;
+			if (map[i] != '\0' || !(ft_isspace(map[i])))
+				return (-1);
 		}
-		else if (map[i] == ' ' || map[i] == '\t')
+		else if (map[i] == ' ' || map[i] == '\t' || map[i] == '\0')
 			point[h][w].color = 0xFFFFFF;
 		else
 			return (-1);
@@ -96,15 +109,17 @@ int	map_checker_2(char *map, t_point **point, t_ucs *ucs)
 	height = 0;
 	while (height < ucs->h)
 	{
+		i = 0;
 		width = 0;
 		while (*map != '\n')
 		{
-			if (ft_strchr(" \t", *map) != 0)
+			if (is_set(" \t", *map) != -1)
 				map++;
 			else
 				i = point_init(map, point, width, height);
 			if (i < 0)
 				return (0);
+			width++;
 			map += i;
 		}
 		map++;
@@ -140,20 +155,24 @@ t_point	**get_map(int ac, char **file, t_ucs *ucs)
 	map = read_map(ac, file);
 	printf("%s\n", map);
 	if (map_checker_1(map, ucs) == 0)
+	{
+		printf("f");
 		free_file(map, 1);
+	}
 	point = ft_calloc(ucs->h, sizeof(t_point *));
 	if (point == 0)
-		free_file_point(map, point);
+		ft_error("Allocating Fail");
 	i = -1;
 	while (++i < ucs->h)
 	{
 		point[i] = ft_calloc(ucs->w, sizeof(t_point));
 		if (point[i] == 0)
-			free_file_point(map, point);
+			free_file_point(map, point, ucs);
 	}
 	if (map_checker_2(map, point, ucs) == 0)
 	{
-		free_file_point(map, point);
+		printf("chek");
+		free_file_point(map, point, ucs);
 		ft_error("Map Allocating Fail!");
 	}
 	free_file(map, 2);
