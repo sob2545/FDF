@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/08 10:39:17 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/10 14:26:12 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct s_vertex
 	double	x2;
 	double	y2;
 	double	gradient;
+	int		color1;
+	int		color2;
 }	t_vertex;
 
 t_point	**get_map(int ac, char **map, t_ucs *ucs);
@@ -71,6 +73,10 @@ void	ft_error(char *error_no);
 void	free_file(char *file, int flag);
 t_point	**free_file_point(char *file, t_point **point, t_ucs *ucs);
 void	check_file_name(char *file);
+int		is_set(char *set, int c);
+int		point_init(char *map, t_point **point, int w, int h);
+int		get_map_data(int w_cnt, char *map, t_ucs *ucs);
+int		check_ucs(int *height, char *map, t_point **point, t_ucs *ucs);
 
 
 

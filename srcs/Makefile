@@ -6,7 +6,7 @@
 #    By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/24 11:21:24 by sesim             #+#    #+#              #
-#    Updated: 2022/07/08 11:33:06 by sesim            ###   ########.fr        #
+#    Updated: 2022/07/10 13:03:51 by sesim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ RM = rm -f
 
 SRCS = fdf.c \
 	   map_parser_1.c \
-	   map_parser_2.c
+	   map_parser_2.c \
+	   map_parser_3.c
 
 OBJS = $(SRCS:.c=.o)
 

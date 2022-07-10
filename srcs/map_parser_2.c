@@ -5,52 +5,111 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 21:03:47 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/08 10:06:46 by sesim            ###   ########.fr       */
+/*   Created: 2022/07/03 13:45:02 by sesim             #+#    #+#             */
+/*   Updated: 2022/07/10 14:27:05 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "fdf.h"
+#include <fcntl.h>
 #include "../libft/libft.h"
+#include "../libft/get_next_line.h"
 
-void	ft_error(char *error_no)
+int	is_set(char *set, int c)
 {
-	ft_putendl_fd(error_no, 2);
-	exit(1);
+	int	cmp;
+
+	cmp = ft_tolower(c);
+	while (*set)
+	{
+		if (*set == cmp)
+			return (1);
+		set++;
+	}
+	return (-1);
 }
 
-t_point	**free_file_point(char *file, t_point **point, t_ucs *ucs)
+int	get_map_data(int w_cnt, char *map, t_ucs *ucs)
+{
+	while (*map != '\0')
+	{
+		if (is_set(" \t", *map) == 1)
+			map++;
+		else if (*map == '\n')
+		{
+			if ((ucs->w != w_cnt) || ucs->w == 0)
+				return (-1);
+			w_cnt = 0;
+			ucs->h += 1;
+			map++;
+		}
+		else
+		{
+			if (ucs->h == 0)
+				ucs->w += 1;
+			w_cnt++;
+			while (*map && (is_set(" \t\n", *map) == -1))
+				map++;
+		}
+	}
+	return (1);
+}
+
+int	check_color(char *map)
 {
 	int	i;
 
 	i = 0;
-	free (file);
-	file = 0;
-	while (i < ucs->h)
-	{
-		free (point[i]);
+	while (is_set(HEX, map[i]) == 1)
 		i++;
+	if (i > 6)
+		return (-1);
+	if (map[i] != '\0' && map[i] != ' ' && map[i] != '\t' && map[i] != '\n')
+		return (-1);
+	return (i);
+}
+
+int	init_color(char *map, t_point **point, int w, int h)
+{
+	int	i;
+	int	cnt;
+
+	i = 0;
+	cnt = 0;
+	if (*map == '-')
+		i++;
+	while (ft_isdigit(map[i]))
+		i++;
+	if (map[i] == ',')
+	{
+		++i;
+		point[h][w].color = ft_atoi_hex(map + i);
+		if (point[h][w].color != -1)
+			i += 2;
+		cnt = check_color(map + i);
+		if (cnt != -1)
+			i += cnt;
 	}
-	free (point);
-	return (0);
+	else if (ft_isspace(map[i]) || map[i] == '\0')
+		point[h][w].color = 0xFFFFFF;
+	else
+		return (-1);
+	return (i);
 }
 
-void	free_file(char *file, int flag)
+int	point_init(char *map, t_point **point, int w, int h)
 {
-	free (file);
-	file = 0;
-	if (flag == 1)
-		ft_error("Wrong Map!");
-}
+	int	i;
 
-void	check_file_name(char *file)
-{
-	size_t	map_len;
-
-	map_len = ft_strlen(file);
-	if (map_len < 5)
-		ft_error("Where is map's name?");
-	if (ft_strncmp((file + map_len -4), ".fdf\0", 5) != 0)
-		ft_error("Did you confused with other project?!");
+	i = 0;
+	if (ft_isdigit(*map) || *map == '-')
+	{
+		point[h][w].x = w;
+		point[h][w].y = h;
+		point[h][w].z = ft_atoi(map);
+		i = init_color(map, point, w, h);
+		if (i == -1)
+			return (-1);
+	}
+	return (i);
 }

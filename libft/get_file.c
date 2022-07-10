@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 11:53:34 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/07 22:12:12 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/10 12:50:19 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*reader(int fd, char *bac)
 	if (buf == 0)
 		return (0);
 	r_cnt = 1;
-	while (!ft_strchr_g(bac, '\0') && r_cnt != 0)
+	while (r_cnt != 0)
 	{
 		r_cnt = read(fd, buf, BUFFER_SIZE);
 		if (r_cnt == -1)
