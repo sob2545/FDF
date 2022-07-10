@@ -1,0 +1,83 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CC	Makefile	/^CC = cc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address$/;"	m
+FDF_H	fdf.h	/^# define FDF_H$/;"	d
+HEX	fdf.h	/^# define HEX /;"	d
+NAME	Makefile	/^NAME = fdf$/;"	m
+OBJS	Makefile	/^OBJS = $(SRCS:.c=.o)$/;"	m
+RM	Makefile	/^RM = rm -f$/;"	m
+SRCS	Makefile	/^SRCS = fdf.c \\$/;"	m
+angle	fdf.h	/^	double	angle;$/;"	m	struct:s_ucs
+anti_alias	liner_1.c	/^void	anti_alias(t_mlx mlx, t_ptr line)$/;"	f
+check_file_name	map_parser_2.c	/^void	check_file_name(char *file)$/;"	f
+color	fdf.h	/^	int		color;$/;"	m	struct:s_point
+color	fdf.h	/^	int		color;$/;"	m	struct:s_ucs
+dec_point	liner_utils.c	/^double	dec_point(double val)$/;"	f
+dtoi	liner_utils.c	/^int	dtoi(double val)$/;"	f
+dx	fdf.h	/^	double	dx;$/;"	m	struct:s_delta_val
+dy	fdf.h	/^	double	dy;$/;"	m	struct:s_delta_val
+first_pixel_1	liner_2.c	/^void	first_pixel_1(t_mlx mlx, t_ptr line, t_ptr *pxl_point)$/;"	f
+first_pixel_2	liner_2.c	/^void	first_pixel_2(t_mlx mlx, t_ptr line, t_ptr *pxl_point)$/;"	f
+free_file	map_parser_2.c	/^void	free_file(char *file, int flag)$/;"	f
+free_file_point	map_parser_2.c	/^t_point	**free_file_point(char *file, t_point **point, t_ucs *ucs)$/;"	f
+ft_error	map_parser_2.c	/^void	ft_error(char *error_no)$/;"	f
+ft_isometric	isometric.c	/^void	ft_isometric(double *x, double *y, int z)$/;"	f
+ft_round	liner_utils.c	/^int	ft_round(double val)$/;"	f
+ft_swap	liner_utils.c	/^void	ft_swap(int *x, int *y)$/;"	f
+get_color	liner_1.c	/^int	get_color(t_mlx mlx, double grad, double gap)$/;"	f
+get_map	map_parser_1.c	/^t_point	**get_map(int ac, char **file, t_ucs *ucs)$/;"	f
+gradient	fdf.h	/^	double	gradient;$/;"	m	struct:s_vertex
+h	fdf.h	/^	int		h;$/;"	m	struct:s_ucs
+img	fdf.h	/^	void	*img;$/;"	m	struct:s_mlx
+is_set	map_parser_1.c	/^static int	is_set(char *set, int c)$/;"	f	file:
+iso_x	fdf.h	/^	double	iso_x;$/;"	m	struct:s_point
+iso_y	fdf.h	/^	double	iso_y;$/;"	m	struct:s_point
+last_pixel_1	liner_2.c	/^void	last_pixel_1(t_mlx mlx, t_ptr line, t_ptr *pxl_point)$/;"	f
+last_pixel_2	liner_2.c	/^void	last_pixel_2(t_mlx mlx, t_ptr line, t_ptr *pxl_point)$/;"	f
+liner	liner_1.c	/^void	liner(t_mlx mlx, t_ptr line, int flag)$/;"	f
+main	fdf.c	/^int	main(int ac, char **av)$/;"	f
+map_checker_1	map_parser_1.c	/^int	map_checker_1(char *map, t_ucs *ucs)$/;"	f
+map_checker_2	map_parser_1.c	/^int	map_checker_2(char *map, t_point **point, t_ucs *ucs)$/;"	f
+middle_pixel_1	liner_2.c	/^void	middle_pixel_1(t_mlx mlx, t_ptr line, t_ptr pxl_point)$/;"	f
+middle_pixel_2	liner_2.c	/^void	middle_pixel_2(t_mlx mlx, t_ptr line, t_ptr pxl_point)$/;"	f
+mlx	fdf.h	/^	void	*mlx;$/;"	m	struct:s_mlx
+point_init	map_parser_1.c	/^int	point_init(char *map, t_point **point, int w, int h)$/;"	f
+quaternion	quaternion.c	/^void	quaternion()$/;"	f
+read_map	map_parser_1.c	/^char	*read_map(int ac, char **file)$/;"	f
+rev_dec_point	liner_utils.c	/^double	rev_dec_point(double val)$/;"	f
+ro_z	fdf.h	/^	double	ro_z;$/;"	m	struct:s_point
+rotate_x	rotation.c	/^void	rotate_x(double y, double z, t_point *point, double angle)$/;"	f
+rotate_y	rotation.c	/^void	rotate_y(double x, double z, t_point *point, double angle)$/;"	f
+rotate_z	rotation.c	/^void	rotate_z(double x, double y, t_point *point, double angle)$/;"	f
+s_delta_val	fdf.h	/^typedef struct s_delta_val$/;"	s
+s_mlx	fdf.h	/^typedef struct s_mlx$/;"	s
+s_point	fdf.h	/^typedef struct s_point$/;"	s
+s_quater	fdf.h	/^typedef struct s_quater$/;"	s
+s_ucs	fdf.h	/^typedef struct s_ucs$/;"	s
+s_vertex	fdf.h	/^typedef struct s_vertex$/;"	s
+scale	fdf.h	/^	double	scale;$/;"	m	struct:s_ucs
+t_delta_val	fdf.h	/^}	t_delta_val;$/;"	t	typeref:struct:s_delta_val
+t_mlx	fdf.h	/^}	t_mlx;$/;"	t	typeref:struct:s_mlx
+t_point	fdf.h	/^}	t_point;$/;"	t	typeref:struct:s_point
+t_quater	fdf.h	/^}	t_quater;$/;"	t	typeref:struct:s_quater
+t_ucs	fdf.h	/^}	t_ucs;$/;"	t	typeref:struct:s_ucs
+t_vertex	fdf.h	/^}	t_vertex;$/;"	t	typeref:struct:s_vertex
+ucs	fdf.h	/^	t_ucs	ucs;$/;"	m	struct:s_mlx
+w	fdf.h	/^	double	w;$/;"	m	struct:s_quater
+w	fdf.h	/^	int		w;$/;"	m	struct:s_ucs
+win	fdf.h	/^	void	*win;$/;"	m	struct:s_mlx
+x	fdf.h	/^	double	x;$/;"	m	struct:s_quater
+x	fdf.h	/^	int		x;$/;"	m	struct:s_point
+x1	fdf.h	/^	double	x1;$/;"	m	struct:s_vertex
+x2	fdf.h	/^	double	x2;$/;"	m	struct:s_vertex
+y	fdf.h	/^	double	y;$/;"	m	struct:s_quater
+y	fdf.h	/^	int		y;$/;"	m	struct:s_point
+y1	fdf.h	/^	double	y1;$/;"	m	struct:s_vertex
+y2	fdf.h	/^	double	y2;$/;"	m	struct:s_vertex
+z	fdf.h	/^	double	z;$/;"	m	struct:s_quater
+z	fdf.h	/^	int		z;$/;"	m	struct:s_point

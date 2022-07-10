@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 13:45:02 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/08 19:01:40 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/10 00:37:06 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@
 
 static int	is_set(char *set, int c)
 {
+	int	cmp;
+
+	cmp = ft_tolower(c);
 	while (*set)
 	{
-		if (*set == c)
+		if (*set == cmp)
 			return (1);
 		set++;
 	}
@@ -63,21 +66,33 @@ int	map_checker_1(char *map, t_ucs *ucs)
 int	point_init(char *map, t_point **point, int w, int h)
 {
 	int	i;
+	int	cnt;
 
 	i = 0;
+	cnt = 0;
 	if (ft_isdigit(*map) || *map == '-')
 	{
 		point[h][w].x = w;
 		point[h][w].y = h;
 		point[h][w].z = ft_atoi(map);
+		if (*map == '-')
+			i++;
 		while (ft_isdigit(map[i]))
 			i++;
 		if (map[i] == ',')
 		{
 			++i;
 			point[h][w].color = ft_atoi_hex(map + i);
-			i += 9;
-			if (map[i] != '\0' || !(ft_isspace(map[i])))
+			if (point[h][w].color != -1)
+				i += 2;
+			while (is_set(HEX, map[i]) == 1)
+			{
+				cnt ++;
+				i++;
+			}
+			if (cnt > 7)
+				return (-1);
+			if (map[i] != '\0' && map[i] != ' ' && map[i] != '\t')
 				return (-1);
 		}
 		else if (ft_isspace(map[i]) || map[i] == '\0')
@@ -165,7 +180,7 @@ t_point	**get_map(int ac, char **file, t_ucs *ucs)
 	{
 		printf("chek");
 		free_file_point(map, point, ucs);
-		ft_error("Map Allocating Fail!");
+		ft_error("Map Allocating has Fail!");
 	}
 	free_file(map, 2);
 	return (point);
