@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/10 16:17:06 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/10 22:05:12 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ typedef struct s_quater
 
 typedef struct s_vertex
 {
-	double	x1;
-	double	y1;
-	double	x2;
-	double	y2;
-	double	gradient;
+	int		x1;
+	int		y1;
+	int		x2;
+	int		y2;
 	int		color1;
 	int		color2;
+	double	gradient;
 }	t_vertex;
 
 t_point	**get_map(int ac, char **map, t_ucs *ucs);
@@ -108,7 +108,7 @@ void	last_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxvertex);
 void	last_pixel_2(t_mlx mlx, t_vertex line, t_vertex *pxvertex);
 void	middle_pixel_1(t_mlx mlx, t_vertex line, t_vertex pxvertex);
 void	middle_pixel_2(t_mlx mlx, t_vertex line, t_vertex pxvertex);
-int		get_color(t_mlx mlx, double grad, double gap);
+int		get_color(int color, double grad, double gap);
 void	anti_alias(t_mlx mlx, t_vertex line);
 
 #endif
