@@ -6,14 +6,14 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:09:54 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/07 14:09:35 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/10 14:31:55 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "../mlx/mlx.h"
 
-void	first_pixel_1(t_mlx mlx, t_ptr line, t_ptr *pxl_point)
+void	first_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
 {
 	double	end_x;
 	double	end_y;
@@ -35,7 +35,7 @@ void	first_pixel_1(t_mlx mlx, t_ptr line, t_ptr *pxl_point)
 	pxl_point->gradient = end_y + line.gradient;
 }
 
-void	last_pixel_1(t_mlx mlx, t_ptr line, t_ptr *pxl_point)
+void	last_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
 {
 	double	end_x;
 	double	end_y;
@@ -56,7 +56,7 @@ void	last_pixel_1(t_mlx mlx, t_ptr line, t_ptr *pxl_point)
 			pxl_point->y2 + 1 + mlx.ucs.h, color2);
 }
 
-void	first_pixel_2(t_mlx mlx, t_ptr line, t_ptr *pxl_point)
+void	first_pixel_2(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
 {
 	double	end_x;
 	double	end_y;
@@ -78,7 +78,7 @@ void	first_pixel_2(t_mlx mlx, t_ptr line, t_ptr *pxl_point)
 	pxl_point->gradient = end_y + line.gradient;
 }
 
-void	last_pixel_2(t_mlx mlx, t_ptr line, t_ptr *pxl_point)
+void	last_pixel_2(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
 {
 	double	end_x;
 	double	end_y;
@@ -99,7 +99,7 @@ void	last_pixel_2(t_mlx mlx, t_ptr line, t_ptr *pxl_point)
 			pxl_point->y2 + mlx.ucs.h, color2);
 }
 
-void	middle_pixel_1(t_mlx mlx, t_ptr line, t_ptr pxl_point)
+void	middle_pixel_1(t_mlx mlx, t_vertex line, t_vertex pxl_point)
 {
 	int	color1;
 	int	color2;
@@ -121,7 +121,7 @@ void	middle_pixel_1(t_mlx mlx, t_ptr line, t_ptr pxl_point)
 	}
 }
 
-void	middle_pixel_2(t_mlx mlx, t_ptr line, t_ptr pxl_point)
+void	middle_pixel_2(t_mlx mlx, t_vertex line, t_vertex pxl_point)
 {
 	int	color1;
 	int	color2;

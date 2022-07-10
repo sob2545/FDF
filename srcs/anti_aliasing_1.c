@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:10:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/07 14:09:30 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/10 14:35:11 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	get_color(t_mlx mlx, double grad, double gap)
 	return (rgb);
 }
 
-void	liner(t_mlx mlx, t_ptr line, int flag)
+void	liner(t_mlx mlx, t_vertex line, int flag)
 {
-	t_ptr	pxl_point;
+	t_vertex	pxl_point;
 
 	if (flag == 1)
 	{
@@ -52,7 +52,7 @@ void	liner(t_mlx mlx, t_ptr line, int flag)
 	}
 }
 
-void	anti_alias(t_mlx mlx, t_ptr line)
+void	anti_alias(t_mlx mlx, t_vertex line)
 {
 	t_delta_val	delta_val;
 

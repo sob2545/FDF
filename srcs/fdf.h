@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/10 14:26:12 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/10 16:17:06 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,33 @@ typedef struct s_ucs
 {
 	int		w;
 	int		h;
-	double	scale;
-	double	angle;
-	int		color;
 }	t_ucs;
+
+typedef struct s_handler
+{
+	double	scale;
+	double	first_scale;
+	double	angle_x;
+	double	angle_y;
+	double	angle_z;
+}	t_handler;
+
+typedef struct s_img
+{
+	void	*ptr;
+	int		*data;
+	int		size_l;
+	int		bpp;
+	int		endian;
+}	t_img;
 
 typedef struct s_mlx
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	t_ucs	ucs;
+	void		*mlx;
+	void		*win;
+	t_ucs		ucs;
+	t_img		img;
+	t_handler	handler;
 }	t_mlx;
 
 typedef struct s_delta_val
