@@ -6,11 +6,11 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:10:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/10 22:23:10 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/10 22:56:54 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "anti_aliasing.h"
 #include "../mlx/mlx.h"
 #include "math.h"
 

@@ -6,11 +6,11 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:09:54 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/10 22:23:09 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/10 22:57:07 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "anti_aliasing.h"
 #include "../mlx/mlx.h"
 
 void	last_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxl_point)

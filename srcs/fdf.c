@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:10 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/10 16:28:07 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/10 22:47:05 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,22 @@ int	main_loop()
 
 int	main(int ac, char **av)
 {
+	t_fdf	fdf;
 	t_point	**point;
 	t_mlx	mlx;
 
 	point = get_map(ac, av, &mlx.ucs);
+	fdf.point = point;
+	set_mlx(&mlx);
+	fdf.mlx = &mlx;
+	fdf.mlx->img = ft_calloc(1, sizeof(t_img));
+	fdf.mlx->img->ptr = mlx_new_image(mlx.mlx, 1280, 720);
+	fdf.mlx->img->data = (int *)mlx_get_data_addr(mlx.img->ptr, \
+			&(mlx.img->bpp), &(mlx.img->size_l), &(mlx.img->endian));
+	mlx_hook(mlx.win, X_EVENT_KEY_PRESS, 0, key_press, &fdf);
+	mlx_loop_hook(mlx.mlx, main_loop, &mlx);
+	mlx_loop(mlx.mlx);
+	return (0);
 	/*
 	for (int i = 0; i < mlx.ucs.h; ++i)
 	{
