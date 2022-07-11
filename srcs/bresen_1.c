@@ -6,128 +6,80 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:21:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 15:58:49 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/11 23:08:33 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <math.h>
 #include "../libft/libft.h"
+#include "liner.h"
+#include "../mlx/mlx.h"
 
-void	bresenham_x(double start_x, double start_y, double finish_x, double finish_y, t_all *all)
+int	set_grad_color(t_vertex *line)
 {
-	double width;
-	double height;
-	double	x;
-	double	y;
-	double	formula;
-	double Yfactor;
+	int	rgb;
+	int	r;
+	int	g;
+	int	b;
 
-	width = finish_x - start_x;
-	height = finish_y - start_y;
-	Yfactor = 1;
-	if (height < 0)
-	{
-		Yfactor = -1;
-		height *= -1;
-	}
-	x = start_x;
-	y = start_y;
-	formula = 2 * height - width;
-	while (x < finish_x)
-	{
-		if (formula < 0)
-			formula += (2 * height);
-		else
-		{
-			y += Yfactor;
-			formula += 2 * (height - width);
-		}
-		if ((int)x + (int)all->mlx->handler.delta_x < 0 || (int)x + (int)all->mlx->handler.delta_x >= 1600 \
-			|| (1600 * (int)(y + all->mlx->handler.delta_y) + (int)x + (int)all->mlx->handler.delta_x) < 0 \
-			|| (1600 * (int)(y + all->mlx->handler.delta_y) + (int)x + (int)all->mlx->handler.delta_x) > 1600 * 900)
-
-		{
-			x+= 1;
-			continue ;
-		}
-		all->img->data[(1600 * (int)(y + all->mlx->handler.delta_y) + (int)x + (int)all->mlx->handler.delta_x)] = 0xFFFFFF;
-		x += 1;
-	}
+	r = (line->rgb2.r - line->rgb1.r) * line->gradient + line->rgb1.r;
+	g = (line->rgb2.g - line->rgb1.g) * line->gradient + line->rgb1.g;
+	b = (line->rgb2.b - line->rgb1.b) * line->gradient + line->rgb1.b;
+	rgb = 0;
+	rgb |= (r & 0xFF) << 16;
+	rgb |= (g & 0xFF) << 8;
+	rgb |= b & 0xFF;
+	return (rgb);
 }
 
-void	bresenham_y(double start_x, double start_y, double finish_x, double finish_y, t_all *all)
+void	set_color(t_vertex *line)
 {
-	double width;
-	double height;
-	double	x;
-	double	y;
-	double	formula;
-	double Xfactor;
-	width = finish_x - start_x;
-	height = finish_y - start_y;
-	Xfactor = 1;
-	if (width < 0)
-	{
-		Xfactor = -1;
-		width *= -1;
-	}
+	line->rgb1.a = (line->rgb1.color >> 24) & 0xFF;
+	line->rgb1.r = (line->rgb1.color >> 16) & 0xFF;
+	line->rgb1.g = (line->rgb1.color >> 8) & 0xFF;
+	line->rgb1.b = line->rgb1.color & 0xFF;
+	line->rgb2.a = (line->rgb2.color >> 24) & 0xFF;
+	line->rgb2.g = (line->rgb2.color >> 16) & 0xFF;
+	line->rgb2.b = (line->rgb2.color >> 8) & 0xFF;
+	line->rgb2.b = line->rgb2.color & 0xFF;
+}
 
-	x = start_x;
-	y = start_y;
-	formula = 2 * width - height;
-	while (y < finish_y)
+static void	check_steap(t_mlx mlx, t_vertex line, t_delta_val delta_val, int f)
+{
+	line.gradient = sqrt(pow(delta_val.dx, 2) + pow(delta_val.dy, 2));
+	if (f == 1)
 	{
-		if (formula < 0)
-			formula += (2 * width);
-		else
+		if (line.x2 < line.x1)
 		{
-			x += Xfactor;
-			formula += 2 * (width - height);
+			double_swap(&line.x2, &line.x1);
+			double_swap(&line.y2, &line.y1);
+			color_swap(&line.rgb1.color, &line.rgb2.color);
 		}
-		// x 계산값이 윈도우 범위를 넘어서면 화면에 표시하지 않는다 / data에 접근하는 인덱스값 이 음수이면 배열에 접근하지 않는다
-		// if ((int)(y + all->mlx->handler.delta_y) > 900)
-		// 	return ;
-		if ((int)x + (int)all->mlx->handler.delta_x < 0 || (int)x + (int)all->mlx->handler.delta_x >= 1600 \
-			|| (int)(y + all->mlx->handler.delta_y) > 900 || \
-			(1600 * (int)(y + all->mlx->handler.delta_y) + (int)x + (int)all->mlx->handler.delta_x) < 0 \
-			|| (1600 * (int)(y + all->mlx->handler.delta_y) + (int)x + (int)all->mlx->handler.delta_x) > 1600 * 900)
+		set_color(&line);
+		bresenham_x(mlx, line);
+	}
+	else
+	{
+		if (line.y2 < line.y1)
 		{
-			y += 1;
-			continue;
+			double_swap(&line.x2, &line.x1);
+			double_swap(&line.y2, &line.y1);
+			color_swap(&line.rgb1.color, &line.rgb2.color);
 		}
-		// if ((int)x + (int)all->mlx->handler.delta_x > 0 || (int)x + (int)all->mlx->handler.delta_x < 1600 \
-		// 	|| (int)(y + all->mlx->handler.delta_y) < 900 || \
-		// 	(1600 * (int)(y + all->mlx->handler.delta_y) + (int)x + (int)all->mlx->handler.delta_x) > 0 \
-		// 	|| (1600 * (int)(y + all->mlx->handler.delta_y) + (int)x + (int)all->mlx->handler.delta_x) < 1600 * 900)
-		// {
-		// 	all->img->data[(1600 * (int)(y + all->mlx->handler.delta_y) + (int)x + (int)all->mlx->handler.delta_x)] = 0x00FF00;
-		// }
-		all->img->data[(1600 * (int)(y + all->mlx->handler.delta_y) + (int)x + (int)all->mlx->handler.delta_x)] = 0x00FF00;
-		y += 1;
+		set_color(&line);
+		bresenham_y(mlx, line);
 	}
 }
 
 void	bresenham(t_mlx mlx, t_vertex line)
 {
-	t_delta_val delta_val;
+	t_delta_val	delta_val;
 
-	delta_val.dx = (double)line.x2 - (double)line.x1;
-	if (width < 0)
-		width *= -1;
-	if (height < 0)
-		height *= -1;
-	if (width > height)
-	{
-		if (start_x > finish_x)
-			bresenham_x(finish_x, finish_y, start_x, start_y, all);
-		else
-			bresenham_x(start_x, start_y, finish_x, finish_y, all);
-	}
+	delta_val.dx = fabs((double)line.x2 - (double)line.x1);
+	delta_val.dy = fabs((double)line.y2 - (double)line.y1);
+	if (delta_val.dx > delta_val.dy)
+		check_steap(mlx, line, delta_val, 1);
 	else
-	{
-		if (start_y > finish_y)
-			bresenham_y(finish_x, finish_y, start_x, start_y, all);
-		else
-			bresenham_y(start_x, start_y, finish_x, finish_y, all);
-	}
+		check_steap(mlx, line, delta_val, 2);
 }

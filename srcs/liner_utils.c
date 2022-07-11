@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   anti_aliasing_utils.c                              :+:      :+:    :+:   */
+/*   liner_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 09:11:42 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 21:55:07 by sesim            ###   ########.fr       */
+/*   Created: 2022/07/11 21:54:14 by sesim             #+#    #+#             */
+/*   Updated: 2022/07/11 21:55:53 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "liner.h"
 
-int	dtoi(double val)
+void	double_swap(double *x, double *y)
 {
-	return ((int)val);
+	double	tmp;
+
+	tmp = *x;
+	*x = *y;
+	*y = tmp;
 }
 
-int	ft_round(double val)
+void	color_swap(int *x, int *y)
 {
-	return ((int)((double)(val) +0.5));
-}
+	int	tmp;
 
-double	dec_point(double val)
-{
-	return ((double)(val) - (dtoi(val)));
-}
-
-double	rev_dec_point(double val)
-{
-	return (1.0 - dec_point(val));
+	tmp = *x;
+	*x = *y;
+	*y = tmp;
 }

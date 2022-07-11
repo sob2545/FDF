@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 09:49:14 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/11 23:13:35 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,43 @@
 # define LINER_H
 
 # include "fdf.h"
+
+typedef struct s_delta_val
+{
+	double	dx;
+	double	dy;
+}	t_delta_val;
+
+typedef struct s_rgb
+{
+	int	color;
+	int	a;
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
+
+typedef struct s_vertex
+{
+	double	x1;
+	double	y1;
+	double	x2;
+	double	y2;
+	double	gradient;
+	t_rgb	rgb1;
+	t_rgb	rgb2;
+}	t_vertex;
+
+typedef struct s_bresen_val
+{
+	int		color;
+	double	line_w;
+	double	line_h;
+	double	x;
+	double	y;
+	double	init_val;
+	double	factor;
+}	t_bresen_val;
 
 typedef struct s_quater
 {
@@ -36,11 +73,28 @@ typedef struct s_quater_param
 	double	y_z;
 }	t_quater_param;
 
-void	ft_swap(int *x, int *y);
+/* liner utils */
+void	double_swap(double *x, double *y);
+void	color_swap(int *x, int *y);
+
+/* color func */
+int		set_grad_color(t_vertex *line);
+void	set_color(t_vertex *line);
+
+/* bresenham func */
+void	bresenham(t_mlx mlx, t_vertex line);
+void	bresenham_x(t_mlx mlx, t_vertex line);
+void	bresenham_y(t_mlx mlx, t_vertex line);
+void	draw_x(t_mlx mlx, t_vertex line, t_bresen_val *val);
+void	draw_y(t_mlx mlx, t_vertex line, t_bresen_val *val);
+
+/* anti aliasing utils */
 int		dtoi(double val);
 int		ft_round(double val);
 double	dec_point(double val);
 double	rev_dec_point(double val);
+
+/* anti aliasing func */
 void	first_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxvertex);
 void	first_pixel_2(t_mlx mlx, t_vertex line, t_vertex *pxvertex);
 void	last_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxvertex);
@@ -50,8 +104,11 @@ void	middle_pixel_2(t_mlx mlx, t_vertex line, t_vertex pxvertex);
 int		get_color(int color, double grad, double gap);
 void	anti_alias(t_mlx mlx, t_vertex line);
 
+/* euler rotation func */
 void	rotate_x(double y, double z, t_point *point, double angle);
 void	rotate_y(double y, double z, t_point *point, double angle);
 void	rotate_z(double y, double z, t_point *point, double angle);
+
+/* quaternion func */
 
 #endif

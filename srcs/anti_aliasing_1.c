@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:10:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 11:57:45 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/11 22:15:45 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	get_color(int color, double grad, double gap)
 	g = ((color >> 8) & 0xFF) * grad * gap;
 	b = (color & 0xFF) * grad * gap;
 	rgb = 0;
-	rgb |= t << 24;
-	rgb |= r << 16;
-	rgb |= g << 8;
-	rgb |= b;
+	rgb |= (t & 0xFF) << 24;
+	rgb |= (r & 0xFF) << 16;
+	rgb |= (g & 0xFF) << 8;
+	rgb |= b & 0xFF;
 	return (rgb);
 }
 
@@ -72,29 +72,29 @@ void	liner(t_mlx mlx, t_vertex line, int flag)
 	}
 }
 
-void	check_steap(t_mlx mlx, t_vertex line, t_delta_val delta_val, int flag)
+static void	check_steap(t_mlx mlx, t_vertex line, t_delta_val delta_val, int f)
 {
-	if (flag == 1)
+	if (f == 1)
 	{
 		if (line.x2 < line.x1)
 		{
-			ft_swap(&line.x2, &line.x1);
-			ft_swap(&line.y2, &line.y1);
-			ft_swap(&line.color1, &line.color2);
+			double_swap(&line.x2, &line.x1);
+			double_swap(&line.y2, &line.y1);
+			color_swap(&line.rgb1.color, &line.rgb2.color);
 		}
 		line.gradient = (delta_val.dy / delta_val.dx);
-		liner(mlx, line, flag);
+		liner(mlx, line, f);
 	}
 	else
 	{
 		if (line.y2 < line.y1)
 		{
-			ft_swap(&line.x2, &line.x1);
-			ft_swap(&line.y2, &line.y1);
-			ft_swap(&line.color1, &line.color2);
+			double_swap(&line.x2, &line.x1);
+			double_swap(&line.y2, &line.y1);
+			color_swap(&line.rgb1.color, &line.rgb2.color);
 		}
 		line.gradient = (delta_val.dx / delta_val.dy);
-		liner(mlx, line, flag);
+		liner(mlx, line, f);
 	}
 }
 

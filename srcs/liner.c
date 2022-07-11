@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 09:06:24 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 15:44:53 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/11 18:24:51 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	euler_rotate(t_fdf *fdf, int h, int w)
 {
-	rotate_z(h - fdf->mlx->ucs.h / 2, w - fdf->mlx->ucs.w / 2, \
+	rotate_z(h - (double)fdf->mlx->ucs.h / 2, w - (double)fdf->mlx->ucs.w / 2, \
 			&fdf->point[h][w], fdf->mlx->handler.angle_z);
 	rotate_y(fdf->point[h][w].iso_x, fdf->point[h][w].z, \
 			&fdf->point[h][w], fdf->mlx->handler.angle_y);
