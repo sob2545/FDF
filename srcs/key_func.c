@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 07:55:28 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 12:58:00 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/11 16:35:58 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	terminate(t_fdf *fdf)
 	mlx_destroy_image(fdf->mlx->mlx, fdf->mlx->img);
 	mlx_destroy_window(fdf->mlx->mlx, fdf->mlx->win);
 	free(fdf->mlx->img);
-	free(fdf->mlx->mlx);
 }
 
 int	key_press_1(int keycode, t_fdf *fdf)

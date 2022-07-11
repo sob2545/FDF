@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 23:02:40 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 11:55:48 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/11 15:39:40 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	draw_axis(t_quater q, t_fdf *fdf, int x, int y)
 	calc_quaternion(z_axis, q, fdf);
 }
 
-void	quaternion(t_fdf *fdf)
+void	quaternion(t_fdf *fdf, int h, int w)
 {
 	t_quater	q;
 

@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:21:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/10 16:22:29 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/11 15:58:49 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,6 @@ void	bresenham_x(double start_x, double start_y, double finish_x, double finish_
 			y += Yfactor;
 			formula += 2 * (height - width);
 		}
-		// x 계산값이 윈도우 범위를 넘어서면 화면에 표시하지 않는다 / data에 접근하는 인덱스값 이 음수이면 배열에 접근하지 않는다
-		//if ((int)x + (int)all->mlx->handler.delta_x < 0 || (int)x + (int)all->mlx->handler.delta_x > 1600 || (1600 * (int)(y + all->mlx->handler.delta_y) + (int)x + (int)all->mlx->handler.delta_x) < 0)
-		// if ((int)(y + all->mlx->handler.delta_y) > 900)
-		// 	return ;
 		if ((int)x + (int)all->mlx->handler.delta_x < 0 || (int)x + (int)all->mlx->handler.delta_x >= 1600 \
 			|| (1600 * (int)(y + all->mlx->handler.delta_y) + (int)x + (int)all->mlx->handler.delta_x) < 0 \
 			|| (1600 * (int)(y + all->mlx->handler.delta_y) + (int)x + (int)all->mlx->handler.delta_x) > 1600 * 900)
@@ -111,15 +107,13 @@ void	bresenham_y(double start_x, double start_y, double finish_x, double finish_
 	}
 }
 
-void	bresenham(double start_x, double start_y, double finish_x, double finish_y, t_all *all)
+void	bresenham(t_mlx mlx, t_vertex line)
 {
-	double width;
-	double height;
+	t_delta_val delta_val;
 
-	width = (finish_x - start_x);
+	delta_val.dx = (double)line.x2 - (double)line.x1;
 	if (width < 0)
 		width *= -1;
-	height = (finish_y - start_y);
 	if (height < 0)
 		height *= -1;
 	if (width > height)

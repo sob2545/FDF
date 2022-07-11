@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 12:54:42 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/11 15:43:17 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_handler
 	int		mv_y;
 	int		pro_mod;
 	int		ro_mod;
+	int		line_mod;
 	int		help;
 }	t_handler;
 
