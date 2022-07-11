@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/10 22:58:02 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/11 12:54:42 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 
 # define X_EVENT_KEY_PRESS 2
 # define HEX "0123456789abcdef"
+# define KEY_ESC 53
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_1 18
+# define KEY_2 19
+# define KEY_3 20
+# define KEY_4 21
 
 typedef struct s_ucs
 {
@@ -33,6 +42,7 @@ typedef struct s_handler
 	int		mv_y;
 	int		pro_mod;
 	int		ro_mod;
+	int		help;
 }	t_handler;
 
 typedef struct s_img
@@ -70,14 +80,6 @@ typedef struct s_point
 	double	ro_z;
 }	t_point;
 
-typedef struct s_quater
-{
-	double	w;
-	double	x;
-	double	y;
-	double	z;
-}	t_quater;
-
 typedef struct s_vertex
 {
 	int		x1;
@@ -92,7 +94,6 @@ typedef struct s_vertex
 typedef struct s_fdf
 {
 	t_mlx	*mlx;
-	t_img	*img;
 	t_point	**point;
 }	t_fdf;
 
@@ -105,5 +106,7 @@ int		is_set(char *set, int c);
 int		point_init(char *map, t_point **point, int w, int h);
 int		get_map_data(int w_cnt, char *map, t_ucs *ucs);
 int		check_ucs(int *height, char *map, t_point **point, t_ucs *ucs);
+
+int	key_press(int keycode, t_fdf *fdf);
 
 #endif

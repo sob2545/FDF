@@ -6,13 +6,12 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 13:45:02 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/10 14:25:50 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/11 08:09:20 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <fcntl.h>
-#include <stdio.h>
 #include "../libft/libft.h"
 #include "../libft/get_next_line.h"
 
@@ -81,6 +80,5 @@ t_point	**get_map(int ac, char **file, t_ucs *ucs)
 		ft_error("Map Allocating has Fail!");
 	}
 	free_file(map, 2);
-	printf("%d, %d\n", ucs->w, ucs->h);
 	return (point);
 }

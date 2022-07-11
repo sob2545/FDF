@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:10 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/10 22:47:05 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/11 09:06:12 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,16 @@ void	set_mlx(t_mlx *mlx)
 	ft_bzero(&mlx->handler, sizeof(t_handler));
 }
 
-int	main_loop()
+int	main_loop(t_fdf *fdf)
+{
+	mlx_destroy_image(fdf->mlx->mlx, fdf->mlx->img->ptr);
+	mlx_clear_window(fdf->mlx->mlx, fdf->mlx->win);
+	fdf->mlx->img->ptr = mlx_new_image(fdf->mlx->mlx, 1600, 900);
+	fdf->mlx->img->data = (int *)mlx_get_data_addr(fdf->mlx->img->ptr, \
+		&(fdf->mlx->img->bpp), &(fdf->mlx->img->size_l), \
+		&(fdf->mlx->img->endian));
+	draw_liner(fdf);
+}
 
 int	main(int ac, char **av)
 {
@@ -49,5 +58,4 @@ int	main(int ac, char **av)
 			printf("%d %d %d %d\n", point[i][j].x, point[i][j].y,point[i][j].z, point[i][j].color);
 	}
 	*/
-	set_mlx(&mlx);
 }

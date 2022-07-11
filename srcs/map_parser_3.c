@@ -6,11 +6,10 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 21:03:47 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/10 14:28:38 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/11 08:09:06 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "fdf.h"
 #include "../libft/libft.h"
 
