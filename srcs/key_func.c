@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 07:55:28 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 16:35:58 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/12 16:06:09 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../mlx/mlx.h"
 #include <stdlib.h>
 
-void	terminate(t_fdf *fdf)
+int	terminate(t_fdf *fdf)
 {
 	int	i;
 
@@ -29,6 +29,7 @@ void	terminate(t_fdf *fdf)
 	mlx_destroy_image(fdf->mlx->mlx, fdf->mlx->img);
 	mlx_destroy_window(fdf->mlx->mlx, fdf->mlx->win);
 	free(fdf->mlx->img);
+	return (0);
 }
 
 int	key_press_1(int keycode, t_fdf *fdf)

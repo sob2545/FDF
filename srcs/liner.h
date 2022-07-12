@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/12 10:07:29 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/12 16:24:47 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,15 @@ void	rotate_x(double y, double z, t_point *point, double angle);
 void	rotate_y(double y, double z, t_point *point, double angle);
 void	rotate_z(double y, double z, t_point *point, double angle);
 
+/* side coordinate euler rotation func */
+void	rotate_cs_x(double y, double z, t_point *point, double angle);
+void	rotate_cs_y(double y, double z, t_point *point, double angle);
+void	rotate_cs_z(double y, double z, t_point *point, double angle);
+
 /* quaternion func */
+void	quaternion(t_fdf *fdf, t_quater *q, int h, int w);
+
+/* side coordinate quaternion func */
+void	cs_quaternion(t_fdf *fdf, t_quater *q, int h, int w);
 
 #endif

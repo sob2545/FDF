@@ -6,11 +6,12 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 09:06:24 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 18:24:51 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/12 16:18:29 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "liner.h"
+#include "../libft/libft.h"
 
 void	euler_rotate(t_fdf *fdf, int h, int w)
 {
@@ -24,10 +25,13 @@ void	euler_rotate(t_fdf *fdf, int h, int w)
 
 void	rotation(t_fdf *fdf)
 {
+	t_quater	q;
 	int	j;
 	int	k;
 
 	j = -1;
+	ft_bzero(&q, sizeof(t_quater));
+	q.w = 1.0;
 	while (++j < fdf->mlx->ucs.h)
 	{
 		k = -1;
@@ -36,7 +40,7 @@ void	rotation(t_fdf *fdf)
 			if (fdf->mlx->handler.ro_mod == 1)
 				euler_rotate(fdf, j, k);
 			else if (fdf->mlx->handler.ro_mod == 2)
-				quaternion(fdf, j, k);
+				quaternion(fdf, &q, j, k);
 		}
 	}
 }

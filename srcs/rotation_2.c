@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quaternion.c                                       :+:      :+:    :+:   */
+/*   rotation_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 23:02:40 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 15:39:40 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/12 16:22:48 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,34 @@
 #include "../mlx/mlx.h"
 #include "liner.h"
 
+void	rotate_cs_x(double y, double z, t_point *point, double angle)
 {
-	static t_quaternion	prev_q;
-	t_quaternion		*q = (t_quaternion *)param;
+	double	pi;
 
-	if (memcmp(q, &prev_q, sizeof(t_quaternion)))
-	{
-		prev_q = *q;
-		calc_quaternion(q);
-		draw(*q);
-		return (1);
-	}
-	return (0);
+	pi = M_PI / 180;
+	point->iso_y = y * cos(angle * pi) + (z) * sin(angle * pi);
+	point->ro_z = -y * sin(angle * pi) + (z) * cos(angle * pi);
 }
 
-void	draw_vector(t_point p, int color)
+void	rotate_cs_y(double x, double z, t_point *point, double angle)
 {
-	double	dt = fmax(fabs(p.y), fabs(p.z));
-	double	dx = p.y / dt, dy = p.z / dt;
-	double	x = (double)SCREEN_WIDTH / 2, y = (double)SCREEN_HEIGHT / 2;
-	for (double i=0; i<=dt; i+=1.0)
-	{
-		mlx_pixel_put(mlx_ptr, win_ptr, (int)x, (int)y, color);
-		x += dx;
-		y -= dy;
-	}
+	double	pi;
+
+	pi = M_PI / 180;
+	point->iso_x = x * cos(angle * pi) + (z) * sin(angle * pi);
+	point->ro_z = -x * sin(angle * pi) + (z) * cos(angle * pi);
 }
 
-void	cal_quater(t_quater *q, t_fdf *fdf, int w, int h)
+void	rotate_cs_z(double x, double y, t_point *point, double angle)
+{
+	double	pi;
+
+	pi = M_PI / 180;
+	point->iso_x = x * cos(angle * pi) - y * sin(angle * pi);
+	point->iso_y = x * sin(angle * pi) + y * cos(angle * pi);
+}
+
+void	cs_quaternion(t_fdf *fdf, t_quater *q, int h, int w)
 {
 	t_quater_param	param;
 
@@ -64,34 +64,4 @@ void	cal_quater(t_quater *q, t_fdf *fdf, int w, int h)
 	fdf->point[h][w].ro_z = fdf->point[h][w].x * (2. * param.x_z - 2. * \
 		param.w_y) + fdf->point[h][w].y * (2. * param.y_z + 2. * param.w_x) \
 		+ fdf->point[h][w].z * (1. - 2. * param.x_pow - 2. * param.y_pow);
-}
-
-void	draw(t_quater q, t_fdf *fdf, int x, int y)
-{
-
-}
-
-void	draw_axis(t_quater q, t_fdf *fdf, int x, int y)
-{
-	t_quater	x_axis;
-	t_quater	y_axis;
-	t_quater	z_axis;
-
-	ft_bzero(&x_axis, sizeof(t_quater));
-	x_axis.x = x;
-	ft_bzero(&y_axis, sizeof(t_quater));
-	y_axis.x = y;
-	ft_bzero(&z_axis, sizeof(t_quater));
-	z_axis.x = fdf->point[y][x].z;
-	calc_quaternion(x_axis, q, fdf);
-	calc_quaternion(y_axis, q, fdf);
-	calc_quaternion(z_axis, q, fdf);
-}
-
-void	quaternion(t_fdf *fdf, int h, int w)
-{
-	t_quater	q;
-
-	ft_bzero(q, sizeof(t_quater));
-	q.w = 1.0;
 }

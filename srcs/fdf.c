@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:10 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 23:13:57 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/12 16:46:49 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 #include "../mlx/mlx.h"
 #include "../libft/libft.h"
 #include <stdio.h>
+
+void	set_side_cs(t_side_cs *side_cs)
+{
+	ft_bzero(side_cs, sizeof(t_side_cs));
+	side_cs->axis_x.x = 50;
+	side_cs->axis_y.y = 50;
+	side_cs->axis_z.z = 50;
+}
 
 void	set_mlx(t_mlx *mlx)
 {
@@ -31,23 +39,28 @@ int	main_loop(t_fdf *fdf)
 		&(fdf->mlx->img->bpp), &(fdf->mlx->img->size_l), \
 		&(fdf->mlx->img->endian));
 	draw_liner(fdf);
+	return (0);
 }
 
 int	main(int ac, char **av)
 {
-	t_fdf	fdf;
-	t_point	**point;
-	t_mlx	mlx;
+	t_fdf		fdf;
+	t_point		**point;
+	t_mlx		mlx;
+	t_side_cs	side_cs;
 
 	point = get_map(ac, av, &mlx.ucs);
 	fdf.point = point;
 	set_mlx(&mlx);
+	set_side_cs(&side_cs);
 	fdf.mlx = &mlx;
+	fdf.side_cs = &side_cs;
 	fdf.mlx->img = ft_calloc(1, sizeof(t_img));
 	fdf.mlx->img->ptr = mlx_new_image(mlx.mlx, 1280, 720);
 	fdf.mlx->img->data = (int *)mlx_get_data_addr(mlx.img->ptr, \
 		&(mlx.img->bpp), &(mlx.img->size_l), &(mlx.img->endian));
 	mlx_hook(mlx.win, X_EVENT_KEY_PRESS, 0, key_press, &fdf);
+	mlx_hook(mlx.win, X_EXIT, 0, terminate, &fdf);
 	mlx_loop_hook(mlx.mlx, main_loop, &mlx);
 	mlx_loop(mlx.mlx);
 	return (0);

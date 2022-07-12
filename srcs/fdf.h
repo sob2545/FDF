@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 23:12:50 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/12 16:40:41 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FDF_H
 
 # define X_EVENT_KEY_PRESS 2
+# define X_EXIT 17
 # define HEX "0123456789abcdef"
 # define KEY_ESC 53
 # define KEY_UP 126
@@ -26,7 +27,10 @@
 # define KEY_4 21
 # define WIN_W 1280
 # define WIN_H 720
+# define COORD_X 
+# define COORD_Y 
 
+/* map's information */
 typedef struct s_ucs
 {
 	int		w;
@@ -48,6 +52,7 @@ typedef struct s_handler
 	int		help;
 }	t_handler;
 
+/* mlx img pointer */
 typedef struct s_img
 {
 	void	*ptr;
@@ -57,6 +62,7 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+/* map parameters */
 typedef struct s_point
 {
 	int		x;
@@ -68,6 +74,7 @@ typedef struct s_point
 	double	ro_z;
 }	t_point;
 
+/* mlx pointer */
 typedef struct s_mlx
 {
 	void		*mlx;
@@ -77,10 +84,32 @@ typedef struct s_mlx
 	t_handler	handler;
 }	t_mlx;
 
+/* side coordinate rotation value */
+typedef struct s_cs_q
+{
+	double	w;
+	double	x;
+	double	y;
+	double	z;
+	double	ro_x;
+	double	ro_y;
+	double	ro_z;
+	int		color;
+}	t_cs_q;
+
+/* side coordinate axis */
+typedef struct s_side_cs
+{
+	t_cs_q	axis_x;
+	t_cs_q	axis_y;
+	t_cs_q	axis_z;
+}	t_side_cs;
+
 typedef struct s_fdf
 {
-	t_mlx	*mlx;
-	t_point	**point;
+	t_mlx		*mlx;
+	t_point		**point;
+	t_side_cs	*side_cs;
 }	t_fdf;
 
 /* map parser */
@@ -98,6 +127,7 @@ int		check_ucs(int *height, char *map, t_point **point, t_ucs *ucs);
 void	draw_liner(t_fdf *fdf);
 
 /* mlx loop func */
+int		terminate(t_fdf *fdf);
 int		key_press(int keycode, t_fdf *fdf);
 
 #endif
