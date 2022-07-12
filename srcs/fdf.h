@@ -6,21 +6,27 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/12 16:40:41 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/12 23:38:02 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+# define HEX "0123456789abcdef"
 # define X_EVENT_KEY_PRESS 2
 # define X_EXIT 17
-# define HEX "0123456789abcdef"
 # define KEY_ESC 53
 # define KEY_UP 126
 # define KEY_DOWN 125
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
+# define KEY_Q 12
+# define KEY_W 13
+# define KEY_E 14
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
 # define KEY_1 18
 # define KEY_2 19
 # define KEY_3 20
@@ -50,6 +56,7 @@ typedef struct s_handler
 	int		ro_mod;
 	int		line_mod;
 	int		help;
+	int		key;
 }	t_handler;
 
 /* mlx img pointer */

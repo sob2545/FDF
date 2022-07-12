@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/12 16:24:47 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/12 23:44:02 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,12 @@ void	rotate_cs_y(double y, double z, t_point *point, double angle);
 void	rotate_cs_z(double y, double z, t_point *point, double angle);
 
 /* quaternion func */
-void	quaternion(t_fdf *fdf, t_quater *q, int h, int w);
+void	set_quater_angle_x(t_fdf *fdf, t_quater *angle, int flag);
+void	set_quater_angle_y(t_fdf *fdf, t_quater *angle, int flag);
+void	set_quater_angle_z(t_fdf *fdf, t_quater *angle, int flag);
+void	quaternion_cal(t_fdf *fdf, t_quater *q, int h, int w);
+void	quaternion_ro(t_quater *q, t_quater angle);
+void	quaternion_cal(t_fdf *fdf, t_quater *q, int h, int w);
 
 /* side coordinate quaternion func */
 void	cs_quaternion(t_fdf *fdf, t_quater *q, int h, int w);
