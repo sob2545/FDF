@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 23:13:35 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/12 10:07:29 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	last_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxvertex);
 void	last_pixel_2(t_mlx mlx, t_vertex line, t_vertex *pxvertex);
 void	middle_pixel_1(t_mlx mlx, t_vertex line, t_vertex pxvertex);
 void	middle_pixel_2(t_mlx mlx, t_vertex line, t_vertex pxvertex);
-int		get_color(int color, double grad, double gap);
+int		set_grad(t_rgb color, double grad);
 void	anti_alias(t_mlx mlx, t_vertex line);
 
 /* euler rotation func */

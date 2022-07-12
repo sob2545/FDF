@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:10:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 22:15:45 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/12 10:47:29 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,17 @@
 #include "../mlx/mlx.h"
 #include "math.h"
 
-int	get_color(int color, double grad, double gap)
+int	set_grad(t_rgb color, double grad)
 {
 	int	t;
-	int	r;
-	int	g;
-	int	b;
 	int	rgb;
 
-	t = (color >> 24) & 0xFF;
-	r = ((color >> 16) & 0xFF) * grad * gap;
-	g = ((color >> 8) & 0xFF) * grad * gap;
-	b = (color & 0xFF) * grad * gap;
+	t = 0xFF - (0xFF * grad);
 	rgb = 0;
 	rgb |= (t & 0xFF) << 24;
-	rgb |= (r & 0xFF) << 16;
-	rgb |= (g & 0xFF) << 8;
-	rgb |= b & 0xFF;
+	rgb |= color.r << 16;
+	rgb |= color.g << 8;
+	rgb |= color.b;
 	return (rgb);
 }
 
@@ -45,12 +39,17 @@ void	first_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
 	gap = rev_dec_point(line.x1 + 0.5);
 	pxl_point->x1 = end_x;
 	pxl_point->y1 = dtoi(end_y);
-	pxl_point->color1 = get_color(line.color1, rev_dec_point(end_y), gap);
-	pxl_point->color2 = get_color(line.color2, dec_point(end_y), gap);
-	mlx_pixel_put(mlx.mlx, mlx.win, pxl_point->x1 + mlx.ucs.w, \
-			pxl_point->y1 + mlx.ucs.h, pxl_point->color1);
-	mlx_pixel_put(mlx.mlx, mlx.win, pxl_point->x1 + mlx.ucs.w, \
-			pxl_point->y1 + 1 + mlx.ucs.h, pxl_point->color2);
+	pxl_point->rgb1.color = set_grad(line.rgb1, rev_dec_point(end_y) * gap);
+	pxl_point->rgb2.color = set_grad(line.rgb2, dec_point(end_y) * gap);
+	if (check_win(pxl_point->x1, pxl_point->y1, ) == 1)
+	{
+		mlx.img->data[(WIN_W * (int)(pxl_point->x1 + mlx.handler.mv_x) + \
+			(int)pxl_point->y1 + (int)mlx.handler.mv_y)] \
+			= pxl_point->rgb1.color;
+		mlx.img->data[(WIN_W * (int)(pxl_point->x1 + mlx.handler.mv_x) + \
+			(int)pxl_point->y1 + 1 + (int)mlx.handler.mv_y)] \
+			= pxl_point->rgb2.color;
+	}
 	pxl_point->gradient = end_y + line.gradient;
 }
 
@@ -83,6 +82,7 @@ static void	check_steap(t_mlx mlx, t_vertex line, t_delta_val delta_val, int f)
 			color_swap(&line.rgb1.color, &line.rgb2.color);
 		}
 		line.gradient = (delta_val.dy / delta_val.dx);
+		set_color(&line);
 		liner(mlx, line, f);
 	}
 	else
@@ -94,6 +94,7 @@ static void	check_steap(t_mlx mlx, t_vertex line, t_delta_val delta_val, int f)
 			color_swap(&line.rgb1.color, &line.rgb2.color);
 		}
 		line.gradient = (delta_val.dx / delta_val.dy);
+		set_color(&line);
 		liner(mlx, line, f);
 	}
 }

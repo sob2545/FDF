@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:09:54 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 11:57:54 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/12 10:20:46 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	last_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
 	gap = dec_point(line.x2 + 0.5);
 	pxl_point->x2 = end_x;
 	pxl_point->y2 = dtoi(end_y);
-	pxl_point->color1 = get_color(line.color1, rev_dec_point(end_y), gap);
-	pxl_point->color2 = get_color(line.color2, dec_point(end_y), gap);
+	pxl_point->rgb1.color = set_grad(line.rgb1, rev_dec_point(end_y) * gap);
+	pxl_point->rgb2.color = set_grad(line.rgb2, dec_point(end_y) * gap);
 	mlx_pixel_put(mlx.mlx, mlx.win, pxl_point->x2 + mlx.ucs.w, \
-			pxl_point->y2 + mlx.ucs.h, pxl_point->color1);
+			pxl_point->y2 + mlx.ucs.h, pxl_point->rgb1.color);
 	mlx_pixel_put(mlx.mlx, mlx.win, pxl_point->x2 + mlx.ucs.w, \
-			pxl_point->y2 + 1 + mlx.ucs.h, pxl_point->color2);
+			pxl_point->y2 + 1 + mlx.ucs.h, pxl_point->rgb2.color);
 }
 
 void	first_pixel_2(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
@@ -43,12 +43,12 @@ void	first_pixel_2(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
 	gap = rev_dec_point(line.y1 + 0.5);
 	pxl_point->y1 = end_y;
 	pxl_point->x1 = dtoi(end_x);
-	pxl_point->color1 = get_color(line.color1, rev_dec_point(end_x), gap);
-	pxl_point->color2 = get_color(line.color2, dec_point(end_x), gap);
+	pxl_point->rgb1.color = set_grad(line.rgb1, rev_dec_point(end_x) * gap);
+	pxl_point->rgb2.color = set_grad(line.rgb2, dec_point(end_x) * gap);
 	mlx_pixel_put(mlx.mlx, mlx.win, pxl_point->x1 + mlx.ucs.w, \
-			pxl_point->y1 + mlx.ucs.h, pxl_point->color1);
+			pxl_point->y1 + mlx.ucs.h, pxl_point->rgb1.color);
 	mlx_pixel_put(mlx.mlx, mlx.win, pxl_point->x1 + 1 + mlx.ucs.w, \
-			pxl_point->y1 + mlx.ucs.h, pxl_point->color2);
+			pxl_point->y1 + mlx.ucs.h, pxl_point->rgb2.color);
 	pxl_point->gradient = end_y + line.gradient;
 }
 
@@ -63,12 +63,12 @@ void	last_pixel_2(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
 	gap = dec_point(line.y2 + 0.5);
 	pxl_point->y2 = end_y;
 	pxl_point->x2 = dtoi(end_x);
-	pxl_point->color1 = get_color(line.color1, rev_dec_point(end_x), gap);
-	pxl_point->color2 = get_color(line.color2, dec_point(end_x), gap);
+	pxl_point->rgb1.color = set_grad(line.rgb1, rev_dec_point(end_x) * gap);
+	pxl_point->rgb2.color = set_grad(line.rgb2, dec_point(end_x) * gap);
 	mlx_pixel_put(mlx.mlx, mlx.win, pxl_point->x2 + mlx.ucs.w, \
-			pxl_point->y2 + mlx.ucs.h, pxl_point->color1);
+			pxl_point->y2 + mlx.ucs.h, pxl_point->rgb1.color);
 	mlx_pixel_put(mlx.mlx, mlx.win, pxl_point->x2 + 1 + mlx.ucs.w, \
-			pxl_point->y2 + mlx.ucs.h, pxl_point->color2);
+			pxl_point->y2 + mlx.ucs.h, pxl_point->rgb2.color);
 }
 
 void	middle_pixel_1(t_mlx mlx, t_vertex line, t_vertex pxl_point)
@@ -78,15 +78,18 @@ void	middle_pixel_1(t_mlx mlx, t_vertex line, t_vertex pxl_point)
 	int	y;
 
 	i = pxl_point.x1 + 1;
-	pxl_point.color1 = get_color(line.color1, \
-			rev_dec_point(pxl_point.gradient), 1);
-	pxl_point.color2 = get_color(line.color2, dec_point(pxl_point.gradient), 1);
 	while (i < pxl_point.x2)
 	{
+		pxl_point.rgb1.color = set_grad(line.rgb1, \
+			rev_dec_point(pxl_point.gradient));
+		pxl_point.rgb2.color = set_grad(line.rgb2, \
+			dec_point(pxl_point.gradient));
 		x = i + mlx.ucs.h;
 		y = dtoi(pxl_point.gradient) + mlx.ucs.w;
-		mlx_pixel_put(mlx.mlx, mlx.win, x, y, pxl_point.color1);
-		mlx_pixel_put(mlx.mlx, mlx.win, x, y + 1, pxl_point.color2);
+		mlx.img->data[(WIN_W * (int)(x + mlx.handler.mv_x) + (int)y \
+			+ (int)mlx.handler.mv_y)] = pxl_point.rgb1.color;
+		mlx.img->data[(WIN_W * (int)(x + mlx.handler.mv_x) + (int)y + 1 \
+			+ (int)mlx.handler.mv_y)] = pxl_point.rgb2.color;
 		pxl_point.gradient += line.gradient;
 		i++;
 	}
@@ -99,15 +102,18 @@ void	middle_pixel_2(t_mlx mlx, t_vertex line, t_vertex pxl_point)
 	int	y;
 
 	i = pxl_point.y1 + 1;
-	pxl_point.color1 = get_color(line.color1, \
-			rev_dec_point(pxl_point.gradient), 1);
-	pxl_point.color2 = get_color(line.color2, dec_point(pxl_point.gradient), 1);
 	while (i < pxl_point.y2)
 	{
+		pxl_point.rgb1.color = set_grad(line.rgb1, \
+			rev_dec_point(pxl_point.gradient));
+		pxl_point.rgb2.color = set_grad(line.rgb2, \
+			dec_point(pxl_point.gradient));
 		x = dtoi(pxl_point.gradient) + mlx.ucs.w;
 		y = i + mlx.ucs.h;
-		mlx_pixel_put(mlx.mlx, mlx.win, x, y, pxl_point.color1);
-		mlx_pixel_put(mlx.mlx, mlx.win, x + 1, y, pxl_point.color2);
+		mlx.img->data[(WIN_W * (int)(x + mlx.handler.mv_x) + (int)y \
+			+ (int)mlx.handler.mv_y)] = pxl_point.rgb1.color;
+		mlx.img->data[(WIN_W * (int)(x + 1 + mlx.handler.mv_x) + (int)y \
+			+ (int)mlx.handler.mv_y)] = pxl_point.rgb2.color;
 		pxl_point.gradient += line.gradient;
 		i++;
 	}
