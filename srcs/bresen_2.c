@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:21:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 23:07:05 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/13 16:01:56 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,12 @@ void	draw_x(t_mlx mlx, t_vertex line, t_bresen_val *val)
 			val->y += val->factor;
 			val->init_val += 2 * (val->line_h - val->line_w);
 		}
-		if ((int)val->x + (int)mlx.handler.mv_x < 0 || (int)val->x + \
-			(int)mlx.handler.mv_x >= WIN_W || (WIN_W * (int)(val->y + \
-			mlx.handler.mv_y) + (int)val->x + (int)mlx.handler.mv_x) < 0 \
-			|| (WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x + \
-			(int)mlx.handler.mv_x) > WIN_W * WIN_H)
-		{
-			val->x += 1;
-			continue ;
-		}
-		mlx.img->data[(WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x \
-			+ (int)mlx.handler.mv_x)] = val->color;
+		if ((int)val->x + (int)mlx.handler.mv_x >= 0 && (int)val->x + \
+			(int)mlx.handler.mv_x < WIN_W && (WIN_W * (int)(val->y + \
+			mlx.handler.mv_y) + (int)val->x + (int)mlx.handler.mv_x) >= 0 \
+			&& (WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x))
+			mlx.img->data[(WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x \
+				+ (int)mlx.handler.mv_x)] = val->color;
 		val->x += 1;
 	}
 }
@@ -55,17 +50,12 @@ void	draw_y(t_mlx mlx, t_vertex line, t_bresen_val *val)
 			val->x += val->factor;
 			val->init_val += 2 * (val->line_w - val->line_h);
 		}
-		if ((int)val->x + (int)mlx.handler.mv_x < 0 || (int)val->x + \
-			(int)mlx.handler.mv_x >= WIN_W || (WIN_W * (int)(val->y + \
-			mlx.handler.mv_y) + (int)val->x + (int)mlx.handler.mv_x) < 0 \
-			|| (WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x + \
-			(int)mlx.handler.mv_x) > WIN_W * WIN_H)
-		{
-			val->y += 1;
-			continue ;
-		}
-		mlx.img->data[(WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x \
-			+ (int)mlx.handler.mv_x)] = val->color;
+		if ((int)val->x + (int)mlx.handler.mv_x >= 0 && (int)val->x + \
+			(int)mlx.handler.mv_x < WIN_W && (WIN_W * (int)(val->y + \
+			mlx.handler.mv_y) + (int)val->x + (int)mlx.handler.mv_x) >= 0 \
+			&& (WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x))
+			mlx.img->data[(WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x \
+				+ (int)mlx.handler.mv_x)] = val->color;
 		val->y += 1;
 	}
 }

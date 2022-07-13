@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:10:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/12 10:47:29 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/13 15:13:10 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,7 @@ int	set_grad(t_rgb color, double grad)
 	return (rgb);
 }
 
-void	first_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
-{
-	double	end_x;
-	double	end_y;
-	double	gap;
-
-	end_x = ft_round(line.x1);
-	end_y = line.y1 + line.gradient * (end_x - line.x1);
-	gap = rev_dec_point(line.x1 + 0.5);
-	pxl_point->x1 = end_x;
-	pxl_point->y1 = dtoi(end_y);
-	pxl_point->rgb1.color = set_grad(line.rgb1, rev_dec_point(end_y) * gap);
-	pxl_point->rgb2.color = set_grad(line.rgb2, dec_point(end_y) * gap);
-	if (check_win(pxl_point->x1, pxl_point->y1, ) == 1)
-	{
-		mlx.img->data[(WIN_W * (int)(pxl_point->x1 + mlx.handler.mv_x) + \
-			(int)pxl_point->y1 + (int)mlx.handler.mv_y)] \
-			= pxl_point->rgb1.color;
-		mlx.img->data[(WIN_W * (int)(pxl_point->x1 + mlx.handler.mv_x) + \
-			(int)pxl_point->y1 + 1 + (int)mlx.handler.mv_y)] \
-			= pxl_point->rgb2.color;
-	}
-	pxl_point->gradient = end_y + line.gradient;
-}
-
-void	liner(t_mlx mlx, t_vertex line, int flag)
+static void	liner(t_mlx mlx, t_vertex line, int flag)
 {
 	t_vertex	pxl_point;
 

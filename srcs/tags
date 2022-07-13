@@ -6,78 +6,221 @@
 !_TAG_PROGRAM_VERSION	5.8	//
 CC	Makefile	/^CC = cc$/;"	m
 CFLAGS	Makefile	/^CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address$/;"	m
+COORD_X	fdf.h	/^# define COORD_X /;"	d
+COORD_Y	fdf.h	/^# define COORD_Y /;"	d
 FDF_H	fdf.h	/^# define FDF_H$/;"	d
 HEX	fdf.h	/^# define HEX /;"	d
+KEY_1	fdf.h	/^# define KEY_1 /;"	d
+KEY_2	fdf.h	/^# define KEY_2 /;"	d
+KEY_3	fdf.h	/^# define KEY_3 /;"	d
+KEY_4	fdf.h	/^# define KEY_4 /;"	d
+KEY_A	fdf.h	/^# define KEY_A /;"	d
+KEY_D	fdf.h	/^# define KEY_D /;"	d
+KEY_DOWN	fdf.h	/^# define KEY_DOWN /;"	d
+KEY_E	fdf.h	/^# define KEY_E /;"	d
+KEY_ESC	fdf.h	/^# define KEY_ESC /;"	d
+KEY_L	fdf.h	/^# define KEY_L /;"	d
+KEY_LEFT	fdf.h	/^# define KEY_LEFT /;"	d
+KEY_P	fdf.h	/^# define KEY_P /;"	d
+KEY_Q	fdf.h	/^# define KEY_Q /;"	d
+KEY_R	fdf.h	/^# define KEY_R /;"	d
+KEY_RIGHT	fdf.h	/^# define KEY_RIGHT /;"	d
+KEY_S	fdf.h	/^# define KEY_S /;"	d
+KEY_UP	fdf.h	/^# define KEY_UP /;"	d
+KEY_W	fdf.h	/^# define KEY_W /;"	d
+KEY_Z	fdf.h	/^# define KEY_Z /;"	d
+KEY_ZM_D	fdf.h	/^# define KEY_ZM_D /;"	d
+KEY_ZM_U	fdf.h	/^# define KEY_ZM_U /;"	d
+LINER_H	liner.h	/^# define LINER_H$/;"	d
 NAME	Makefile	/^NAME = fdf$/;"	m
 OBJS	Makefile	/^OBJS = $(SRCS:.c=.o)$/;"	m
 RM	Makefile	/^RM = rm -f$/;"	m
 SRCS	Makefile	/^SRCS = fdf.c \\$/;"	m
-angle	fdf.h	/^	double	angle;$/;"	m	struct:s_ucs
-anti_alias	liner_1.c	/^void	anti_alias(t_mlx mlx, t_ptr line)$/;"	f
-check_file_name	map_parser_2.c	/^void	check_file_name(char *file)$/;"	f
+WIN_H	fdf.h	/^# define WIN_H /;"	d
+WIN_W	fdf.h	/^# define WIN_W /;"	d
+X_EVENT_KEY_PRESS	fdf.h	/^# define X_EVENT_KEY_PRESS /;"	d
+X_EVENT_MOUSE_PRESS	fdf.h	/^# define X_EVENT_MOUSE_PRESS /;"	d
+X_EXIT	fdf.h	/^# define X_EXIT /;"	d
+a	liner.h	/^	int	a;$/;"	m	struct:s_rgb
+angle_x	fdf.h	/^	double	angle_x;$/;"	m	struct:s_handler
+angle_y	fdf.h	/^	double	angle_y;$/;"	m	struct:s_handler
+angle_z	fdf.h	/^	double	angle_z;$/;"	m	struct:s_handler
+anti_alias	anti_aliasing_1.c	/^void	anti_alias(t_mlx mlx, t_vertex line)$/;"	f
+axis_x	fdf.h	/^	t_cs_q	axis_x;$/;"	m	struct:s_side_cs
+axis_y	fdf.h	/^	t_cs_q	axis_y;$/;"	m	struct:s_side_cs
+axis_z	fdf.h	/^	t_cs_q	axis_z;$/;"	m	struct:s_side_cs
+b	liner.h	/^	int	b;$/;"	m	struct:s_rgb
+bpp	fdf.h	/^	int		bpp;$/;"	m	struct:s_img
+bresenham	bresen_1.c	/^void	bresenham(t_mlx mlx, t_vertex line)$/;"	f
+bresenham_x	bresen_2.c	/^void	bresenham_x(t_mlx mlx, t_vertex line)$/;"	f
+bresenham_y	bresen_2.c	/^void	bresenham_y(t_mlx mlx, t_vertex line)$/;"	f
+check_color	map_parser_2.c	/^int	check_color(char *map)$/;"	f
+check_file_name	map_parser_3.c	/^void	check_file_name(char *file)$/;"	f
+check_steap	anti_aliasing_1.c	/^static void	check_steap(t_mlx mlx, t_vertex line, t_delta_val delta_val, int f)$/;"	f	file:
+check_steap	bresen_1.c	/^static void	check_steap(t_mlx mlx, t_vertex line, t_delta_val delta_val, int f)$/;"	f	file:
+check_ucs	map_parser_3.c	/^int	check_ucs(int *height, char *map, t_point **point, t_ucs *ucs)$/;"	f
+check_win	anti_aliasing_utils.c	/^int	check_win(double x, double y, double mv_x, double mv_y)$/;"	f
+color	fdf.h	/^	int		color;$/;"	m	struct:s_cs_q
 color	fdf.h	/^	int		color;$/;"	m	struct:s_point
-color	fdf.h	/^	int		color;$/;"	m	struct:s_ucs
-dec_point	liner_utils.c	/^double	dec_point(double val)$/;"	f
-dtoi	liner_utils.c	/^int	dtoi(double val)$/;"	f
-dx	fdf.h	/^	double	dx;$/;"	m	struct:s_delta_val
-dy	fdf.h	/^	double	dy;$/;"	m	struct:s_delta_val
-first_pixel_1	liner_2.c	/^void	first_pixel_1(t_mlx mlx, t_ptr line, t_ptr *pxl_point)$/;"	f
-first_pixel_2	liner_2.c	/^void	first_pixel_2(t_mlx mlx, t_ptr line, t_ptr *pxl_point)$/;"	f
-free_file	map_parser_2.c	/^void	free_file(char *file, int flag)$/;"	f
-free_file_point	map_parser_2.c	/^t_point	**free_file_point(char *file, t_point **point, t_ucs *ucs)$/;"	f
-ft_error	map_parser_2.c	/^void	ft_error(char *error_no)$/;"	f
-ft_isometric	isometric.c	/^void	ft_isometric(double *x, double *y, int z)$/;"	f
-ft_round	liner_utils.c	/^int	ft_round(double val)$/;"	f
-ft_swap	liner_utils.c	/^void	ft_swap(int *x, int *y)$/;"	f
-get_color	liner_1.c	/^int	get_color(t_mlx mlx, double grad, double gap)$/;"	f
+color	liner.h	/^	int		color;$/;"	m	struct:s_bresen_val
+color	liner.h	/^	int	color;$/;"	m	struct:s_rgb
+color_swap	liner_utils.c	/^void	color_swap(int *x, int *y)$/;"	f
+cs_quaternion	rotation_cs.c	/^void	cs_quaternion(t_fdf *fdf, t_quater *q, int h, int w)$/;"	f
+data	fdf.h	/^	int		*data;$/;"	m	struct:s_img
+dec_point	anti_aliasing_utils.c	/^double	dec_point(double val)$/;"	f
+double_swap	liner_utils.c	/^void	double_swap(double *x, double *y)$/;"	f
+draw_liner	liner.c	/^void	draw_liner(t_fdf *fdf)$/;"	f
+draw_x	bresen_2.c	/^void	draw_x(t_mlx mlx, t_vertex line, t_bresen_val *val)$/;"	f
+draw_y	bresen_2.c	/^void	draw_y(t_mlx mlx, t_vertex line, t_bresen_val *val)$/;"	f
+dtoi	anti_aliasing_utils.c	/^int	dtoi(double val)$/;"	f
+dx	liner.h	/^	double	dx;$/;"	m	struct:s_delta_val
+dy	liner.h	/^	double	dy;$/;"	m	struct:s_delta_val
+endian	fdf.h	/^	int		endian;$/;"	m	struct:s_img
+euler_rotate	euler_angle.c	/^void	euler_rotate(t_fdf *fdf, int h, int w)$/;"	f
+factor	liner.h	/^	double	factor;$/;"	m	struct:s_bresen_val
+first_pixel_1	anti_aliasing_2.c	/^void	first_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxl_point)$/;"	f
+first_pixel_2	anti_aliasing_2.c	/^void	first_pixel_2(t_mlx mlx, t_vertex line, t_vertex *pxl_point)$/;"	f
+first_scale	fdf.h	/^	double	first_scale;$/;"	m	struct:s_handler
+free_file	map_parser_3.c	/^void	free_file(char *file, int flag)$/;"	f
+free_file_point	map_parser_3.c	/^t_point	**free_file_point(char *file, t_point **point, t_ucs *ucs)$/;"	f
+ft_error	map_parser_3.c	/^void	ft_error(char *error_no)$/;"	f
+ft_isometric	projection.c	/^void	ft_isometric(double *x, double *y, int z)$/;"	f
+ft_parallel	projection.c	/^void	ft_parallel(t_point *point, t_mlx mlx, int mod)$/;"	f
+ft_round	anti_aliasing_utils.c	/^int	ft_round(double val)$/;"	f
+g	liner.h	/^	int	g;$/;"	m	struct:s_rgb
 get_map	map_parser_1.c	/^t_point	**get_map(int ac, char **file, t_ucs *ucs)$/;"	f
-gradient	fdf.h	/^	double	gradient;$/;"	m	struct:s_vertex
+get_map_data	map_parser_2.c	/^int	get_map_data(int w_cnt, char *map, t_ucs *ucs)$/;"	f
+gradient	liner.h	/^	double	gradient;$/;"	m	struct:s_vertex
 h	fdf.h	/^	int		h;$/;"	m	struct:s_ucs
-img	fdf.h	/^	void	*img;$/;"	m	struct:s_mlx
-is_set	map_parser_1.c	/^static int	is_set(char *set, int c)$/;"	f	file:
+handler	fdf.h	/^	t_handler	handler;$/;"	m	struct:s_mlx
+img	fdf.h	/^	t_img		*img;$/;"	m	struct:s_mlx
+info	fdf.h	/^	int		info;$/;"	m	struct:s_handler
+init_color	map_parser_2.c	/^int	init_color(char *map, t_point **point, int w, int h)$/;"	f
+init_val	liner.h	/^	double	init_val;$/;"	m	struct:s_bresen_val
+is_set	map_parser_2.c	/^int	is_set(char *set, int c)$/;"	f
 iso_x	fdf.h	/^	double	iso_x;$/;"	m	struct:s_point
 iso_y	fdf.h	/^	double	iso_y;$/;"	m	struct:s_point
-last_pixel_1	liner_2.c	/^void	last_pixel_1(t_mlx mlx, t_ptr line, t_ptr *pxl_point)$/;"	f
-last_pixel_2	liner_2.c	/^void	last_pixel_2(t_mlx mlx, t_ptr line, t_ptr *pxl_point)$/;"	f
-liner	liner_1.c	/^void	liner(t_mlx mlx, t_ptr line, int flag)$/;"	f
+key	fdf.h	/^	int		key;$/;"	m	struct:s_handler
+key_press	key_func_1.c	/^int	key_press(int keycode, t_fdf *fdf)$/;"	f
+last_pixel_1	anti_aliasing_2.c	/^void	last_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxl_point)$/;"	f
+last_pixel_2	anti_aliasing_2.c	/^void	last_pixel_2(t_mlx mlx, t_vertex line, t_vertex *pxl_point)$/;"	f
+line_h	liner.h	/^	double	line_h;$/;"	m	struct:s_bresen_val
+line_mod	fdf.h	/^	int		line_mod;$/;"	m	struct:s_handler
+line_w	liner.h	/^	double	line_w;$/;"	m	struct:s_bresen_val
+liner	anti_aliasing_1.c	/^static void	liner(t_mlx mlx, t_vertex line, int flag)$/;"	f	file:
+liner	liner.c	/^void	liner(t_fdf *fdf)$/;"	f
 main	fdf.c	/^int	main(int ac, char **av)$/;"	f
+main_loop	fdf.c	/^int	main_loop(t_fdf *fdf)$/;"	f
 map_checker_1	map_parser_1.c	/^int	map_checker_1(char *map, t_ucs *ucs)$/;"	f
 map_checker_2	map_parser_1.c	/^int	map_checker_2(char *map, t_point **point, t_ucs *ucs)$/;"	f
-middle_pixel_1	liner_2.c	/^void	middle_pixel_1(t_mlx mlx, t_ptr line, t_ptr pxl_point)$/;"	f
-middle_pixel_2	liner_2.c	/^void	middle_pixel_2(t_mlx mlx, t_ptr line, t_ptr pxl_point)$/;"	f
-mlx	fdf.h	/^	void	*mlx;$/;"	m	struct:s_mlx
-point_init	map_parser_1.c	/^int	point_init(char *map, t_point **point, int w, int h)$/;"	f
-quaternion	quaternion.c	/^void	quaternion()$/;"	f
+middle_image_1	anti_aliasing_3.c	/^void	middle_image_1(t_mlx mlx, t_vertex pxl_point, int x, int y)$/;"	f
+middle_image_2	anti_aliasing_3.c	/^void	middle_image_2(t_mlx mlx, t_vertex pxl_point, int x, int y)$/;"	f
+middle_pixel_1	anti_aliasing_3.c	/^void	middle_pixel_1(t_mlx mlx, t_vertex line, t_vertex pxl_point)$/;"	f
+middle_pixel_2	anti_aliasing_3.c	/^void	middle_pixel_2(t_mlx mlx, t_vertex line, t_vertex pxl_point)$/;"	f
+mlx	fdf.h	/^	t_mlx		*mlx;$/;"	m	struct:s_fdf
+mlx	fdf.h	/^	void		*mlx;$/;"	m	struct:s_mlx
+mouse_press	key_func_1.c	/^int	mouse_press(int btn, int x, int y, t_fdf *fdf)$/;"	f
+mv_x	fdf.h	/^	int		mv_x;$/;"	m	struct:s_handler
+mv_y	fdf.h	/^	int		mv_y;$/;"	m	struct:s_handler
+obj_init	key_func_2.c	/^void	obj_init(int keycode, t_fdf *fdf)$/;"	f
+obj_move	key_func_2.c	/^void	obj_move(int keycode, t_fdf *fdf)$/;"	f
+obj_rotate	key_func_2.c	/^void	obj_rotate(int keycode, t_fdf *fdf)$/;"	f
+obj_zoom	key_func_2.c	/^void	obj_zoom(int keycode, t_fdf *fdf)$/;"	f
+point	fdf.h	/^	t_point		**point;$/;"	m	struct:s_fdf
+point_init	map_parser_2.c	/^int	point_init(char *map, t_point **point, int w, int h)$/;"	f
+pro_mod	fdf.h	/^	int		pro_mod;$/;"	m	struct:s_handler
+ptr	fdf.h	/^	void	*ptr;$/;"	m	struct:s_img
+quaternion	quaternion.c	/^void	quaternion(t_fdf *fdf, t_quater *q, int h, int w)$/;"	f
+quaternion_cal	quaternion.c	/^void	quaternion_cal(t_fdf *fdf, t_quater *q, int h, int w)$/;"	f
+quaternion_ro	quaternion.c	/^void	quaternion_ro(t_quater *q, t_quater angle)$/;"	f
+r	liner.h	/^	int	r;$/;"	m	struct:s_rgb
 read_map	map_parser_1.c	/^char	*read_map(int ac, char **file)$/;"	f
-rev_dec_point	liner_utils.c	/^double	rev_dec_point(double val)$/;"	f
+rev_dec_point	anti_aliasing_utils.c	/^double	rev_dec_point(double val)$/;"	f
+rgb1	liner.h	/^	t_rgb	rgb1;$/;"	m	struct:s_vertex
+rgb2	liner.h	/^	t_rgb	rgb2;$/;"	m	struct:s_vertex
+ro_mod	fdf.h	/^	int		ro_mod;$/;"	m	struct:s_handler
+ro_x	fdf.h	/^	double	ro_x;$/;"	m	struct:s_cs_q
+ro_y	fdf.h	/^	double	ro_y;$/;"	m	struct:s_cs_q
+ro_z	fdf.h	/^	double	ro_z;$/;"	m	struct:s_cs_q
 ro_z	fdf.h	/^	double	ro_z;$/;"	m	struct:s_point
-rotate_x	rotation.c	/^void	rotate_x(double y, double z, t_point *point, double angle)$/;"	f
-rotate_y	rotation.c	/^void	rotate_y(double x, double z, t_point *point, double angle)$/;"	f
-rotate_z	rotation.c	/^void	rotate_z(double x, double y, t_point *point, double angle)$/;"	f
-s_delta_val	fdf.h	/^typedef struct s_delta_val$/;"	s
+rotate_cs_x	rotation_cs.c	/^void	rotate_cs_x(double y, double z, t_point *point, double angle)$/;"	f
+rotate_cs_y	rotation_cs.c	/^void	rotate_cs_y(double x, double z, t_point *point, double angle)$/;"	f
+rotate_cs_z	rotation_cs.c	/^void	rotate_cs_z(double x, double y, t_point *point, double angle)$/;"	f
+rotate_handler	key_func_2.c	/^void	rotate_handler(double *angle, double pi, int flag)$/;"	f
+rotate_x	euler_angle.c	/^void	rotate_x(double y, double z, t_point *point, double angle)$/;"	f
+rotate_y	euler_angle.c	/^void	rotate_y(double x, double z, t_point *point, double angle)$/;"	f
+rotate_z	euler_angle.c	/^void	rotate_z(double x, double y, t_point *point, double angle)$/;"	f
+rotation	liner.c	/^void	rotation(t_fdf *fdf)$/;"	f
+s_bresen_val	liner.h	/^typedef struct s_bresen_val$/;"	s
+s_cs_q	fdf.h	/^typedef struct s_cs_q$/;"	s
+s_delta_val	liner.h	/^typedef struct s_delta_val$/;"	s
+s_fdf	fdf.h	/^typedef struct s_fdf$/;"	s
+s_handler	fdf.h	/^typedef struct s_handler$/;"	s
+s_img	fdf.h	/^typedef struct s_img$/;"	s
 s_mlx	fdf.h	/^typedef struct s_mlx$/;"	s
 s_point	fdf.h	/^typedef struct s_point$/;"	s
-s_quater	fdf.h	/^typedef struct s_quater$/;"	s
+s_quater	liner.h	/^typedef struct s_quater$/;"	s
+s_quater_param	liner.h	/^typedef struct s_quater_param$/;"	s
+s_rgb	liner.h	/^typedef struct s_rgb$/;"	s
+s_side_cs	fdf.h	/^typedef struct s_side_cs$/;"	s
 s_ucs	fdf.h	/^typedef struct s_ucs$/;"	s
-s_vertex	fdf.h	/^typedef struct s_vertex$/;"	s
-scale	fdf.h	/^	double	scale;$/;"	m	struct:s_ucs
-t_delta_val	fdf.h	/^}	t_delta_val;$/;"	t	typeref:struct:s_delta_val
+s_vertex	liner.h	/^typedef struct s_vertex$/;"	s
+scale	fdf.h	/^	double	scale;$/;"	m	struct:s_handler
+set_color	bresen_1.c	/^void	set_color(t_vertex *line)$/;"	f
+set_grad	anti_aliasing_1.c	/^int	set_grad(t_rgb color, double grad)$/;"	f
+set_grad_color	bresen_1.c	/^int	set_grad_color(t_vertex *line)$/;"	f
+set_mlx	fdf.c	/^void	set_mlx(t_mlx *mlx)$/;"	f
+set_projection	key_func_1.c	/^void	set_projection(int key, t_fdf *fdf)$/;"	f
+set_quater_angle_x	quaternion_utils.c	/^void	set_quater_angle_x(t_fdf *fdf, t_quater *angle, int flag)$/;"	f
+set_quater_angle_y	quaternion_utils.c	/^void	set_quater_angle_y(t_fdf *fdf, t_quater *angle, int flag)$/;"	f
+set_quater_angle_z	quaternion_utils.c	/^void	set_quater_angle_z(t_fdf *fdf, t_quater *angle, int flag)$/;"	f
+set_vertex	liner.c	/^t_vertex	set_vertex(t_fdf *fdf, int h, int w)$/;"	f
+set_view	liner.c	/^void	set_view(t_fdf *fdf, int h, int w)$/;"	f
+side_cs	fdf.h	/^	t_side_cs	*side_cs;$/;"	m	struct:s_fdf
+size_l	fdf.h	/^	int		size_l;$/;"	m	struct:s_img
+t_bresen_val	liner.h	/^}	t_bresen_val;$/;"	t	typeref:struct:s_bresen_val
+t_cs_q	fdf.h	/^}	t_cs_q;$/;"	t	typeref:struct:s_cs_q
+t_delta_val	liner.h	/^}	t_delta_val;$/;"	t	typeref:struct:s_delta_val
+t_fdf	fdf.h	/^}	t_fdf;$/;"	t	typeref:struct:s_fdf
+t_handler	fdf.h	/^}	t_handler;$/;"	t	typeref:struct:s_handler
+t_img	fdf.h	/^}	t_img;$/;"	t	typeref:struct:s_img
 t_mlx	fdf.h	/^}	t_mlx;$/;"	t	typeref:struct:s_mlx
 t_point	fdf.h	/^}	t_point;$/;"	t	typeref:struct:s_point
-t_quater	fdf.h	/^}	t_quater;$/;"	t	typeref:struct:s_quater
+t_quater	liner.h	/^}	t_quater;$/;"	t	typeref:struct:s_quater
+t_quater_param	liner.h	/^}	t_quater_param;$/;"	t	typeref:struct:s_quater_param
+t_rgb	liner.h	/^}	t_rgb;$/;"	t	typeref:struct:s_rgb
+t_side_cs	fdf.h	/^}	t_side_cs;$/;"	t	typeref:struct:s_side_cs
 t_ucs	fdf.h	/^}	t_ucs;$/;"	t	typeref:struct:s_ucs
-t_vertex	fdf.h	/^}	t_vertex;$/;"	t	typeref:struct:s_vertex
-ucs	fdf.h	/^	t_ucs	ucs;$/;"	m	struct:s_mlx
-w	fdf.h	/^	double	w;$/;"	m	struct:s_quater
+t_vertex	liner.h	/^}	t_vertex;$/;"	t	typeref:struct:s_vertex
+terminate	key_func_1.c	/^int	terminate(t_fdf *fdf)$/;"	f
+ucs	fdf.h	/^	t_ucs		ucs;$/;"	m	struct:s_mlx
+view_pnt	fdf.h	/^	int		view_pnt;$/;"	m	struct:s_handler
+view_point_init	projection.c	/^void	view_point_init(t_point *point, t_mlx mlx, int mod)$/;"	f
+w	fdf.h	/^	double	w;$/;"	m	struct:s_cs_q
 w	fdf.h	/^	int		w;$/;"	m	struct:s_ucs
-win	fdf.h	/^	void	*win;$/;"	m	struct:s_mlx
-x	fdf.h	/^	double	x;$/;"	m	struct:s_quater
+w	liner.h	/^	double	w;$/;"	m	struct:s_quater
+w_x	liner.h	/^	double	w_x;$/;"	m	struct:s_quater_param
+w_y	liner.h	/^	double	w_y;$/;"	m	struct:s_quater_param
+w_z	liner.h	/^	double	w_z;$/;"	m	struct:s_quater_param
+win	fdf.h	/^	void		*win;$/;"	m	struct:s_mlx
+x	fdf.h	/^	double	x;$/;"	m	struct:s_cs_q
 x	fdf.h	/^	int		x;$/;"	m	struct:s_point
-x1	fdf.h	/^	double	x1;$/;"	m	struct:s_vertex
-x2	fdf.h	/^	double	x2;$/;"	m	struct:s_vertex
-y	fdf.h	/^	double	y;$/;"	m	struct:s_quater
+x	liner.h	/^	double	x;$/;"	m	struct:s_bresen_val
+x	liner.h	/^	double	x;$/;"	m	struct:s_quater
+x1	liner.h	/^	double	x1;$/;"	m	struct:s_vertex
+x2	liner.h	/^	double	x2;$/;"	m	struct:s_vertex
+x_pow	liner.h	/^	double	x_pow;$/;"	m	struct:s_quater_param
+x_y	liner.h	/^	double	x_y;$/;"	m	struct:s_quater_param
+x_z	liner.h	/^	double	x_z;$/;"	m	struct:s_quater_param
+y	fdf.h	/^	double	y;$/;"	m	struct:s_cs_q
 y	fdf.h	/^	int		y;$/;"	m	struct:s_point
-y1	fdf.h	/^	double	y1;$/;"	m	struct:s_vertex
-y2	fdf.h	/^	double	y2;$/;"	m	struct:s_vertex
-z	fdf.h	/^	double	z;$/;"	m	struct:s_quater
+y	liner.h	/^	double	y;$/;"	m	struct:s_bresen_val
+y	liner.h	/^	double	y;$/;"	m	struct:s_quater
+y1	liner.h	/^	double	y1;$/;"	m	struct:s_vertex
+y2	liner.h	/^	double	y2;$/;"	m	struct:s_vertex
+y_pow	liner.h	/^	double	y_pow;$/;"	m	struct:s_quater_param
+y_z	liner.h	/^	double	y_z;$/;"	m	struct:s_quater_param
+z	fdf.h	/^	double	z;$/;"	m	struct:s_cs_q
 z	fdf.h	/^	int		z;$/;"	m	struct:s_point
+z	liner.h	/^	double	z;$/;"	m	struct:s_quater
+z_pow	liner.h	/^	double	z_pow;$/;"	m	struct:s_quater_param

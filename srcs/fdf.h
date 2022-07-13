@@ -6,33 +6,49 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/12 23:38:02 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/13 12:19:30 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+/* hex */
 # define HEX "0123456789abcdef"
+/* mlx event */
 # define X_EVENT_KEY_PRESS 2
+# define X_EVENT_MOUSE_PRESS 4
 # define X_EXIT 17
+/* end key */
 # define KEY_ESC 53
+/* move keys */
 # define KEY_UP 126
 # define KEY_DOWN 125
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
+/* rotation keys */
 # define KEY_Q 12
 # define KEY_W 13
 # define KEY_E 14
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
+/* mod change keys */
+# define KEY_Z 6
+# define KEY_R 15
+# define KEY_P 35
+# define KEY_L 37
+/* zoom keys */
+# define KEY_ZM_U 30
+# define KEY_ZM_D 33
 # define KEY_1 18
 # define KEY_2 19
 # define KEY_3 20
 # define KEY_4 21
+/* window size */
 # define WIN_W 1280
 # define WIN_H 720
+/* side coordinate position */
 # define COORD_X 
 # define COORD_Y 
 
@@ -43,6 +59,7 @@ typedef struct s_ucs
 	int		h;
 }	t_ucs;
 
+/* bonus movement */
 typedef struct s_handler
 {
 	double	scale;
@@ -53,9 +70,10 @@ typedef struct s_handler
 	int		mv_x;
 	int		mv_y;
 	int		pro_mod;
+	int		view_pnt;
 	int		ro_mod;
 	int		line_mod;
-	int		help;
+	int		info;
 	int		key;
 }	t_handler;
 
@@ -121,9 +139,9 @@ typedef struct s_fdf
 
 /* map parser */
 t_point	**get_map(int ac, char **map, t_ucs *ucs);
+t_point	**free_file_point(char *file, t_point **point, t_ucs *ucs);
 void	ft_error(char *error_no);
 void	free_file(char *file, int flag);
-t_point	**free_file_point(char *file, t_point **point, t_ucs *ucs);
 void	check_file_name(char *file);
 int		is_set(char *set, int c);
 int		point_init(char *map, t_point **point, int w, int h);
@@ -136,5 +154,13 @@ void	draw_liner(t_fdf *fdf);
 /* mlx loop func */
 int		terminate(t_fdf *fdf);
 int		key_press(int keycode, t_fdf *fdf);
+int		mouse_press(int btn, int x, int y, t_fdf *fdf);
+
+/* key func */
+void	view_point_init(t_point *point, t_mlx mlx, int mod);
+void	obj_init(int keycode, t_fdf *fdf);
+void	obj_zoom(int keycode, t_fdf *fdf);
+void	obj_move(int keycode, t_fdf *fdf);
+void	obj_rotate(int keycode, t_fdf *fdf);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 23:09:59 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/12 23:44:35 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/13 10:44:38 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ void	quaternion(t_fdf *fdf, t_quater *q, int h, int w)
 		set_quater_angle_x(fdf, &angle, 1);
 	else if (fdf->mlx->handler.key == KEY_D)
 		set_quater_angle_x(fdf, &angle, 2);
-	else if (fdf->mlx->handler.key == KEY_Q)
-		set_quater_angle_y(fdf, &angle, 1);
-	else if (fdf->mlx->handler.key == KEY_E)
-		set_quater_angle_y(fdf, &angle, 2);
 	else if (fdf->mlx->handler.key == KEY_W)
-		set_quater_angle_z(fdf, &angle, 1);
+		set_quater_angle_y(fdf, &angle, 1);
 	else if (fdf->mlx->handler.key == KEY_S)
+		set_quater_angle_y(fdf, &angle, 2);
+	else if (fdf->mlx->handler.key == KEY_Q)
+		set_quater_angle_z(fdf, &angle, 1);
+	else if (fdf->mlx->handler.key == KEY_E)
 		set_quater_angle_z(fdf, &angle, 2);
 	quaternion_ro(q, angle);
 	quaternion_cal(fdf, q, h, w);

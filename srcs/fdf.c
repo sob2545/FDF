@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:10 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/12 16:46:49 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/13 15:56:16 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../libft/libft.h"
 #include <stdio.h>
 
+/*
 void	set_side_cs(t_side_cs *side_cs)
 {
 	ft_bzero(side_cs, sizeof(t_side_cs));
@@ -22,23 +23,37 @@ void	set_side_cs(t_side_cs *side_cs)
 	side_cs->axis_y.y = 50;
 	side_cs->axis_z.z = 50;
 }
+*/
 
 void	set_mlx(t_mlx *mlx)
 {
+	double	scale;
+
+	scale = 20;
 	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx, 1280, 720, "FDF");
-	ft_bzero(&mlx->handler, sizeof(t_handler));
+	mlx->win = mlx_new_window(mlx->mlx, WIN_W, WIN_H, "FDF");
+	ft_bzero(&(mlx->handler), sizeof(t_handler));
+	mlx->handler.pro_mod = 1;
+	mlx->handler.ro_mod = 1;
+	mlx->handler.mv_x = WIN_W / 2;
+	mlx->handler.mv_y = WIN_H / 2;
+	//while (scale * mlx->ucs.w < WIN_W - 100 && scale * mlx->ucs.h < WIN_H - 100)
+	//	scale++;
+	mlx->handler.first_scale = scale;
+	mlx->handler.scale = scale;
 }
 
 int	main_loop(t_fdf *fdf)
 {
 	mlx_destroy_image(fdf->mlx->mlx, fdf->mlx->img->ptr);
 	mlx_clear_window(fdf->mlx->mlx, fdf->mlx->win);
-	fdf->mlx->img->ptr = mlx_new_image(fdf->mlx->mlx, 1600, 900);
+	fdf->mlx->img->ptr = mlx_new_image(fdf->mlx->mlx, WIN_W, WIN_H);
 	fdf->mlx->img->data = (int *)mlx_get_data_addr(fdf->mlx->img->ptr, \
 		&(fdf->mlx->img->bpp), &(fdf->mlx->img->size_l), \
 		&(fdf->mlx->img->endian));
 	draw_liner(fdf);
+	mlx_put_image_to_window(fdf->mlx->mlx, fdf->mlx->win, \
+			fdf->mlx->img->ptr, 0, 0);
 	return (0);
 }
 
@@ -46,29 +61,29 @@ int	main(int ac, char **av)
 {
 	t_fdf		fdf;
 	t_point		**point;
-	t_mlx		mlx;
 	t_side_cs	side_cs;
 
-	point = get_map(ac, av, &mlx.ucs);
+	fdf.mlx = ft_calloc(1, sizeof(t_mlx));
+	point = get_map(ac, av, &(fdf.mlx->ucs));
 	fdf.point = point;
-	set_mlx(&mlx);
-	set_side_cs(&side_cs);
-	fdf.mlx = &mlx;
+	set_mlx(fdf.mlx);
+	//set_side_cs(&side_cs);
 	fdf.side_cs = &side_cs;
-	fdf.mlx->img = ft_calloc(1, sizeof(t_img));
-	fdf.mlx->img->ptr = mlx_new_image(mlx.mlx, 1280, 720);
-	fdf.mlx->img->data = (int *)mlx_get_data_addr(mlx.img->ptr, \
-		&(mlx.img->bpp), &(mlx.img->size_l), &(mlx.img->endian));
-	mlx_hook(mlx.win, X_EVENT_KEY_PRESS, 0, key_press, &fdf);
-	mlx_hook(mlx.win, X_EXIT, 0, terminate, &fdf);
-	mlx_loop_hook(mlx.mlx, main_loop, &mlx);
-	mlx_loop(mlx.mlx);
-	return (0);
 	/*
-	for (int i = 0; i < mlx.ucs.h; ++i)
+	for (int i = 0; i < fdf.mlx->ucs.h; ++i)
 	{
-		for (int j = 0; j < mlx.ucs.w; ++j)
+		for (int j = 0; j < fdf.mlx->ucs.w; ++j)
 			printf("%d %d %d %d\n", point[i][j].x, point[i][j].y,point[i][j].z, point[i][j].color);
 	}
 	*/
+	fdf.mlx->img = ft_calloc(1, sizeof(t_img));
+	fdf.mlx->img->ptr = mlx_new_image(fdf.mlx->mlx, WIN_W, WIN_H);
+	fdf.mlx->img->data = (int *)mlx_get_data_addr(fdf.mlx->img->ptr, \
+		&(fdf.mlx->img->bpp), &(fdf.mlx->img->size_l), &(fdf.mlx->img->endian));
+	mlx_hook(fdf.mlx->win, X_EVENT_KEY_PRESS, 0, key_press, &fdf);
+	mlx_hook(fdf.mlx->win, X_EVENT_MOUSE_PRESS, 0, mouse_press, &fdf);
+	mlx_hook(fdf.mlx->win, X_EXIT, 0, terminate, &fdf);
+	mlx_loop_hook(fdf.mlx->mlx, main_loop, &fdf.mlx);
+	mlx_loop(fdf.mlx->mlx);
+	return (0);
 }

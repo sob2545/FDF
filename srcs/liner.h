@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/12 23:44:02 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/13 13:06:32 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int		dtoi(double val);
 int		ft_round(double val);
 double	dec_point(double val);
 double	rev_dec_point(double val);
+int		check_win(double x, double y, double mv_x, double mv_y);
 
 /* anti aliasing func */
 void	first_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxvertex);
@@ -105,6 +106,7 @@ int		set_grad(t_rgb color, double grad);
 void	anti_alias(t_mlx mlx, t_vertex line);
 
 /* euler rotation func */
+void	euler_rotate(t_fdf *fdf, int h, int w);
 void	rotate_x(double y, double z, t_point *point, double angle);
 void	rotate_y(double y, double z, t_point *point, double angle);
 void	rotate_z(double y, double z, t_point *point, double angle);
@@ -120,9 +122,14 @@ void	set_quater_angle_y(t_fdf *fdf, t_quater *angle, int flag);
 void	set_quater_angle_z(t_fdf *fdf, t_quater *angle, int flag);
 void	quaternion_cal(t_fdf *fdf, t_quater *q, int h, int w);
 void	quaternion_ro(t_quater *q, t_quater angle);
-void	quaternion_cal(t_fdf *fdf, t_quater *q, int h, int w);
+void	quaternion(t_fdf *fdf, t_quater *q, int h, int w);
 
-/* side coordinate quaternion func */
+/* projection func */
+void	ft_isometric(double *x, double *y, int z);
+void	ft_parallel(t_point *point, t_mlx mlx, int mod);
+
+/* side coordinate quaternion func 
 void	cs_quaternion(t_fdf *fdf, t_quater *q, int h, int w);
+*/
 
 #endif

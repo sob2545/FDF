@@ -6,30 +6,37 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:09:54 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/12 10:20:46 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/13 14:53:12 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "liner.h"
 #include "../mlx/mlx.h"
 
-void	last_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
+void	first_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
 {
 	double	end_x;
 	double	end_y;
 	double	gap;
 
-	end_x = ft_round(line.x2);
-	end_y = line.y2 + line.gradient * (end_x - line.x2);
-	gap = dec_point(line.x2 + 0.5);
-	pxl_point->x2 = end_x;
-	pxl_point->y2 = dtoi(end_y);
+	end_x = ft_round(line.x1);
+	end_y = line.y1 + line.gradient * (end_x - line.x1);
+	gap = rev_dec_point(line.x1 + 0.5);
+	pxl_point->x1 = end_x;
+	pxl_point->y1 = dtoi(end_y);
 	pxl_point->rgb1.color = set_grad(line.rgb1, rev_dec_point(end_y) * gap);
 	pxl_point->rgb2.color = set_grad(line.rgb2, dec_point(end_y) * gap);
-	mlx_pixel_put(mlx.mlx, mlx.win, pxl_point->x2 + mlx.ucs.w, \
-			pxl_point->y2 + mlx.ucs.h, pxl_point->rgb1.color);
-	mlx_pixel_put(mlx.mlx, mlx.win, pxl_point->x2 + mlx.ucs.w, \
-			pxl_point->y2 + 1 + mlx.ucs.h, pxl_point->rgb2.color);
+	if (check_win(pxl_point->x1, pxl_point->y1, mlx.handler.mv_x, \
+		mlx.handler.mv_y) == 1)
+	{
+		mlx.img->data[(WIN_W * (int)(pxl_point->x1 + mlx.handler.mv_x) + \
+			(int)pxl_point->y1 + (int)mlx.handler.mv_y)] \
+			= pxl_point->rgb1.color;
+		mlx.img->data[(WIN_W * (int)(pxl_point->x1 + mlx.handler.mv_x) + \
+			(int)pxl_point->y1 + 1 + (int)mlx.handler.mv_y)] \
+			= pxl_point->rgb2.color;
+	}
+	pxl_point->gradient = end_y + line.gradient;
 }
 
 void	first_pixel_2(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
@@ -45,11 +52,42 @@ void	first_pixel_2(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
 	pxl_point->x1 = dtoi(end_x);
 	pxl_point->rgb1.color = set_grad(line.rgb1, rev_dec_point(end_x) * gap);
 	pxl_point->rgb2.color = set_grad(line.rgb2, dec_point(end_x) * gap);
-	mlx_pixel_put(mlx.mlx, mlx.win, pxl_point->x1 + mlx.ucs.w, \
-			pxl_point->y1 + mlx.ucs.h, pxl_point->rgb1.color);
-	mlx_pixel_put(mlx.mlx, mlx.win, pxl_point->x1 + 1 + mlx.ucs.w, \
-			pxl_point->y1 + mlx.ucs.h, pxl_point->rgb2.color);
+	if (check_win(pxl_point->x1, pxl_point->y1, mlx.handler.mv_x, \
+		mlx.handler.mv_y) == 1)
+	{
+		mlx.img->data[(WIN_W * (int)(pxl_point->x1 + mlx.handler.mv_x) + \
+			(int)pxl_point->y1 + (int)mlx.handler.mv_y)] \
+			= pxl_point->rgb1.color;
+		mlx.img->data[(WIN_W * (int)(pxl_point->x1 + 1 + mlx.handler.mv_x) + \
+			(int)pxl_point->y1 + (int)mlx.handler.mv_y)] \
+			= pxl_point->rgb2.color;
+	}
 	pxl_point->gradient = end_y + line.gradient;
+}
+
+void	last_pixel_1(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
+{
+	double	end_x;
+	double	end_y;
+	double	gap;
+
+	end_x = ft_round(line.x2);
+	end_y = line.y2 + line.gradient * (end_x - line.x2);
+	gap = dec_point(line.x2 + 0.5);
+	pxl_point->x2 = end_x;
+	pxl_point->y2 = dtoi(end_y);
+	pxl_point->rgb1.color = set_grad(line.rgb1, rev_dec_point(end_y) * gap);
+	pxl_point->rgb2.color = set_grad(line.rgb2, dec_point(end_y) * gap);
+	if (check_win(pxl_point->x1, pxl_point->y1, mlx.handler.mv_x, \
+		mlx.handler.mv_y) == 1)
+	{
+		mlx.img->data[(WIN_W * (int)(pxl_point->x2 + mlx.handler.mv_x) + \
+			(int)pxl_point->y2 + (int)mlx.handler.mv_y)] \
+			= pxl_point->rgb1.color;
+		mlx.img->data[(WIN_W * (int)(pxl_point->x2 + mlx.handler.mv_x) + \
+			(int)pxl_point->y2 + 1 + (int)mlx.handler.mv_y)] \
+			= pxl_point->rgb2.color;
+	}
 }
 
 void	last_pixel_2(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
@@ -65,56 +103,14 @@ void	last_pixel_2(t_mlx mlx, t_vertex line, t_vertex *pxl_point)
 	pxl_point->x2 = dtoi(end_x);
 	pxl_point->rgb1.color = set_grad(line.rgb1, rev_dec_point(end_x) * gap);
 	pxl_point->rgb2.color = set_grad(line.rgb2, dec_point(end_x) * gap);
-	mlx_pixel_put(mlx.mlx, mlx.win, pxl_point->x2 + mlx.ucs.w, \
-			pxl_point->y2 + mlx.ucs.h, pxl_point->rgb1.color);
-	mlx_pixel_put(mlx.mlx, mlx.win, pxl_point->x2 + 1 + mlx.ucs.w, \
-			pxl_point->y2 + mlx.ucs.h, pxl_point->rgb2.color);
-}
-
-void	middle_pixel_1(t_mlx mlx, t_vertex line, t_vertex pxl_point)
-{
-	int	i;
-	int	x;
-	int	y;
-
-	i = pxl_point.x1 + 1;
-	while (i < pxl_point.x2)
+	if (check_win(pxl_point->x1, pxl_point->y1, mlx.handler.mv_x, \
+		mlx.handler.mv_y) == 1)
 	{
-		pxl_point.rgb1.color = set_grad(line.rgb1, \
-			rev_dec_point(pxl_point.gradient));
-		pxl_point.rgb2.color = set_grad(line.rgb2, \
-			dec_point(pxl_point.gradient));
-		x = i + mlx.ucs.h;
-		y = dtoi(pxl_point.gradient) + mlx.ucs.w;
-		mlx.img->data[(WIN_W * (int)(x + mlx.handler.mv_x) + (int)y \
-			+ (int)mlx.handler.mv_y)] = pxl_point.rgb1.color;
-		mlx.img->data[(WIN_W * (int)(x + mlx.handler.mv_x) + (int)y + 1 \
-			+ (int)mlx.handler.mv_y)] = pxl_point.rgb2.color;
-		pxl_point.gradient += line.gradient;
-		i++;
-	}
-}
-
-void	middle_pixel_2(t_mlx mlx, t_vertex line, t_vertex pxl_point)
-{
-	int	i;
-	int	x;
-	int	y;
-
-	i = pxl_point.y1 + 1;
-	while (i < pxl_point.y2)
-	{
-		pxl_point.rgb1.color = set_grad(line.rgb1, \
-			rev_dec_point(pxl_point.gradient));
-		pxl_point.rgb2.color = set_grad(line.rgb2, \
-			dec_point(pxl_point.gradient));
-		x = dtoi(pxl_point.gradient) + mlx.ucs.w;
-		y = i + mlx.ucs.h;
-		mlx.img->data[(WIN_W * (int)(x + mlx.handler.mv_x) + (int)y \
-			+ (int)mlx.handler.mv_y)] = pxl_point.rgb1.color;
-		mlx.img->data[(WIN_W * (int)(x + 1 + mlx.handler.mv_x) + (int)y \
-			+ (int)mlx.handler.mv_y)] = pxl_point.rgb2.color;
-		pxl_point.gradient += line.gradient;
-		i++;
+		mlx.img->data[(WIN_W * (int)(pxl_point->x2 + mlx.handler.mv_x) + \
+			(int)pxl_point->y2 + (int)mlx.handler.mv_y)] \
+			= pxl_point->rgb1.color;
+		mlx.img->data[(WIN_W * (int)(pxl_point->x2 + 1 + mlx.handler.mv_x) + \
+			(int)pxl_point->y2 + (int)mlx.handler.mv_y)] \
+			= pxl_point->rgb2.color;
 	}
 }
