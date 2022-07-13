@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 07:55:28 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/13 15:42:46 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/13 23:11:42 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	mouse_press(int btn, int x, int y, t_fdf *fdf)
 	(void) x;
 	(void) y;
 	if (btn == 4 && fdf->mlx->handler.scale < 1000)
-		fdf->mlx->handler.scale *= 0.1;
+		fdf->mlx->handler.scale *= 10;
 	else if (btn == 5 && fdf->mlx->handler.scale > 0.0001)
 		fdf->mlx->handler.scale *= 0.1;
 	return (0);

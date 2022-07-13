@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 07:55:28 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/13 12:17:33 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/13 23:11:14 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 
 void	obj_move(int keycode, t_fdf *fdf)
 {
-	if (keycode == KEY_UP && fdf->mlx->handler.mv_y > -5000)
+	if (keycode == KEY_UP) //&& fdf->mlx->handler.mv_y > -5000)
 		fdf->mlx->handler.mv_y -= 20;
-	else if (keycode == KEY_DOWN && fdf->mlx->handler.mv_y < 5000)
+	else if (keycode == KEY_DOWN)// && fdf->mlx->handler.mv_y < 5000)
 		fdf->mlx->handler.mv_y += 20;
-	else if (keycode == KEY_LEFT && fdf->mlx->handler.mv_x > -5000)
+	else if (keycode == KEY_LEFT)// && fdf->mlx->handler.mv_x > -5000)
 		fdf->mlx->handler.mv_x -= 20;
-	else if (keycode == KEY_RIGHT && fdf->mlx->handler.mv_x < 5000)
+	else if (keycode == KEY_RIGHT)// && fdf->mlx->handler.mv_x < 5000)
 		fdf->mlx->handler.mv_x += 20;
 }
 
@@ -31,14 +31,14 @@ void	rotate_handler(double *angle, double pi, int flag)
 {
 	if (flag == 1)
 	{
-		if (*angle >= 360 * pi)
-			*angle -= (360 * pi);
+		//if (*angle >= 360 * pi)
+		//	*angle -= (360 * pi);
 		*angle += (15 * pi);
 	}
 	else
 	{
-		if (*angle <= -(360 * pi))
-			*angle += (360 * pi);
+		//if (*angle <= -(360 * pi))
+		//	*angle += (360 * pi);
 		*angle -= (15 * pi);
 	}
 }
@@ -72,7 +72,7 @@ void	obj_rotate(int keycode, t_fdf *fdf)
 void	obj_zoom(int keycode, t_fdf *fdf)
 {
 	if (keycode == KEY_ZM_U && fdf->mlx->handler.scale < 1000)
-		fdf->mlx->handler.scale *= 0.1;
+		fdf->mlx->handler.scale *= 10;
 	else if (keycode == KEY_ZM_D && fdf->mlx->handler.scale > 0.0001)
 		fdf->mlx->handler.scale *= 0.1;
 }

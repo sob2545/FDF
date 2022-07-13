@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:21:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/13 16:01:56 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/13 23:07:34 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	draw_x(t_mlx mlx, t_vertex line, t_bresen_val *val)
 		if ((int)val->x + (int)mlx.handler.mv_x >= 0 && (int)val->x + \
 			(int)mlx.handler.mv_x < WIN_W && (WIN_W * (int)(val->y + \
 			mlx.handler.mv_y) + (int)val->x + (int)mlx.handler.mv_x) >= 0 \
-			&& (WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x))
+			&& (WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x + \
+			(int)mlx.handler.mv_x <= WIN_W * WIN_H))
 			mlx.img->data[(WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x \
 				+ (int)mlx.handler.mv_x)] = val->color;
 		val->x += 1;
@@ -53,7 +54,8 @@ void	draw_y(t_mlx mlx, t_vertex line, t_bresen_val *val)
 		if ((int)val->x + (int)mlx.handler.mv_x >= 0 && (int)val->x + \
 			(int)mlx.handler.mv_x < WIN_W && (WIN_W * (int)(val->y + \
 			mlx.handler.mv_y) + (int)val->x + (int)mlx.handler.mv_x) >= 0 \
-			&& (WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x))
+			&& (WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x + \
+			(int)mlx.handler.mv_x <= WIN_W * WIN_H))
 			mlx.img->data[(WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x \
 				+ (int)mlx.handler.mv_x)] = val->color;
 		val->y += 1;
@@ -85,7 +87,7 @@ void	bresenham_y(t_mlx mlx, t_vertex line)
 	val.line_w = line.x2 - line.x1;
 	val.line_h = line.y2 - line.y1;
 	val.factor = 1;
-	if (val.line_h < 0)
+	if (val.line_w < 0)
 	{
 		val.factor = -1;
 		val.line_w *= -1;
@@ -93,5 +95,5 @@ void	bresenham_y(t_mlx mlx, t_vertex line)
 	val.x = line.x1;
 	val.y = line.y1;
 	val.init_val = (2 * val.line_w) - val.line_h;
-	draw_x(mlx, line, &val);
+	draw_y(mlx, line, &val);
 }

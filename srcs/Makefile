@@ -6,7 +6,7 @@
 #    By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/24 11:21:24 by sesim             #+#    #+#              #
-#    Updated: 2022/07/13 15:11:25 by sesim            ###   ########.fr        #
+#    Updated: 2022/07/13 18:32:40 by sesim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ all : $(NAME)
 
 fdf: $(OBJS)
 #	make -C ../mlx
-	$(CC) $(CFLAGS) -L ../libft -l ft -L ../srcs -l mlx -framework OpenGL -framework AppKit $^ -o $@
+	$(CC) $(CFLAGS) -L ../libft -l ft -L ../mlx -l mlx -framework OpenGL -framework AppKit $^ -o $@
 
 clean :
 #	make -C ../mlx clean

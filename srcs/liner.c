@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 09:06:24 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/13 12:14:40 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/13 23:10:19 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 void	set_view(t_fdf *fdf, int h, int w)
 {
-	if (fdf->mlx->handler.pro_mod == 0)
+	//if (fdf->mlx->handler.pro_mod == 0)
 		ft_isometric(&(fdf->point[h][w].iso_x), &(fdf->point[h][w].iso_y), \
 			fdf->point[h][w].ro_z);
-	else if (fdf->mlx->handler.pro_mod == 1)
-		ft_parallel(&(fdf->point[h][w]), *(fdf->mlx), \
-			fdf->mlx->handler.view_pnt);
+	//else if (fdf->mlx->handler.pro_mod == 1)
+	//	ft_parallel(&(fdf->point[h][w]), *(fdf->mlx), \
+	//		fdf->mlx->handler.view_pnt);
 }
 
 void	rotation(t_fdf *fdf)
@@ -39,28 +39,59 @@ void	rotation(t_fdf *fdf)
 		{
 			if (fdf->mlx->handler.ro_mod == 0)
 				euler_rotate(fdf, j, k);
-			else if (fdf->mlx->handler.ro_mod == 1)
-				quaternion(fdf, &q, j, k);
+			/*else if (fdf->mlx->handler.ro_mod == 1)
+				quaternion(fdf, &q, j, k);*/
 			set_view(fdf, j, k);
 		}
 	}
 }
 
-t_vertex	set_vertex(t_fdf *fdf, int h, int w)
+t_vertex	set_vertex(t_fdf *fdf, int h, int w, int flag)
 {
 	t_vertex	line;
 
 	ft_bzero(&line, sizeof(t_vertex));
-	line.x1 = fdf->point[h][w - 1].x;
-	line.y1 = fdf->point[h][w - 1].y;
-	line.x2 = fdf->point[h][w].y;
-	line.y2 = fdf->point[h][w].y;
-	line.rgb1.color = fdf->point[h][w - 1].color;
-	line.rgb2.color = fdf->point[h][w].color;
+	if (flag == 1)
+	{
+		line.x1 = fdf->point[h][w - 1].x * fdf->mlx->handler.scale;
+		line.y1 = fdf->point[h][w - 1].y * fdf->mlx->handler.scale;
+		line.x2 = fdf->point[h][w].y * fdf->mlx->handler.scale;
+		line.y2 = fdf->point[h][w].y * fdf->mlx->handler.scale;
+		line.rgb1.color = fdf->point[h][w - 1].color;
+		line.rgb2.color = fdf->point[h][w].color;
+	}
+	else
+	{
+		line.x1 = fdf->point[h - 1][w].x * fdf->mlx->handler.scale;
+		line.y1 = fdf->point[h - 1][w].y * fdf->mlx->handler.scale;
+		line.x2 = fdf->point[h][w].y * fdf->mlx->handler.scale;
+		line.y2 = fdf->point[h][w].y * fdf->mlx->handler.scale;
+		line.rgb1.color = fdf->point[h - 1][w].color;
+		line.rgb2.color = fdf->point[h][w].color;
+	}
 	return (line);
 }
 
-void	liner(t_fdf *fdf)
+void	x_liner(t_fdf *fdf)
+{
+	int	j;
+	int	k;
+
+	j = -1;
+	while (++j < fdf->mlx->ucs.h)
+	{
+		k = 0;
+		while (++k < fdf->mlx->ucs.w)
+		{
+			//if (fdf->mlx->handler.pro_mod == 0)
+				bresenham(*(fdf->mlx), set_vertex(fdf, j, k, 1));
+			//else if (fdf->mlx->handler.pro_mod == 1)
+			//	anti_alias(*(fdf->mlx), set_vertex(fdf, j, k));
+		}
+	}
+}
+
+void	y_liner(t_fdf *fdf)
 {
 	int	j;
 	int	k;
@@ -68,13 +99,13 @@ void	liner(t_fdf *fdf)
 	j = 0;
 	while (++j < fdf->mlx->ucs.h)
 	{
-		k = 0;
+		k = -1;
 		while (++k < fdf->mlx->ucs.w)
 		{
-			if (fdf->mlx->handler.pro_mod == 0)
-				bresenham(*(fdf->mlx), set_vertex(fdf, j, k));
-			else if (fdf->mlx->handler.pro_mod == 1)
-				anti_alias(*(fdf->mlx), set_vertex(fdf, j, k));
+			//if (fdf->mlx->handler.pro_mod == 0)
+				bresenham(*(fdf->mlx), set_vertex(fdf, j, k, 2));
+			//else if (fdf->mlx->handler.pro_mod == 1)
+			//	anti_alias(*(fdf->mlx), set_vertex(fdf, j, k));
 		}
 	}
 }
@@ -82,5 +113,6 @@ void	liner(t_fdf *fdf)
 void	draw_liner(t_fdf *fdf)
 {
 	rotation(fdf);
-	liner(fdf);
+	x_liner(fdf);
+	y_liner(fdf);
 }

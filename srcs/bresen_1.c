@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:21:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/12 08:24:52 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/13 23:02:06 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int	set_grad_color(t_vertex *line)
 
 void	set_color(t_vertex *line)
 {
-	line->rgb1.a = (line->rgb1.color >> 24) & 0xFF;
-	line->rgb1.r = (line->rgb1.color >> 16) & 0xFF;
-	line->rgb1.g = (line->rgb1.color >> 8) & 0xFF;
-	line->rgb1.b = line->rgb1.color & 0xFF;
-	line->rgb2.a = (line->rgb2.color >> 24) & 0xFF;
-	line->rgb2.g = (line->rgb2.color >> 16) & 0xFF;
-	line->rgb2.b = (line->rgb2.color >> 8) & 0xFF;
-	line->rgb2.b = line->rgb2.color & 0xFF;
+	line->rgb1.a |= (line->rgb1.color >> 24) & 0xFF;
+	line->rgb1.r |= (line->rgb1.color >> 16) & 0xFF;
+	line->rgb1.g |= (line->rgb1.color >> 8) & 0xFF;
+	line->rgb1.b |= line->rgb1.color & 0xFF;
+	line->rgb2.a |= (line->rgb2.color >> 24) & 0xFF;
+	line->rgb2.g |= (line->rgb2.color >> 16) & 0xFF;
+	line->rgb2.b |= (line->rgb2.color >> 8) & 0xFF;
+	line->rgb2.b |= line->rgb2.color & 0xFF;
 }
 
 static void	check_steap(t_mlx mlx, t_vertex line, t_delta_val delta_val, int f)
