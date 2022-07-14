@@ -6,11 +6,10 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:21:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/13 23:07:34 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/14 12:43:17 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
 #include <math.h>
 #include "../libft/libft.h"
 #include "liner.h"
@@ -20,7 +19,7 @@ void	draw_x(t_mlx mlx, t_vertex line, t_bresen_val *val)
 {
 	while (val->x < line.x2)
 	{
-		val->color = set_grad_color(&line);
+		val->color = set_grad_color(&line, val->x / line.gradient);
 		if (val->init_val < 0)
 			val->init_val += (2 * val->line_h);
 		else
@@ -32,7 +31,7 @@ void	draw_x(t_mlx mlx, t_vertex line, t_bresen_val *val)
 			(int)mlx.handler.mv_x < WIN_W && (WIN_W * (int)(val->y + \
 			mlx.handler.mv_y) + (int)val->x + (int)mlx.handler.mv_x) >= 0 \
 			&& (WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x + \
-			(int)mlx.handler.mv_x <= WIN_W * WIN_H))
+			(int)mlx.handler.mv_x < WIN_W * WIN_H))
 			mlx.img->data[(WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x \
 				+ (int)mlx.handler.mv_x)] = val->color;
 		val->x += 1;
@@ -43,7 +42,7 @@ void	draw_y(t_mlx mlx, t_vertex line, t_bresen_val *val)
 {
 	while (val->y < line.y2)
 	{
-		val->color = set_grad_color(&line);
+		val->color = set_grad_color(&line, val->x / line.gradient);
 		if (val->init_val < 0)
 			val->init_val += (2 * val->line_w);
 		else
@@ -55,7 +54,7 @@ void	draw_y(t_mlx mlx, t_vertex line, t_bresen_val *val)
 			(int)mlx.handler.mv_x < WIN_W && (WIN_W * (int)(val->y + \
 			mlx.handler.mv_y) + (int)val->x + (int)mlx.handler.mv_x) >= 0 \
 			&& (WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x + \
-			(int)mlx.handler.mv_x <= WIN_W * WIN_H))
+			(int)mlx.handler.mv_x < WIN_W * WIN_H))
 			mlx.img->data[(WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x \
 				+ (int)mlx.handler.mv_x)] = val->color;
 		val->y += 1;

@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 14:09:13 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/13 12:12:18 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/14 09:03:38 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_parallel(t_point *point, t_mlx mlx, int mod)
 	}
 }
 
-void	ft_isometric(double *x, double *y, int z)
+void	ft_isometric(double *x, double *y, double z)
 {
 	double	prev_x;
 	double	prev_y;

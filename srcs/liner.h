@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/13 13:06:32 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/14 09:04:03 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	double_swap(double *x, double *y);
 void	color_swap(int *x, int *y);
 
 /* color func */
-int		set_grad_color(t_vertex *line);
+int		set_grad_color(t_vertex *line, double grad);
 void	set_color(t_vertex *line);
 
 /* bresenham func */
@@ -125,7 +125,7 @@ void	quaternion_ro(t_quater *q, t_quater angle);
 void	quaternion(t_fdf *fdf, t_quater *q, int h, int w);
 
 /* projection func */
-void	ft_isometric(double *x, double *y, int z);
+void	ft_isometric(double *x, double *y, double z);
 void	ft_parallel(t_point *point, t_mlx mlx, int mod);
 
 /* side coordinate quaternion func 

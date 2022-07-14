@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:11:42 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/13 16:06:05 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/14 12:42:02 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	check_win(double x, double y, double mv_x, double mv_y)
 {
-	if ((int)x + (int)mv_x >= 0 && (int)x + (int)mv_x < WIN_W && \
-		(WIN_W * (int)(y + mv_y) + (int)x + (int)mv_x) >= 0 \
-		&& (WIN_W * (int)(y + mv_y) + (int)x))
+	if ((int)x + (int)mv_x >= 0 && (int)x + (int)mv_x < WIN_W \
+		&& (WIN_W * (int)(y + mv_y) + (int)x + (int)mv_x) >= 0 \
+		&& (WIN_W * (int)(y + mv_y) + (int)x + (int)mv_x < WIN_W * WIN_H))
 		return (1);
 	else
 		return (0);

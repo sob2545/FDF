@@ -6,26 +6,25 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:21:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/13 23:02:06 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/14 08:17:18 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
 #include <math.h>
 #include "../libft/libft.h"
 #include "liner.h"
 #include "../mlx/mlx.h"
 
-int	set_grad_color(t_vertex *line)
+int	set_grad_color(t_vertex *line, double grad)
 {
 	int	rgb;
 	int	r;
 	int	g;
 	int	b;
 
-	r = (line->rgb2.r - line->rgb1.r) * line->gradient + line->rgb1.r;
-	g = (line->rgb2.g - line->rgb1.g) * line->gradient + line->rgb1.g;
-	b = (line->rgb2.b - line->rgb1.b) * line->gradient + line->rgb1.b;
+	r = (line->rgb2.r - line->rgb1.r) * grad + line->rgb1.r;
+	g = (line->rgb2.g - line->rgb1.g) * grad + line->rgb1.g;
+	b = (line->rgb2.b - line->rgb1.b) * grad + line->rgb1.b;
 	rgb = 0;
 	rgb |= (r & 0xFF) << 16;
 	rgb |= (g & 0xFF) << 8;
@@ -40,8 +39,8 @@ void	set_color(t_vertex *line)
 	line->rgb1.g |= (line->rgb1.color >> 8) & 0xFF;
 	line->rgb1.b |= line->rgb1.color & 0xFF;
 	line->rgb2.a |= (line->rgb2.color >> 24) & 0xFF;
-	line->rgb2.g |= (line->rgb2.color >> 16) & 0xFF;
-	line->rgb2.b |= (line->rgb2.color >> 8) & 0xFF;
+	line->rgb2.r |= (line->rgb2.color >> 16) & 0xFF;
+	line->rgb2.g |= (line->rgb2.color >> 8) & 0xFF;
 	line->rgb2.b |= line->rgb2.color & 0xFF;
 }
 
