@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/14 09:04:03 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/14 14:14:42 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,6 @@ typedef struct s_bresen_val
 	double	factor;
 }	t_bresen_val;
 
-typedef struct s_quater
-{
-	double	w;
-	double	x;
-	double	y;
-	double	z;
-}	t_quater;
-
-typedef struct s_quater_param
-{
-	double	x_pow;
-	double	y_pow;
-	double	z_pow;
-	double	w_x;
-	double	w_y;
-	double	w_z;
-	double	x_y;
-	double	x_z;
-	double	y_z;
-}	t_quater_param;
-
 /* liner utils */
 void	double_swap(double *x, double *y);
 void	color_swap(int *x, int *y);
@@ -116,20 +95,8 @@ void	rotate_cs_x(double y, double z, t_point *point, double angle);
 void	rotate_cs_y(double y, double z, t_point *point, double angle);
 void	rotate_cs_z(double y, double z, t_point *point, double angle);
 
-/* quaternion func */
-void	set_quater_angle_x(t_fdf *fdf, t_quater *angle, int flag);
-void	set_quater_angle_y(t_fdf *fdf, t_quater *angle, int flag);
-void	set_quater_angle_z(t_fdf *fdf, t_quater *angle, int flag);
-void	quaternion_cal(t_fdf *fdf, t_quater *q, int h, int w);
-void	quaternion_ro(t_quater *q, t_quater angle);
-void	quaternion(t_fdf *fdf, t_quater *q, int h, int w);
-
 /* projection func */
 void	ft_isometric(double *x, double *y, double z);
-void	ft_parallel(t_point *point, t_mlx mlx, int mod);
-
-/* side coordinate quaternion func 
-void	cs_quaternion(t_fdf *fdf, t_quater *q, int h, int w);
-*/
+void	ft_parallel(t_point *point, int mod);
 
 #endif

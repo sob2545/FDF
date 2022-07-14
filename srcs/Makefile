@@ -6,7 +6,7 @@
 #    By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/24 11:21:24 by sesim             #+#    #+#              #
-#    Updated: 2022/07/13 18:32:40 by sesim            ###   ########.fr        #
+#    Updated: 2022/07/14 14:08:25 by sesim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,6 @@ SRCS = fdf.c \
 	   bresen_1.c \
 	   bresen_2.c \
 	   euler_angle.c \
-	   quaternion.c \
-	   quaternion_utils.c \
 	   projection.c \
 	   liner.c \
 	   liner_utils.c \

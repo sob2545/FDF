@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 14:09:13 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/14 09:03:38 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/14 14:14:30 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,29 @@ void	view_point_init(t_point *point, t_mlx mlx, int mod)
 	}
 }
 
-void	ft_parallel(t_point *point, t_mlx mlx, int mod)
+void	ft_parallel(t_point *point, int mod)
 {
 	double	x;
 	double	y;
 	double	z;
 
-	x = point->iso_y;
+	x = point->iso_x;
 	y = point->iso_y;
 	z = point->ro_z;
 	if (mod == 0)
 	{
-		point->iso_x = x - (mlx.ucs.w / 2);
-		point->iso_y = y - (mlx.ucs.h / 2);
+		point->iso_x = x;
+		point->iso_y = y;
 	}
 	if (mod == 1)
 	{
-		point->iso_x = x - (mlx.ucs.w / 2);
-		point->iso_y = (z * -1) - (point->z / 2);
+		point->iso_x = x;
+		point->iso_y = (z * -1);
 	}
 	else if (mod == 2)
 	{
-		point->iso_x = y - (mlx.ucs.h / 2);
-		point->iso_y = (z * -1) - (point->z / 2);
+		point->iso_x = y;
+		point->iso_y = (z * -1);
 	}
 }
 

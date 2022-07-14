@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:10 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/14 09:21:02 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/14 14:09:51 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 #include "../mlx/mlx.h"
 #include "../libft/libft.h"
 #include <stdio.h>
-
-/*
-void	set_side_cs(t_side_cs *side_cs)
-{
-	ft_bzero(side_cs, sizeof(t_side_cs));
-	side_cs->axis_x.x = 50;
-	side_cs->axis_y.y = 50;
-	side_cs->axis_z.z = 50;
-}
-*/
 
 void	set_mlx(t_mlx *mlx)
 {
@@ -34,10 +24,9 @@ void	set_mlx(t_mlx *mlx)
 	mlx->win = mlx_new_window(mlx->mlx, WIN_W, WIN_H, "FDF");
 	ft_bzero(&(mlx->handler), sizeof(t_handler));
 	mlx->handler.pro_mod = 0;
-	mlx->handler.ro_mod = 0;
 	mlx->handler.mv_x = WIN_W / 2;
 	mlx->handler.mv_y = WIN_H / 2;
-	while (scale * mlx->ucs.w < WIN_W - 100 && scale * mlx->ucs.h < WIN_H - 100)
+	while (scale * mlx->ucs.w < WIN_W - 500 && scale * mlx->ucs.h < WIN_H - 300)
 		scale++;
 	mlx->handler.first_scale = scale;
 	mlx->handler.scale = scale;
@@ -61,14 +50,11 @@ int	main(int ac, char **av)
 {
 	t_fdf		fdf;
 	t_point		**point;
-	t_side_cs	side_cs;
 
 	fdf.mlx = ft_calloc(1, sizeof(t_mlx));
 	point = get_map(ac, av, &(fdf.mlx->ucs));
 	fdf.point = point;
 	set_mlx(fdf.mlx);
-	//set_side_cs(&side_cs);
-	fdf.side_cs = &side_cs;
 	fdf.mlx->img = ft_calloc(1, sizeof(t_img));
 	fdf.mlx->img->ptr = mlx_new_image(fdf.mlx->mlx, WIN_W, WIN_H);
 	fdf.mlx->img->data = (int *)mlx_get_data_addr(fdf.mlx->img->ptr, \

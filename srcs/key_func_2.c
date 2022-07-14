@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 07:55:28 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/14 09:10:05 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/14 14:09:04 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,6 @@ void	obj_rotate(int keycode, t_fdf *fdf)
 	double	pi;
 
 	pi = M_PI / 180;
-	if (keycode == KEY_R)
-	{
-		if (fdf->mlx->handler.ro_mod < 2)
-			++(fdf->mlx->handler.ro_mod);
-		else
-			fdf->mlx->handler.ro_mod = 0;
-	}
 	if (keycode == KEY_Q)
 		rotate_handler(&(fdf->mlx->handler.angle_z), pi, 1);
 	else if (keycode == KEY_E)
@@ -88,7 +81,6 @@ void	obj_init(int keycode, t_fdf *fdf)
 		fdf->mlx->handler.mv_x = WIN_W / 2;
 		fdf->mlx->handler.mv_y = WIN_H / 2;
 		fdf->mlx->handler.pro_mod = 0;
-		fdf->mlx->handler.ro_mod = 0;
 		fdf->mlx->handler.line_mod = 0;
 		fdf->mlx->handler.line_mod = 0;
 	}

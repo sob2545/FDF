@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/13 12:19:30 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/14 14:03:07 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,6 @@
 /* window size */
 # define WIN_W 1280
 # define WIN_H 720
-/* side coordinate position */
-# define COORD_X 
-# define COORD_Y 
 
 /* map's information */
 typedef struct s_ucs
@@ -71,7 +68,6 @@ typedef struct s_handler
 	int		mv_y;
 	int		pro_mod;
 	int		view_pnt;
-	int		ro_mod;
 	int		line_mod;
 	int		info;
 	int		key;
@@ -109,32 +105,10 @@ typedef struct s_mlx
 	t_handler	handler;
 }	t_mlx;
 
-/* side coordinate rotation value */
-typedef struct s_cs_q
-{
-	double	w;
-	double	x;
-	double	y;
-	double	z;
-	double	ro_x;
-	double	ro_y;
-	double	ro_z;
-	int		color;
-}	t_cs_q;
-
-/* side coordinate axis */
-typedef struct s_side_cs
-{
-	t_cs_q	axis_x;
-	t_cs_q	axis_y;
-	t_cs_q	axis_z;
-}	t_side_cs;
-
 typedef struct s_fdf
 {
 	t_mlx		*mlx;
 	t_point		**point;
-	t_side_cs	*side_cs;
 }	t_fdf;
 
 /* map parser */

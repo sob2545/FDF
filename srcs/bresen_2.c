@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:21:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/14 12:43:17 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/14 13:12:00 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	draw_x(t_mlx mlx, t_vertex line, t_bresen_val *val)
 			mlx.handler.mv_y) + (int)val->x + (int)mlx.handler.mv_x) >= 0 \
 			&& (WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x + \
 			(int)mlx.handler.mv_x < WIN_W * WIN_H))
-			mlx.img->data[(WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x \
-				+ (int)mlx.handler.mv_x)] = val->color;
+			mlx.img->data[(WIN_W * (int)(val->y + mlx.handler.mv_y) + \
+				(int)val->x + (int)mlx.handler.mv_x)] = val->color;
 		val->x += 1;
 	}
 }
@@ -55,8 +55,8 @@ void	draw_y(t_mlx mlx, t_vertex line, t_bresen_val *val)
 			mlx.handler.mv_y) + (int)val->x + (int)mlx.handler.mv_x) >= 0 \
 			&& (WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x + \
 			(int)mlx.handler.mv_x < WIN_W * WIN_H))
-			mlx.img->data[(WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x \
-				+ (int)mlx.handler.mv_x)] = val->color;
+			mlx.img->data[(WIN_W * (int)(val->y + mlx.handler.mv_y) + \
+				(int)val->x + (int)mlx.handler.mv_x)] = val->color;
 		val->y += 1;
 	}
 }

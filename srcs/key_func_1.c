@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 07:55:28 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/13 23:11:42 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/14 14:11:49 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	set_projection(int key, t_fdf *fdf)
 
 	if (key == KEY_P)
 	{
-		if (fdf->mlx->handler.pro_mod < 2)
+		if (fdf->mlx->handler.pro_mod == 0)
 			++(fdf->mlx->handler.pro_mod);
 		else
 			fdf->mlx->handler.pro_mod = 0;
@@ -56,7 +56,7 @@ void	set_projection(int key, t_fdf *fdf)
 		k = -1;
 		while (++k < fdf->mlx->ucs.w)
 			view_point_init(&(fdf->point[j][k]), *(fdf->mlx), \
-					fdf->mlx->handler.view_pnt);
+				fdf->mlx->handler.view_pnt);
 	}
 }
 
@@ -65,10 +65,18 @@ int	key_press(int keycode, t_fdf *fdf)
 	fdf->mlx->handler.key = keycode;
 	if (keycode == KEY_ESC)
 		terminate(fdf);
+	if (keycode == KEY_L)
+	{
+		if (fdf->mlx->handler.line_mod == 0)
+			++(fdf->mlx->handler.line_mod);
+		else
+			fdf->mlx->handler.line_mod = 0;
+	}
 	obj_init(keycode, fdf);
 	obj_zoom(keycode, fdf);
 	obj_move(keycode, fdf);
 	obj_rotate(keycode, fdf);
+	set_projection(keycode, fdf);
 	return (0);
 }
 
