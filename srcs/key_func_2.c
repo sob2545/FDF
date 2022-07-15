@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 07:55:28 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/14 14:09:04 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/15 13:52:45 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	obj_rotate(int keycode, t_fdf *fdf)
 void	obj_zoom(int keycode, t_fdf *fdf)
 {
 	if (keycode == KEY_ZM_U && fdf->mlx->handler.scale < 1000)
-		fdf->mlx->handler.scale *= 5;
+		fdf->mlx->handler.scale += fdf->mlx->handler.scale * 0.1;
 	else if (keycode == KEY_ZM_D && fdf->mlx->handler.scale > 0.0001)
-		fdf->mlx->handler.scale *= 0.1;
+		fdf->mlx->handler.scale -= fdf->mlx->handler.scale * 0.1;
 }
 
 void	obj_init(int keycode, t_fdf *fdf)
@@ -81,7 +81,6 @@ void	obj_init(int keycode, t_fdf *fdf)
 		fdf->mlx->handler.mv_x = WIN_W / 2;
 		fdf->mlx->handler.mv_y = WIN_H / 2;
 		fdf->mlx->handler.pro_mod = 0;
-		fdf->mlx->handler.line_mod = 0;
 		fdf->mlx->handler.line_mod = 0;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/14 14:14:42 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/15 09:46:31 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int		set_grad(t_rgb color, double grad);
 void	anti_alias(t_mlx mlx, t_vertex line);
 
 /* euler rotation func */
-void	euler_rotate(t_fdf *fdf, int h, int w);
 void	rotate_x(double y, double z, t_point *point, double angle);
 void	rotate_y(double y, double z, t_point *point, double angle);
 void	rotate_z(double y, double z, t_point *point, double angle);
@@ -97,6 +96,6 @@ void	rotate_cs_z(double y, double z, t_point *point, double angle);
 
 /* projection func */
 void	ft_isometric(double *x, double *y, double z);
-void	ft_parallel(t_point *point, int mod);
+void	ft_parallel(t_point *point);
 
 #endif

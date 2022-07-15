@@ -1,5 +1,5 @@
 test :
-	cc *.c ../libft/libft.a ../minilibx_macos/libmlx.a -framework openGL -framework AppKit
+	cc *.c -fsanitize=address ../libft/libft.a ../mlx/libmlx.a -framework openGL -framework AppKit
 	./a.out ../test_maps/42.fdf
 	rm -rf ./a.out
 
@@ -9,4 +9,5 @@ test2:
 	rm -rf ./a.out
 
 test3:
-	cc *.c ../libft/libft.a ../minilibx_macos/libmlx.a -framework openGL -framework AppKit
+	cc *.c ../libft/libft.a ../mlx/libmlx.a -framework openGL -framework AppKit
+#	cc  -g -fsanitize=address *.c ../libft/libft.a ../minilibx_macos/libmlx.a -framework openGL -framework AppKit

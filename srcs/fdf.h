@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:22 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/14 14:03:07 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/15 09:42:46 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@
 /* mod change keys */
 # define KEY_Z 6
 # define KEY_R 15
-# define KEY_P 35
-# define KEY_L 37
+# define KEY_F 3
 /* zoom keys */
 # define KEY_ZM_U 30
 # define KEY_ZM_D 33
@@ -67,7 +66,6 @@ typedef struct s_handler
 	int		mv_x;
 	int		mv_y;
 	int		pro_mod;
-	int		view_pnt;
 	int		line_mod;
 	int		info;
 	int		key;

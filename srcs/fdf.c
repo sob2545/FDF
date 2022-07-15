@@ -6,14 +6,13 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 09:30:10 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/14 14:30:04 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/15 14:16:29 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "../mlx/mlx.h"
 #include "../libft/libft.h"
-#include <stdio.h>
 
 void	set_mlx(t_mlx *mlx)
 {
@@ -26,7 +25,7 @@ void	set_mlx(t_mlx *mlx)
 	mlx->handler.pro_mod = 0;
 	mlx->handler.mv_x = WIN_W / 2;
 	mlx->handler.mv_y = WIN_H / 2;
-	while (scale * mlx->ucs.w < WIN_W - 500 && scale * mlx->ucs.h < WIN_H - 300)
+	while (scale * mlx->ucs.w < WIN_W - 500 && scale * mlx->ucs.h < WIN_H - 500)
 		scale++;
 	mlx->handler.first_scale = scale;
 	mlx->handler.scale = scale;

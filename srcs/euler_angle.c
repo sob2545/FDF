@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 23:09:59 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/14 09:01:00 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/15 08:27:46 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,4 @@ void	rotate_z(double x, double y, t_point *point, double angle)
 	pi = M_PI / 180;
 	point->iso_x = x * cos(angle * pi) - y * sin(angle * pi);
 	point->iso_y = x * sin(angle * pi) + y * cos(angle * pi);
-}
-
-void	euler_rotate(t_fdf *fdf, int h, int w)
-{
-	rotate_z(w - (double)fdf->mlx->ucs.w / 2, h - (double)fdf->mlx->ucs.h / 2, \
-			&fdf->point[h][w], fdf->mlx->handler.angle_z);
-	rotate_y(fdf->point[h][w].iso_x, fdf->point[h][w].z, \
-			&fdf->point[h][w], fdf->mlx->handler.angle_y);
-	rotate_x(fdf->point[h][w].iso_y, fdf->point[h][w].ro_z, \
-			&fdf->point[h][w], fdf->mlx->handler.angle_x);
 }

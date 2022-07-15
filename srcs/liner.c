@@ -6,26 +6,17 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 09:06:24 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/14 14:15:17 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/15 13:48:21 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "liner.h"
 #include "../libft/libft.h"
 
-void	set_view(t_fdf *fdf, int h, int w)
-{
-	if (fdf->mlx->handler.pro_mod == 0)
-		ft_isometric(&(fdf->point[h][w].iso_x), &(fdf->point[h][w].iso_y), \
-			fdf->point[h][w].ro_z);
-	else if (fdf->mlx->handler.pro_mod == 1)
-		ft_parallel(&(fdf->point[h][w]), fdf->mlx->handler.view_pnt);
-}
-
 void	rotation(t_fdf *fdf)
 {
-	int			j;
-	int			k;
+	int	j;
+	int	k;
 
 	j = -1;
 	while (++j < fdf->mlx->ucs.h)
@@ -33,8 +24,17 @@ void	rotation(t_fdf *fdf)
 		k = -1;
 		while (++k < fdf->mlx->ucs.w)
 		{
-			euler_rotate(fdf, j, k);
-			set_view(fdf, j, k);
+			rotate_z(k - fdf->mlx->ucs.w / 2, j - fdf->mlx->ucs.h / 2, \
+				&fdf->point[j][k], fdf->mlx->handler.angle_z);
+			rotate_y(fdf->point[j][k].iso_x, fdf->point[j][k].z, \
+				&fdf->point[j][k], fdf->mlx->handler.angle_y);
+			rotate_x(fdf->point[j][k].iso_y, fdf->point[j][k].ro_z, \
+				&fdf->point[j][k], fdf->mlx->handler.angle_x);
+			if (fdf->mlx->handler.pro_mod == 0)
+				ft_isometric(&(fdf->point[j][k].iso_x), \
+					&(fdf->point[j][k].iso_y), fdf->point[j][k].ro_z);
+			else if (fdf->mlx->handler.pro_mod == 1)
+				ft_parallel(&(fdf->point[j][k]));
 		}
 	}
 }

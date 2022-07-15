@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:21:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/14 14:52:38 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/15 07:59:30 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	check_steap(t_mlx mlx, t_vertex line, t_delta_val delta_val, int f)
 		{
 			double_swap(&line.x2, &line.x1);
 			double_swap(&line.y2, &line.y1);
-			//color_swap(&line.rgb1.color, &line.rgb2.color);
+			color_swap(&line.rgb1.color, &line.rgb2.color);
 		}
 		set_color(&line);
 		bresenham_x(mlx, line);

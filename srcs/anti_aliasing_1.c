@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 09:10:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/13 15:13:10 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/15 13:47:15 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static void	liner(t_mlx mlx, t_vertex line, int flag)
 	{
 		first_pixel_1(mlx, line, &pxl_point);
 		last_pixel_1(mlx, line, &pxl_point);
-		middle_pixel_1(mlx, line, pxl_point);
+		//middle_pixel_1(mlx, line, pxl_point);
 	}
 	else
 	{
 		first_pixel_2(mlx, line, &pxl_point);
 		last_pixel_2(mlx, line, &pxl_point);
-		middle_pixel_2(mlx, line, pxl_point);
+		//middle_pixel_2(mlx, line, pxl_point);
 	}
 }
 
