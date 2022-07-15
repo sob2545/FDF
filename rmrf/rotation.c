@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotation.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/15 16:07:11 by sesim             #+#    #+#             */
+/*   Updated: 2022/07/15 16:07:11 by sesim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include <math.h>
 
@@ -27,4 +39,3 @@ void	rotate_z(double x, double y, t_point *point, double angle)
 	point->iso_x = x * cos(angle * pi) - y * sin(angle * pi);
 	point->iso_y = x * sin(angle * pi) + y * cos(angle * pi);
 }
-

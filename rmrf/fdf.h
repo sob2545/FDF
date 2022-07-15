@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 14:29:18 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/15 15:09:08 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/15 16:20:58 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,5 +158,11 @@ void	rotate_z(double x, double y, t_point *point, double angle);
 /*   projection   */
 void	ft_isometric(double *x, double *y, double z);
 void	parallel(t_point *point);
+
+/*    key functions   */
+int		key_press(int keycode, t_fdf *fdf);
+void	move_rotate(int keycode, t_fdf *fdf);
+int		terminate(t_fdf *fdf);
+int	mouse_press(int button, int x, int y, t_fdf *fdf);
 
 #endif

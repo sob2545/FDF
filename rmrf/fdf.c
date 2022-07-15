@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/15 16:06:54 by sesim             #+#    #+#             */
+/*   Updated: 2022/07/15 16:09:56 by sesim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../mlx/mlx.h"
 #include "../libft/libft.h"
 #include <math.h>
@@ -115,95 +127,6 @@ void	bresenham(double start_x, double start_y, double finish_x, double finish_y,
 	}
 }
 
-int	terminate(t_fdf *fdf)
-{
-	int	i;
-
-	i = 0;
-	while (i < fdf->mlx->ucs.h)
-	{
-		free(fdf->point[i]);
-		i++;
-	}
-	free(fdf->point);
-	mlx_clear_window(fdf->mlx->mlx, fdf->mlx->win);
-	mlx_destroy_image(fdf->mlx->mlx, fdf->mlx->img);
-	mlx_destroy_window(fdf->mlx->mlx, fdf->mlx->win);
-	exit (0);
-}
-
-void	angle_init(t_handler *handler, int flag)
-{
-	if (flag == 0)
-	{
-		handler->angle_x = 0;
-		handler->angle_y = 0;
-		handler->angle_z = 0;
-	}
-	else if (flag == 1)
-	{
-		handler->angle_x = -90;
-		handler->angle_y = 0;
-		handler->angle_z = 0;
-	}
-	else if (flag == 2)
-	{
-		handler->angle_x = -90;
-		handler->angle_y = 0;
-		handler->angle_z = 90;
-	}
-}
-
-void	set_projection(int key, t_fdf *fdf)
-{
-	if (key == KEY_R)
-	{
-		angle_init(&(fdf->mlx->handler), 0);
-		if (fdf->mlx->handler.pro_mod == 0)
-			++(fdf->mlx->handler.pro_mod);
-		else
-			fdf->mlx->handler.pro_mod = 0;
-	}
-	else if (key == KEY_1 && fdf->mlx->handler.pro_mod != 0)
-		angle_init(&(fdf->mlx->handler), 0);
-	else if (key == KEY_2 && fdf->mlx->handler.pro_mod != 0)
-		angle_init(&(fdf->mlx->handler), 1);
-	else if (key == KEY_3 && fdf->mlx->handler.pro_mod != 0)
-		angle_init(&(fdf->mlx->handler), 2);
-}
-
-int	key_press(int keycode, t_fdf *fdf)
-{
-	if (keycode == KEY_ESC)
-		terminate(fdf);
-	else if (keycode == KEY_UP)
-		(fdf->mlx->handler.mv_y) -= 30;
-	else if (keycode == KEY_DOWN)
-		(fdf->mlx->handler.mv_y) += 30;
-	else if (keycode == KEY_LEFT)
-		(fdf->mlx->handler.mv_x) -= 30;
-	else if (keycode == KEY_RIGHT)
-		(fdf->mlx->handler.mv_x) += 30;
-	else if (keycode == KEY_ZM_U)
-		(fdf->mlx->handler.scale) += fdf->mlx->handler.scale * 0.1;
-	else if (keycode == KEY_ZM_D)
-		(fdf->mlx->handler.scale) -= fdf->mlx->handler.scale * 0.1;
-	else if (keycode == KEY_W)
-		++(fdf->mlx->handler.angle_x);
-	else if (keycode == KEY_S)
-		--(fdf->mlx->handler.angle_x);
-	else if (keycode == KEY_A)
-		++(fdf->mlx->handler.angle_y);
-	else if (keycode == KEY_Q)
-		--(fdf->mlx->handler.angle_y);
-	else if (keycode == KEY_E)
-		++(fdf->mlx->handler.angle_z);
-	else if (keycode == KEY_D)
-		--(fdf->mlx->handler.angle_z);
-	set_projection(keycode, fdf);
-	return (0);
-}
-
 void	set_mlx(t_mlx *mlx)
 {
 	int	scale;
@@ -286,6 +209,7 @@ int	main(int ac, char **av)
 	fdf.mlx->img->data = (int *)mlx_get_data_addr(fdf.mlx->img->ptr, \
 		&(fdf.mlx->img->bpp), &(fdf.mlx->img->size_l), &(fdf.mlx->img->endian));
 	mlx_hook(fdf.mlx->win, X_EVENT_KEY_PRESS, 0, key_press, &fdf.mlx);
+	mlx_hook(fdf.mlx->win, X_EVENT_MOUSE_PRESS, 0, mouse_press, &fdf.mlx);
 	mlx_hook(fdf.mlx->win, 17, 0, terminate, &fdf.mlx);
 	printf("%d, %d\n", fdf.mlx->ucs.h, fdf.mlx->ucs.w);
 	mlx_loop_hook(fdf.mlx->mlx, main_loop, &fdf);
