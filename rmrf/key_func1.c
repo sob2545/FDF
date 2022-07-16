@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 16:08:13 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/15 16:20:44 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/17 00:35:55 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	terminate(t_fdf *fdf)
 	exit (0);
 }
 
-void	angle_init(t_handler *handler, int flag)
+void	parallel_angle_init(t_handler *handler, int flag)
 {
 	if (flag == 0)
 	{
@@ -57,48 +57,27 @@ void	set_projection(int key, t_fdf *fdf)
 {
 	if (key == KEY_R)
 	{
-		angle_init(&(fdf->mlx->handler), 0);
+		parallel_angle_init(&(fdf->mlx->handler), 0);
 		if (fdf->mlx->handler.pro_mod == 0)
 			++(fdf->mlx->handler.pro_mod);
 		else
 			fdf->mlx->handler.pro_mod = 0;
 	}
 	else if (key == KEY_1 && fdf->mlx->handler.pro_mod != 0)
-		angle_init(&(fdf->mlx->handler), 0);
+		parallel_angle_init(&(fdf->mlx->handler), 0);
 	else if (key == KEY_2 && fdf->mlx->handler.pro_mod != 0)
-		angle_init(&(fdf->mlx->handler), 1);
+		parallel_angle_init(&(fdf->mlx->handler), 1);
 	else if (key == KEY_3 && fdf->mlx->handler.pro_mod != 0)
-		angle_init(&(fdf->mlx->handler), 2);
+		parallel_angle_init(&(fdf->mlx->handler), 2);
 }
 
 int	key_press(int keycode, t_fdf *fdf)
 {
 	if (keycode == KEY_ESC)
 		terminate(fdf);
-	else if (keycode == KEY_UP)
-		(fdf->mlx->handler.mv_y) -= 30;
-	else if (keycode == KEY_DOWN)
-		(fdf->mlx->handler.mv_y) += 30;
-	else if (keycode == KEY_LEFT)
-		(fdf->mlx->handler.mv_x) -= 30;
-	else if (keycode == KEY_RIGHT)
-		(fdf->mlx->handler.mv_x) += 30;
-	else if (keycode == KEY_ZM_U)
-		(fdf->mlx->handler.scale) += fdf->mlx->handler.scale * 0.1;
-	else if (keycode == KEY_ZM_D)
-		(fdf->mlx->handler.scale) -= fdf->mlx->handler.scale * 0.1;
-	else if (keycode == KEY_W)
-		++(fdf->mlx->handler.angle_x);
-	else if (keycode == KEY_S)
-		--(fdf->mlx->handler.angle_x);
-	else if (keycode == KEY_A)
-		++(fdf->mlx->handler.angle_y);
-	else if (keycode == KEY_Q)
-		--(fdf->mlx->handler.angle_y);
-	else if (keycode == KEY_E)
-		++(fdf->mlx->handler.angle_z);
-	else if (keycode == KEY_D)
-		--(fdf->mlx->handler.angle_z);
+	obj_init(keycode, fdf);
+	obj_move(keycode, fdf);
+	obj_rotate(keycode, fdf);
 	set_projection(keycode, fdf);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 09:06:24 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/15 13:48:21 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/16 22:29:10 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,71 +39,79 @@ void	rotation(t_fdf *fdf)
 	}
 }
 
-t_vertex	set_vertex(t_fdf *fdf, int h, int w, int flag)
-{
-	t_vertex	line;
-
-	ft_bzero(&line, sizeof(t_vertex));
-	if (flag == 1)
-	{
-		line.x1 = fdf->point[h][w - 1].iso_x * fdf->mlx->handler.scale;
-		line.y1 = fdf->point[h][w - 1].iso_y * fdf->mlx->handler.scale;
-		line.x2 = fdf->point[h][w].iso_x * fdf->mlx->handler.scale;
-		line.y2 = fdf->point[h][w].iso_y * fdf->mlx->handler.scale;
-		line.rgb1.color = fdf->point[h][w - 1].color;
-		line.rgb2.color = fdf->point[h][w].color;
-	}
-	else
-	{
-		line.x1 = fdf->point[h - 1][w].iso_x * fdf->mlx->handler.scale;
-		line.y1 = fdf->point[h - 1][w].iso_y * fdf->mlx->handler.scale;
-		line.x2 = fdf->point[h][w].iso_x * fdf->mlx->handler.scale;
-		line.y2 = fdf->point[h][w].iso_y * fdf->mlx->handler.scale;
-		line.rgb1.color = fdf->point[h - 1][w].color;
-		line.rgb2.color = fdf->point[h][w].color;
-	}
-	return (line);
-}
-
 void	bresen_liner(t_fdf *fdf)
 {
-	int	j;
-	int	k;
+	t_vertex	line;
+	int	h;
+	int	w;
 
-	j = -1;
-	while (++j < fdf->mlx->ucs.h)
+	h = -1;
+	while (++h < fdf->mlx->ucs.h)
 	{
-		k = 0;
-		while (++k < fdf->mlx->ucs.w)
-			bresenham(*(fdf->mlx), set_vertex(fdf, j, k, 1));
+		w = 0;
+		while (++w < fdf->mlx->ucs.w)
+		{
+			line.x1 = fdf->point[h][w - 1].iso_x * fdf->mlx->handler.scale;
+			line.y1 = fdf->point[h][w - 1].iso_y * fdf->mlx->handler.scale;
+			line.x2 = fdf->point[h][w].iso_x * fdf->mlx->handler.scale;
+			line.y2 = fdf->point[h][w].iso_y * fdf->mlx->handler.scale;
+			line.rgb1.color = fdf->point[h][w - 1].color;
+			line.rgb2.color = fdf->point[h][w].color;
+			bresenham(*(fdf->mlx), line);
+		}
 	}
-	j = 0;
-	while (++j < fdf->mlx->ucs.h)
+	h = 0;
+	while (++h < fdf->mlx->ucs.h)
 	{
-		k = -1;
-		while (++k < fdf->mlx->ucs.w)
-			bresenham(*(fdf->mlx), set_vertex(fdf, j, k, 2));
+		w = -1;
+		while (++w < fdf->mlx->ucs.w)
+		{
+			line.x1 = fdf->point[h - 1][w].iso_x * fdf->mlx->handler.scale;
+			line.y1 = fdf->point[h - 1][w].iso_y * fdf->mlx->handler.scale;
+			line.x2 = fdf->point[h][w].iso_x * fdf->mlx->handler.scale;
+			line.y2 = fdf->point[h][w].iso_y * fdf->mlx->handler.scale;
+			line.rgb1.color = fdf->point[h - 1][w].color;
+			line.rgb2.color = fdf->point[h][w].color;
+			bresenham(*(fdf->mlx), line);
+		}
 	}
 }
 
 void	anti_liner(t_fdf *fdf)
 {
-	int	j;
-	int	k;
+	t_vertex	line;
+	int	h;
+	int	w;
 
-	j = -1;
-	while (++j < fdf->mlx->ucs.h)
+	h = -1;
+	while (++h < fdf->mlx->ucs.h)
 	{
-		k = 0;
-		while (++k < fdf->mlx->ucs.w)
-			anti_alias(*(fdf->mlx), set_vertex(fdf, j, k, 1));
+		w = 0;
+		while (++w < fdf->mlx->ucs.w)
+		{
+			line.x1 = fdf->point[h][w - 1].iso_x * fdf->mlx->handler.scale;
+			line.y1 = fdf->point[h][w - 1].iso_y * fdf->mlx->handler.scale;
+			line.x2 = fdf->point[h][w].iso_x * fdf->mlx->handler.scale;
+			line.y2 = fdf->point[h][w].iso_y * fdf->mlx->handler.scale;
+			line.rgb1.color = fdf->point[h][w - 1].color;
+			line.rgb2.color = fdf->point[h][w].color;
+			anti_alias(*(fdf->mlx), line);
+		}
 	}
-	j = 0;
-	while (++j < fdf->mlx->ucs.h)
+	h = 0;
+	while (++h < fdf->mlx->ucs.h)
 	{
-		k = -1;
-		while (++k < fdf->mlx->ucs.w)
-			anti_alias(*(fdf->mlx), set_vertex(fdf, j, k, 2));
+		w = -1;
+		while (++w < fdf->mlx->ucs.w)
+		{
+			line.x1 = fdf->point[h - 1][w].iso_x * fdf->mlx->handler.scale;
+			line.y1 = fdf->point[h - 1][w].iso_y * fdf->mlx->handler.scale;
+			line.x2 = fdf->point[h][w].iso_x * fdf->mlx->handler.scale;
+			line.y2 = fdf->point[h][w].iso_y * fdf->mlx->handler.scale;
+			line.rgb1.color = fdf->point[h - 1][w].color;
+			line.rgb2.color = fdf->point[h][w].color;
+			anti_alias(*(fdf->mlx), line);
+		}
 	}
 }
 

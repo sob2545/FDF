@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:21:08 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/15 10:45:44 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/17 00:52:04 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	draw_x(t_mlx mlx, t_vertex line, t_bresen_val *val)
 {
 	while (val->x < line.x2)
 	{
-		val->color = set_grad_color(&line, val->x / line.gradient);
+		val->color = set_grad_color(&line, line.gradient);
 		if (val->init_val < 0)
 			val->init_val += (2 * val->line_h);
 		else
@@ -33,7 +33,7 @@ void	draw_x(t_mlx mlx, t_vertex line, t_bresen_val *val)
 			&& (WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x + \
 			(int)mlx.handler.mv_x < WIN_W * WIN_H))
 			mlx.img->data[(WIN_W * (int)(val->y + mlx.handler.mv_y) + \
-				(int)val->x + (int)mlx.handler.mv_x)] = val->color;
+				(int)val->x + (int)mlx.handler.mv_x)] = line.rgb2.color;
 		val->x += 1;
 	}
 }
@@ -42,7 +42,7 @@ void	draw_y(t_mlx mlx, t_vertex line, t_bresen_val *val)
 {
 	while (val->y < line.y2)
 	{
-		val->color = set_grad_color(&line, val->x / line.gradient);
+		val->color = set_grad_color(&line, line.gradient);
 		if (val->init_val < 0)
 			val->init_val += (2 * val->line_w);
 		else
@@ -56,7 +56,7 @@ void	draw_y(t_mlx mlx, t_vertex line, t_bresen_val *val)
 			&& (WIN_W * (int)(val->y + mlx.handler.mv_y) + (int)val->x + \
 			(int)mlx.handler.mv_x < WIN_W * WIN_H))
 			mlx.img->data[(WIN_W * (int)(val->y + mlx.handler.mv_y) + \
-				(int)val->x + (int)mlx.handler.mv_x)] = val->color;
+				(int)val->x + (int)mlx.handler.mv_x)] = line.rgb2.color;
 		val->y += 1;
 	}
 }

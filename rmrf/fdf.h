@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 14:29:18 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/15 16:20:58 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/17 00:35:26 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,14 +155,29 @@ void	rotate_x(double y, double z, t_point *point, double angle);
 void	rotate_y(double x, double z, t_point *point, double angle);
 void	rotate_z(double x, double y, t_point *point, double angle);
 
+/*   line functions    */
+int		check_win_size(double x, double y, double mv_x, double mv_y);
+void	double_swap(double *x, double *y);
+void	color_swap(int *x, int *y);
+void	set_color(t_vertex *line);
+void	rotate(t_fdf *fdf);
+void	bresen_line_1(t_fdf *fdf);
+void	bresen_line_2(t_fdf *fdf);
+void	bresenham(t_vertex line, t_fdf *fdf);
+void	bresenham_x(t_vertex line, t_fdf *fdf);
+void	bresenham_y(t_vertex line, t_fdf *fdf);
+
 /*   projection   */
+void	projection(t_point *point, t_handler handler);
 void	ft_isometric(double *x, double *y, double z);
 void	parallel(t_point *point);
 
 /*    key functions   */
 int		key_press(int keycode, t_fdf *fdf);
-void	move_rotate(int keycode, t_fdf *fdf);
 int		terminate(t_fdf *fdf);
-int	mouse_press(int button, int x, int y, t_fdf *fdf);
+int		mouse_press(int button, int x, int y, t_fdf *fdf);
+void	obj_init(int keycode, t_fdf *fdf);
+void	obj_rotate(int keycode, t_fdf *fdf);
+void	obj_move(int keycode, t_fdf *fdf);
 
 #endif

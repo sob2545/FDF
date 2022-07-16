@@ -6,12 +6,12 @@
 #    By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/24 11:21:24 by sesim             #+#    #+#              #
-#    Updated: 2022/07/14 14:08:25 by sesim            ###   ########.fr        #
+#    Updated: 2022/07/17 00:46:06 by sesim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -g -Wall -Wextra -Werror
 RM = rm -f
 
 SRCS = fdf.c \
