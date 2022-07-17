@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 14:29:18 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/17 00:35:26 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/18 08:25:52 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define KEY_2 19
 # define KEY_3 20
 
+/*    MOUSE CODE      */
 # define KEY_ZM_U 30
 # define KEY_ZM_D 33
 
@@ -71,9 +72,7 @@ typedef struct s_handler
 	int		mv_x;
 	int		mv_y;
 	int		pro_mod;
-	int		line_mod;
 	int		view_point;
-	int		key;
 }	t_handler;
 
 typedef struct s_mlx
@@ -102,15 +101,6 @@ typedef struct s_fdf
 	t_point	**point;
 }	t_fdf;
 
-typedef struct s_rgb
-{
-	int	color;
-	int	a;
-	int	r;
-	int	g;
-	int	b;
-}	t_rgb;
-
 typedef struct s_vertex
 {
 	double	x1;
@@ -118,8 +108,8 @@ typedef struct s_vertex
 	double	x2;
 	double	y2;
 	double	gradient;
-	t_rgb	rgb1;
-	t_rgb	rgb2;
+	int		color1;
+	int		color2;
 }	t_vertex;
 
 typedef struct s_delta_val
@@ -159,7 +149,6 @@ void	rotate_z(double x, double y, t_point *point, double angle);
 int		check_win_size(double x, double y, double mv_x, double mv_y);
 void	double_swap(double *x, double *y);
 void	color_swap(int *x, int *y);
-void	set_color(t_vertex *line);
 void	rotate(t_fdf *fdf);
 void	bresen_line_1(t_fdf *fdf);
 void	bresen_line_2(t_fdf *fdf);

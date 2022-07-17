@@ -6,12 +6,12 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 16:07:11 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/15 16:07:11 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/18 08:01:32 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
 #include <math.h>
+#include "fdf.h"
 
 void	rotate_x(double y, double z, t_point *point, double angle)
 {

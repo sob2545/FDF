@@ -6,12 +6,12 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 13:45:02 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/11 16:06:09 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/18 08:00:58 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
 #include <fcntl.h>
+#include "fdf.h"
 #include "../libft/libft.h"
 #include "../libft/get_next_line.h"
 

@@ -6,11 +6,11 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 16:07:03 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/15 16:07:07 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/18 08:01:26 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "math.h"
+#include <math.h>
 #include "fdf.h"
 
 void	ft_isometric(double *x, double *y, double z)

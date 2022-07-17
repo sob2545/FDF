@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 16:06:54 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/17 00:35:41 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/18 08:26:30 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "../libft/libft.h"
 #include <math.h>
 #include "fdf.h"
-#include <stdio.h>
 
 void	set_mlx(t_mlx *mlx)
 {
@@ -25,7 +24,6 @@ void	set_mlx(t_mlx *mlx)
 	mlx->win = mlx_new_window(mlx->mlx, WIN_W, WIN_H, "FdF");
 	ft_bzero(&(mlx->handler), sizeof(t_handler));
 	mlx->handler.pro_mod = 0;
-	mlx->handler.line_mod = 0;
 	while (scale * mlx->ucs.w < WIN_W - 500 && scale * mlx->ucs.h < WIN_H - 500)
 		scale++;
 	mlx->handler.scale = scale;
@@ -74,7 +72,6 @@ int	main(int ac, char **av)
 	mlx_hook(fdf.mlx->win, X_EVENT_KEY_PRESS, 0, key_press, &fdf.mlx);
 	mlx_hook(fdf.mlx->win, X_EVENT_MOUSE_PRESS, 0, mouse_press, &fdf.mlx);
 	mlx_hook(fdf.mlx->win, 17, 0, terminate, &fdf.mlx);
-	printf("%d, %d\n", fdf.mlx->ucs.h, fdf.mlx->ucs.w);
 	mlx_loop_hook(fdf.mlx->mlx, main_loop, &fdf);
 	mlx_loop(fdf.mlx->mlx);
 	return (0);

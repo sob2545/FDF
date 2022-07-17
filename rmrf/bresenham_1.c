@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 16:06:54 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/17 00:37:17 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/18 07:57:58 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,6 @@ void	color_swap(int *x, int *y)
 	*y = tmp;
 }
 
-void	set_color(t_vertex *line)
-{
-	line->rgb1.a |= (line->rgb1.color >> 24) & 0xFF;
-	line->rgb1.r |= (line->rgb1.color >> 16) & 0xFF;
-	line->rgb1.g |= (line->rgb1.color >> 8) & 0xFF;
-	line->rgb1.b |= line->rgb1.color & 0xFF;
-	line->rgb2.a |= (line->rgb1.color >> 24) & 0xFF;
-	line->rgb2.r |= (line->rgb1.color >> 16) & 0xFF;
-	line->rgb2.g |= (line->rgb1.color >> 8) & 0xFF;
-	line->rgb2.b |= line->rgb1.color & 0xFF;
-}
-
 int	check_win_size(double x, double y, double mv_x, double mv_y)
 {
 	if ((int)x + (int)mv_x >= 0 && (int)x + (int)mv_x < WIN_W && \
@@ -67,7 +55,7 @@ void	bresenham(t_vertex line, t_fdf *fdf)
 		{
 			double_swap(&line.x1, &line.x2);
 			double_swap(&line.y1, &line.y2);
-			color_swap(&line.rgb1.color, &line.rgb2.color);
+			color_swap(&line.color1, &line.color2);
 		}
 		bresenham_x(line, fdf);
 	}
@@ -77,7 +65,7 @@ void	bresenham(t_vertex line, t_fdf *fdf)
 		{
 			double_swap(&line.x1, &line.x2);
 			double_swap(&line.y1, &line.y2);
-			color_swap(&line.rgb1.color, &line.rgb2.color);
+			color_swap(&line.color1, &line.color2);
 		}
 		bresenham_y(line, fdf);
 	}

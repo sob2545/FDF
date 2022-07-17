@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 16:10:36 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/16 23:19:52 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/18 08:26:20 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	obj_init(int keycode, t_fdf *fdf)
 		fdf->mlx->handler.mv_x = WIN_W / 2;
 		fdf->mlx->handler.mv_y = WIN_H / 2;
 		fdf->mlx->handler.pro_mod = 0;
-		fdf->mlx->handler.line_mod = 0;
 	}
 }
 

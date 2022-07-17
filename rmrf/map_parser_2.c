@@ -6,12 +6,12 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 13:45:02 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/10 14:27:05 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/18 08:23:43 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
 #include <fcntl.h>
+#include "fdf.h"
 #include "../libft/libft.h"
 #include "../libft/get_next_line.h"
 
@@ -62,7 +62,7 @@ int	check_color(char *map)
 	i = 0;
 	while (is_set(HEX, map[i]) == 1)
 		i++;
-	if (i > 6)
+	if (i >= 7)
 		return (-1);
 	if (map[i] != '\0' && map[i] != ' ' && map[i] != '\t' && map[i] != '\n')
 		return (-1);
@@ -75,7 +75,6 @@ int	init_color(char *map, t_point **point, int w, int h)
 	int	cnt;
 
 	i = 0;
-	cnt = 0;
 	if (*map == '-')
 		i++;
 	while (ft_isdigit(map[i]))
@@ -84,11 +83,13 @@ int	init_color(char *map, t_point **point, int w, int h)
 	{
 		++i;
 		point[h][w].color = ft_atoi_hex(map + i);
-		if (point[h][w].color != -1)
-			i += 2;
+		if (point[h][w].color == -1)
+			return (-1);
+		i += 2;
 		cnt = check_color(map + i);
-		if (cnt != -1)
-			i += cnt;
+		if (cnt == -1)
+			return (-1);
+		i += cnt;
 	}
 	else if (ft_isspace(map[i]) || map[i] == '\0')
 		point[h][w].color = 0xFFFFFF;

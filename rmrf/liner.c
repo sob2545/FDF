@@ -6,7 +6,7 @@
 /*   By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 22:45:02 by sesim             #+#    #+#             */
-/*   Updated: 2022/07/17 00:39:14 by sesim            ###   ########.fr       */
+/*   Updated: 2022/07/18 08:00:25 by sesim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	bresen_line_1(t_fdf *fdf)
 			line.y1 = fdf->point[i][j - 1].iso_y * fdf->mlx->handler.scale;
 			line.x2 = fdf->point[i][j].iso_x * fdf->mlx->handler.scale;
 			line.y2 = fdf->point[i][j].iso_y * fdf->mlx->handler.scale;
-			line.rgb1.color = fdf->point[i][j - 1].color;
-			line.rgb2.color = fdf->point[i][j].color;
+			line.color1 = fdf->point[i][j - 1].color;
+			line.color2 = fdf->point[i][j].color;
 			bresenham(line, fdf);
 		}
 	}
@@ -76,8 +76,8 @@ void	bresen_line_2(t_fdf *fdf)
 			line.y1 = fdf->point[i - 1][j].iso_y * fdf->mlx->handler.scale;
 			line.x2 = fdf->point[i][j].iso_x * fdf->mlx->handler.scale;
 			line.y2 = fdf->point[i][j].iso_y * fdf->mlx->handler.scale;
-			line.rgb1.color = fdf->point[i - 1][j].color;
-			line.rgb2.color = fdf->point[i][j].color;
+			line.color1 = fdf->point[i - 1][j].color;
+			line.color2 = fdf->point[i][j].color;
 			bresenham(line, fdf);
 		}
 	}

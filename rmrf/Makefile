@@ -6,7 +6,7 @@
 #    By: sesim <sesim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/24 11:21:24 by sesim             #+#    #+#              #
-#    Updated: 2022/07/17 00:45:42 by sesim            ###   ########.fr        #
+#    Updated: 2022/07/18 07:52:30 by sesim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,17 +34,20 @@ NAME = fdf
 all : $(NAME)
 
 fdf: $(OBJS)
-#	make -C ../mlx
+	make -C ../libft
+	make -C ../mlx
 	$(CC) $(CFLAGS) -L ../libft -l ft -L ../mlx -l mlx -framework OpenGL -framework AppKit $^ -o $@
 
 test :
 	$(CC) -L ../libft -l ft -L ../mlx -l mlx -framework OpenGL -framework AppKit *.c
 
 clean :
-#	make -C ../mlx clean
+	make -C ../libft clean
+	make -C ../mlx clean
 	$(RM) $(OBJS)
 
 fclean : clean
+	make -C ../libft fclean
 	$(RM) $(NAME)
 
 re :
